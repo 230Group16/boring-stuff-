@@ -9,15 +9,17 @@
  *
  *  This example is an improvement over TextFieldFrameCrappy.
  *  There are many small but very important differences.
- *
- *
- ************ NOT COMMENTED PROPERLY (COPY PASTA) ^^^ **************
  */
 
 package kablewie;
 
-import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.Container;
+import java.awt.Dimension;
 
+import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 
 public class Game {
@@ -28,29 +30,32 @@ public class Game {
     	JFrame frame = new JFrame( "Klablewie!!!");
     	frame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
     	
+    	Container pane = frame.getContentPane();
+    	
+    	pane.setLayout(new BoxLayout(pane, BoxLayout.Y_AXIS));
+    	
     	/* create Board and Scoreboard panels */
-    	Board boardpanel = new Board();
     	Scoreboard scoreboardpanel = new Scoreboard();
+    	scoreboardpanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+    	scoreboardpanel.setPreferredSize(new Dimension(700, 200));
+    	Board boardpanel = new Board();
+    	boardpanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+    	boardpanel.setPreferredSize(new Dimension(700, 500));
+    	
+    	
+    	/* set frame size */
+    	//frame.setSize( FRAME_HEIGHT, FRAME_WIDTH );
     	
     	/* add boardpanel and scoreboardpanel to frame */
-    	frame.add(scoreboardpanel);
+    	pane.add(scoreboardpanel);
+    	pane.add(boardpanel);
     	
-    	/* set frame size */
-    	frame.setSize( FRAME_WIDTH/2, FRAME_HEIGHT );
-    	
-    	/* display frame */
-        frame.setVisible( true );
-        
-    	frame.add(boardpanel);
-    	
-    	/* set frame size */
-    	frame.setSize( FRAME_WIDTH, FRAME_HEIGHT );
-    	
+    	frame.pack();
     	/* display frame */
         frame.setVisible( true );
         
         /* set frame resizable to false */
-        frame.setResizable(false);
+        frame.setResizable(true);
 	}
     
     /** The width of the Game frame */
