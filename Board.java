@@ -19,17 +19,25 @@ public class Board extends JPanel {
 	      graphics.fillRect( FIRST_X_COORD,
 	                         FIRST_Y_COORD,
 	                         BAR_WIDTH,
-	                         BAR_LENGTH );
+	                         BAR_HEIGHT);
 	      
 	      /* set new drawing color using predefined variable */
 	      graphics.setColor(Color.BLUE);
 	      graphics.drawString( "Bard", TEXT_X_COORD, TEXT_Y_COORD );
 	   } // end method paintComponent
 	
+	public int getWidth(){
+		return BAR_WIDTH;
+	}
+	
+	public int getHeight(){
+		return BAR_HEIGHT;
+	}
+	
 	private static final int COLOR_COMPONENT = 0;
 	private static final int FIRST_X_COORD = 0;
-	private static final int FIRST_Y_COORD = 200;
-	private static final int BAR_LENGTH = 500;
+	private static final int FIRST_Y_COORD = 0;
+	private static final int BAR_HEIGHT = 500;
 	private static final int BAR_WIDTH = 700;
 	private static final int TEXT_X_COORD = 30;
 	private static final int TEXT_Y_COORD = 230;
