@@ -34,13 +34,15 @@ public class Game {
     	
     	pane.setLayout(new BoxLayout(pane, BoxLayout.Y_AXIS));
     	
+    	
+    	
     	/* create Board and Scoreboard panels */
     	Scoreboard scoreboardpanel = new Scoreboard();
     	scoreboardpanel.setAlignmentX(Component.CENTER_ALIGNMENT);
-    	scoreboardpanel.setPreferredSize(new Dimension(700, 200));
+    	scoreboardpanel.setPreferredSize(new Dimension(scoreboardpanel.getWidth(), scoreboardpanel.getHeight()));
     	Board boardpanel = new Board();
     	boardpanel.setAlignmentX(Component.CENTER_ALIGNMENT);
-    	boardpanel.setPreferredSize(new Dimension(700, 500));
+    	boardpanel.setPreferredSize(new Dimension(boardpanel.getWidth(), boardpanel.getHeight()));
     	
     	
     	/* set frame size */
@@ -52,15 +54,10 @@ public class Game {
     	
     	frame.pack();
     	/* display frame */
-        frame.setVisible( true );
+        frame.setVisible(true);
         
         /* set frame resizable to false */
         frame.setResizable(true);
 	}
-    
-    /** The width of the Game frame */
-    private static final int FRAME_WIDTH = 700;
-    /** The height of the Game frame */
-    private static final int FRAME_HEIGHT = 700;
     
 }
