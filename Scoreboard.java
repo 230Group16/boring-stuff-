@@ -2,10 +2,31 @@ package kablewie;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.util.Calendar;
 
 import javax.swing.JPanel;
 
 public class Scoreboard extends JPanel {
+	Calendar m_gameTime;
+	int m_minesDiffused;
+	int m_numberOfTilesRevealed;
+	
+	public void update() {
+		
+	}
+	
+	public Calendar getGameTime() {
+		return m_gameTime;
+	}
+	
+	public int getMinesDiffused() {
+		return m_minesDiffused;
+	}
+	
+	public int getNumberOfRevealed() {
+		return m_numberOfTilesRevealed;
+	}
+	
 	public void paintComponent( Graphics graphics ) {
 
 	      /* call superclass's paintComponent */
@@ -22,7 +43,7 @@ public class Scoreboard extends JPanel {
 	      
 	      /* set new drawing color using predefined variable */
 	      graphics.setColor(Color.BLACK);
-	      graphics.drawString( "Crap", TEXT_X_COORD, TEXT_Y_COORD );
+	      graphics.drawString( "Scoreboard goes here.", TEXT_X_COORD, TEXT_Y_COORD );
 	   } // end method paintComponent
 	
 	public int getWidth(){
