@@ -6,6 +6,39 @@ import java.awt.Graphics;
 import javax.swing.JPanel;
 
 public class Board extends JPanel {
+	int m_size;
+	int m_numberOfMines;
+	int[] m_mineLocations;
+	boolean m_gameOver;
+	Tile[] m_tiles;
+	
+	public Board() {
+		//Will handle the creation of a board using default values
+	}
+	
+	public Board(int sideLength, Mine[] mines) {
+		//Will handle the creation of a board with values input by the user
+	}
+	
+	public boolean isGameOver() {
+		return m_gameOver;
+	}
+	
+	public int getBoardSize() {
+		return m_size;
+	}
+	
+	public int getNumberOfMines() {
+		return m_numberOfMines;
+	}
+	
+	public int[] getMineLocations() {
+		return m_mineLocations;
+	}
+	
+	public void updateGameState() {
+		
+	}
 	
 	public void paintComponent( Graphics graphics ) {
 
@@ -23,7 +56,7 @@ public class Board extends JPanel {
 	      
 	      /* set new drawing color using predefined variable */
 	      graphics.setColor(Color.BLUE);
-	      graphics.drawString( "Bard", TEXT_X_COORD, TEXT_Y_COORD );
+	      graphics.drawString( "Board goes here.", TEXT_X_COORD, TEXT_Y_COORD );
 	   } // end method paintComponent
 	
 	public int getWidth(){
