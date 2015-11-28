@@ -70,8 +70,8 @@ public class Board extends JPanel {
 	private static final int COLOR_COMPONENT = 0;
 	private static final int FIRST_X_COORD = 0;
 	private static final int FIRST_Y_COORD = 0;
-	private static final int BAR_HEIGHT = 500;
-	private static final int BAR_WIDTH = 700;
+	private static final int BAR_HEIGHT = Game.getMBarHeight() - 100;
+	private static final int BAR_WIDTH = Game.getMBarWidth();
 	private static final int TEXT_X_COORD = 30;
 	private static final int TEXT_Y_COORD = 230;
 
