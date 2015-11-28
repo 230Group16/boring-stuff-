@@ -3,7 +3,7 @@
  * @author  -Rabidra Thapa
  * @date    -28/11/2015
  * @see     -Board.java
- * @see		-Scoreboard.java
+ * @see	    -Scoreboard.java
  *
  * A simple frame that can contain panels
  * 
@@ -19,24 +19,24 @@ import javax.swing.JFrame;
 
 public class Game {
 	
-	/* *
-     * Get method for frame Height 
-     * @return Frame's height
-     */
+        /* *
+        * Get method for frame Height 
+        * @return Frame's height
+        */
 	public static int getMBarHeight() {
 		return BAR_HEIGHT;
 	}
 	
-	/* *
-     * Get method for frame Width 
-     * @return Frame's width
-     */
+        /* *
+        * Get method for frame Width 
+        * @return Frame's width
+        */
 	public static int getMBarWidth() {
 		return BAR_WIDTH;
 	}
 	
 	
-    public static void main( String args[] ) {
+	public static void main( String args[] ) {
     
     	/* create frame for Board and Scoreboard */
     	JFrame frame = new JFrame( "Klablewie!!!");
