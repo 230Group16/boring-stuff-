@@ -5,6 +5,14 @@ import java.awt.Graphics;
 
 import javax.swing.JPanel;
 
+/**
+* @file Board.java
+* @author Thomas Fisher ************************** Whoever works on this class add your name here **************************
+* @date 28 Nov 2015
+* @see Game.java, Tile.java, Mine.java and Scoreboard.java for related information.
+*
+* The board that a Kablewie game will be played on.
+*/
 public class Board extends JPanel {
 	int m_size;
 	int m_numberOfMines;
