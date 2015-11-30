@@ -20,34 +20,68 @@ public class Board extends JPanel {
 	boolean m_gameOver;
 	Tile[] m_tiles;
 	
+	/**
+	* A constructor taking no arguments and returning a new instance of Board.
+	* @return New board object
+	*/
 	public Board() {
 		//Will handle the creation of a board using default values
 	}
 	
+	/**
+	* A constructor taking two arguments and returning a new instance of Board.
+	* @param sideLength the length of a side of the board.
+	* @param mines an array of Mine objects.
+	* @return New board object
+	*/
 	public Board(int sideLength, Mine[] mines) {
 		//Will handle the creation of a board with values input by the user
 	}
 	
+	/**
+	* An accessor method taking in no arguments and returning the value of m_gameOver
+	* @return Value of m_gameOver
+	*/
 	public boolean isGameOver() {
 		return m_gameOver;
 	}
 	
+	/**
+	* An accessor method taking in no arguments and returning the value of m_size
+	* @return Value of m_size
+	*/
 	public int getBoardSize() {
 		return m_size;
 	}
 	
+	/**
+	* An accessor method taking in no arguments and returning the value of m_numberOfMines
+	* @return Value of m_numberOfMines
+	*/
 	public int getNumberOfMines() {
 		return m_numberOfMines;
 	}
 	
+	/**
+	* An accessor method taking in no arguments and returning the value of m_mineLocations
+	* @return Value of m_mineLocations
+	*/
 	public int[] getMineLocations() {
 		return m_mineLocations;
 	}
 	
+	/**
+	* A method that updates all necessary data when called.
+	*/
 	public void updateGameState() {
 		
 	}
 	
+	/**
+	* A method taking in one argument that displays the board on the screen
+	* @param graphics the object to be displayed on the screen.
+	* @see Game.java
+	*/
 	public void paintComponent( Graphics graphics ) {
 
 	      /* call superclass's paintComponent */
@@ -67,10 +101,18 @@ public class Board extends JPanel {
 	      graphics.drawString( "Board goes here.", TEXT_X_COORD, TEXT_Y_COORD );
 	   } // end method paintComponent
 	
+	/**
+	* An accessor method taking in no arguments and returning the value of BAR_WIDTH
+	* @return Value of BAR_WIDTH
+	*/
 	public int getWidth(){
 		return BAR_WIDTH;
 	}
 	
+	/**
+	* An accessor method taking in no arguments and returning the value of BAR_HEIGHT
+	* @return Value of BAR_HEIGHT
+	*/
 	public int getHeight(){
 		return BAR_HEIGHT;
 	}
