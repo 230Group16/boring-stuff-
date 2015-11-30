@@ -14,29 +14,6 @@ import javax.swing.JPanel;
 * The board that a Kablewie game will be played on.
 */
 public class Board extends JPanel {
-	int m_size;
-	int m_numberOfMines;
-	int[] m_mineLocations;
-	boolean m_gameOver;
-	Tile[] m_tiles;
-	
-	/**
-	* A constructor taking no arguments and returning a new instance of Board.
-	* @return New board object
-	*/
-	public Board() {
-		//Will handle the creation of a board using default values
-	}
-	
-	/**
-	* A constructor taking two arguments and returning a new instance of Board.
-	* @param sideLength the length of a side of the board.
-	* @param mines an array of Mine objects.
-	* @return New board object
-	*/
-	public Board(int sideLength, Mine[] mines) {
-		//Will handle the creation of a board with values input by the user
-	}
 	
 	/**
 	* An accessor method taking in no arguments and returning the value of m_gameOver
@@ -71,10 +48,44 @@ public class Board extends JPanel {
 	}
 	
 	/**
+	* An accessor method taking in no arguments and returning the value of BAR_WIDTH
+	* @return Value of BAR_WIDTH
+	*/
+	public int getWidth(){
+		return BAR_WIDTH;
+	}
+	
+	/**
+	* An accessor method taking in no arguments and returning the value of BAR_HEIGHT
+	* @return Value of BAR_HEIGHT
+	*/
+	public int getHeight(){
+		return BAR_HEIGHT;
+	}
+	
+	/**
 	* A method that updates all necessary data when called.
 	*/
 	public void updateGameState() {
 		
+	}
+	
+	/**
+	* A constructor taking no arguments and returning a new instance of Board.
+	* @return New board object
+	*/
+	public Board() {
+		//Will handle the creation of a board using default values
+	}
+	
+	/**
+	* A constructor taking two arguments and returning a new instance of Board.
+	* @param sideLength the length of a side of the board.
+	* @param mines an array of Mine objects.
+	* @return New board object
+	*/
+	public Board(int sideLength, Mine[] mines) {
+		//Will handle the creation of a board with values input by the user
 	}
 	
 	/**
@@ -99,24 +110,13 @@ public class Board extends JPanel {
 	      /* set new drawing color using predefined variable */
 	      graphics.setColor(Color.BLUE);
 	      graphics.drawString( "Board goes here.", TEXT_X_COORD, TEXT_Y_COORD );
-	   } // end method paintComponent
-	
-	/**
-	* An accessor method taking in no arguments and returning the value of BAR_WIDTH
-	* @return Value of BAR_WIDTH
-	*/
-	public int getWidth(){
-		return BAR_WIDTH;
 	}
 	
-	/**
-	* An accessor method taking in no arguments and returning the value of BAR_HEIGHT
-	* @return Value of BAR_HEIGHT
-	*/
-	public int getHeight(){
-		return BAR_HEIGHT;
-	}
-	
+	int m_size;
+	int m_numberOfMines;
+	int[] m_mineLocations;
+	boolean m_gameOver;
+	Tile[] m_tiles;
 	private static final int COLOR_COMPONENT = 0;
 	private static final int FIRST_X_COORD = 0;
 	private static final int FIRST_Y_COORD = 0;
