@@ -1,81 +1,128 @@
-/**
- * @file    -Game.java
- * @author  -Rabidra Thapa
- * @date    -28/11/2015
- * @see     -Board.java
- * @see	    -Scoreboard.java
- *
- * A simple frame that can contain panels
- * 
- */
-
 package kablewie;
 
-import java.awt.Component;
-import java.awt.Container;
-import java.awt.Dimension;
-import javax.swing.BoxLayout;
-import javax.swing.JFrame;
+import java.awt.Color;
+import java.awt.Graphics;
 
-public class Game {
+import javax.swing.JPanel;
+
+/**
+* @file Board.java
+* @author Thomas Fisher ************************** Whoever works on this class add your name here **************************
+* @date 28 Nov 2015
+* @see Game.java, Tile.java, Mine.java and Scoreboard.java for related information.
+*
+* The board that a Kablewie game will be played on.
+*/
+public class Board extends JPanel {
+	int m_size;
+	int m_numberOfMines;
+	int[] m_mineLocations;
+	boolean m_gameOver;
+	Tile[] m_tiles;
 	
-        /* *
-        * Get method for frame Height 
-        * @return Frame's height
-        */
-	public static int getMBarHeight() {
-		return BAR_HEIGHT;
+	/**
+	* A constructor taking no arguments and returning a new instance of Board.
+	* @return New board object
+	*/
+	public Board() {
+		//Will handle the creation of a board using default values
 	}
 	
-        /* *
-        * Get method for frame Width 
-        * @return Frame's width
-        */
-	public static int getMBarWidth() {
+	/**
+	* A constructor taking two arguments and returning a new instance of Board.
+	* @param sideLength the length of a side of the board.
+	* @param mines an array of Mine objects.
+	* @return New board object
+	*/
+	public Board(int sideLength, Mine[] mines) {
+		//Will handle the creation of a board with values input by the user
+	}
+	
+	/**
+	* An accessor method taking in no arguments and returning the value of m_gameOver
+	* @return Value of m_gameOver
+	*/
+	public boolean isGameOver() {
+		return m_gameOver;
+	}
+	
+	/**
+	* An accessor method taking in no arguments and returning the value of m_size
+	* @return Value of m_size
+	*/
+	public int getBoardSize() {
+		return m_size;
+	}
+	
+	/**
+	* An accessor method taking in no arguments and returning the value of m_numberOfMines
+	* @return Value of m_numberOfMines
+	*/
+	public int getNumberOfMines() {
+		return m_numberOfMines;
+	}
+	
+	/**
+	* An accessor method taking in no arguments and returning the value of m_mineLocations
+	* @return Value of m_mineLocations
+	*/
+	public int[] getMineLocations() {
+		return m_mineLocations;
+	}
+	
+	/**
+	* A method that updates all necessary data when called.
+	*/
+	public void updateGameState() {
+		
+	}
+	
+	/**
+	* A method taking in one argument that displays the board on the screen
+	* @param graphics the object to be displayed on the screen.
+	* @see Game.java
+	*/
+	public void paintComponent( Graphics graphics ) {
+
+	      /* call superclass's paintComponent */
+	      super.paintComponent( graphics );
+
+	      /* set new drawing color using integers */
+	      graphics.setColor(new Color(COLOR_COMPONENT, 
+	                                  COLOR_COMPONENT,
+	                                  COLOR_COMPONENT ) );
+	      graphics.fillRect( FIRST_X_COORD,
+	                         FIRST_Y_COORD,
+	                         BAR_WIDTH,
+	                         BAR_HEIGHT);
+	      
+	      /* set new drawing color using predefined variable */
+	      graphics.setColor(Color.BLUE);
+	      graphics.drawString( "Board goes here.", TEXT_X_COORD, TEXT_Y_COORD );
+	   } // end method paintComponent
+	
+	/**
+	* An accessor method taking in no arguments and returning the value of BAR_WIDTH
+	* @return Value of BAR_WIDTH
+	*/
+	public int getWidth(){
 		return BAR_WIDTH;
 	}
 	
-	
-	public static void main( String args[] ) {
-    
-    	/* create frame for Board and Scoreboard */
-    	JFrame frame = new JFrame( "Klablewie!!!");
-    	frame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
-    	
-    	/* create container */
-    	Container pane = frame.getContentPane();
-    	
-    	/* set container layout to boxlayout */
-    	pane.setLayout(new BoxLayout(pane, BoxLayout.Y_AXIS));
-    	
-    	/* creates Board and Scoreboard panels and sets their verticle alignmenrt and preferred sizes */
-    	Scoreboard scoreboardpanel = new Scoreboard();
-    	scoreboardpanel.setAlignmentX(Component.CENTER_ALIGNMENT);
-    	scoreboardpanel.setPreferredSize(new Dimension(scoreboardpanel.getWidth(), scoreboardpanel.getHeight()));
-    	
-    	Board boardpanel = new Board();
-    	boardpanel.setAlignmentX(Component.CENTER_ALIGNMENT);
-    	boardpanel.setPreferredSize(new Dimension(boardpanel.getWidth(), boardpanel.getHeight()));
-    	
-    	
-    	/* set frame size */
-    	//frame.setSize( FRAME_HEIGHT, FRAME_WIDTH );
-    	
-    	/* add boardpanel and scoreboardpanel to frame */
-    	pane.add(scoreboardpanel);
-    	pane.add(boardpanel);
-    	
-    	/* Sets frame size */
-    	frame.setSize(BAR_WIDTH, BAR_HEIGHT);
-    	
-    	/* display frame */
-        frame.setVisible(true);
-        
-        /* set frame resizable to false */
-        frame.setResizable(false);
+	/**
+	* An accessor method taking in no arguments and returning the value of BAR_HEIGHT
+	* @return Value of BAR_HEIGHT
+	*/
+	public int getHeight(){
+		return BAR_HEIGHT;
 	}
 	
-	private static final int BAR_WIDTH = 700;
-	private static final int BAR_HEIGHT = 700;
-    
+	private static final int COLOR_COMPONENT = 0;
+	private static final int FIRST_X_COORD = 0;
+	private static final int FIRST_Y_COORD = 0;
+	private static final int BAR_HEIGHT = Game.getMBarHeight() - 100;
+	private static final int BAR_WIDTH = Game.getMBarWidth();
+	private static final int TEXT_X_COORD = 30;
+	private static final int TEXT_Y_COORD = 230;
+
 }
