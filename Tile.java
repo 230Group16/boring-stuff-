@@ -12,6 +12,7 @@ public class Tile extends JButton {
 	private Graphics2D m_graphic;
 	private int m_x;
 	private int m_y;
+	private Graphics2D img[];
 	
 	public Tile(int x, int y){
 		m_enabled = true;
@@ -20,9 +21,45 @@ public class Tile extends JButton {
 		m_x = x;
 		m_y = y;
 		
-		Graphics2D img[] = new Graphics2D[9];  
+		createGraphicsArray();  
+		addHandler();
+	}
 		
-		
+	
+	public void setEnabled(boolean tf){
+		m_enabled = tf;
+	}
+	
+	public boolean m_isEnabled(){
+		return m_enabled;
+	}
+	
+	public void toggleFlag(){
+		m_flag = !m_flag;
+	}
+	
+	public void m_showGraphic(int mineCount){
+		switch (mineCount){
+		case 1:
+			m_graphic = new Graphics2D(/*pic of 1*/);
+			break;
+		case 2:
+			
+		}
+	}
+	public Graphics2D getGraphic(){
+		return m_graphic;
+	}
+	
+	public boolean hasMine(){
+		return false;
+	}
+	
+	public boolean m_hasFlag(){
+		return m_flag;
+	}
+	
+	public void addHandler(){
 		class MouseHandle implements MouseListener{
 			public void mousePressed(MouseEvent e){
 			    if(e.getButton() == MouseEvent.BUTTON1)
@@ -52,41 +89,18 @@ public class Tile extends JButton {
 		
 		MouseHandle mh = new MouseHandle();
 		this.addMouseListener(mh);
-		
-		
-		
-	}
-		
-	
-	public void setEnabled(boolean tf){
-		m_enabled = tf;
 	}
 	
-	public boolean m_isEnabled(){
-		return m_enabled;
+	public void createGraphicsArray(){
+		img = new Graphics2D[10];
+		//add images for each Aled
 	}
 	
-	public void toggleFlag(){
-		m_flag = !m_flag;
+	public int getPosX(){
+		return m_x;
 	}
 	
-	public void setGraphic(int mineCount){
-		switch (mineCount){
-		case 1:
-			m_graphic = new Graphics2D(/*pic of 1*/);
-			break;
-		case 2
-		}
-	}
-	public Graphics2D getGraphic(){
-		return m_graphic;
-	}
-	
-	public boolean hasMine(){
-		return false;
-	}
-	
-	public boolean m_hasFlag(){
-		return m_flag;
+	public int getPosY(){
+		return m_y;
 	}
 }
