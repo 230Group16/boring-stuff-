@@ -24,15 +24,6 @@ public class Tile extends JButton {
 		createGraphicsArray();  
 		addHandler();
 	}
-		
-	
-	public void setEnabled(boolean tf){
-		m_enabled = tf;
-	}
-	
-	public boolean m_isEnabled(){
-		return m_enabled;
-	}
 	
 	public void toggleFlag(){
 		m_flag = !m_flag;
@@ -73,6 +64,7 @@ public class Tile extends JButton {
 			
 		}
 	}
+	
 	public Graphics2D getGraphic(){
 		return m_graphic;
 	}
@@ -91,8 +83,8 @@ public class Tile extends JButton {
 			    if(e.getButton() == MouseEvent.BUTTON1)
 			    {
 			     setEnabled(false);
-			     Game g = (Game) getParent();
-			     g.reveal(this);
+			     Board b = (Board) getParent();
+			     b.reveal(getThis());
 			    }	    
 			    else if(e.getButton() == MouseEvent.BUTTON3)
 			    {
@@ -115,6 +107,10 @@ public class Tile extends JButton {
 		
 		MouseHandle mh = new MouseHandle();
 		this.addMouseListener(mh);
+	}
+	
+	public Tile getThis() {
+		return this;
 	}
 	
 	public void createGraphicsArray(){
