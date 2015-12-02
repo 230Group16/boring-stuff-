@@ -13,15 +13,50 @@ public class Tile extends JButton {
 	private int m_x;
 	private int m_y;
 	
-	public void Tile(int x, int y){
+	public Tile(int x, int y){
 		m_enabled = true;
 		m_flag = false;
 		m_graphic = null;
 		m_x = x;
 		m_y = y;
 		
+		Graphics2D img[] = new Graphics2D[9];  
+		
+		
+		class MouseHandle implements MouseListener{
+			public void mousePressed(MouseEvent e){
+			    if(e.getButton() == MouseEvent.BUTTON1)
+			    {
+			     setEnabled(false);
+			     Game g = (Game) getParent();
+			     g.reveal(this);
+			    }	    
+			    else if(e.getButton() == MouseEvent.BUTTON3)
+			    {
+			    	toggleFlag();
+			    }
+			}
+			public void mouseReleased(MouseEvent e){
+				
+			}
+			public void mouseEntered(MouseEvent e){
+				
+			}
+			public void mouseExited(MouseEvent e){
+				
+			}
+			public void mouseClicked(MouseEvent e){
+				
+			}
+		}
+		
+		MouseHandle mh = new MouseHandle();
+		this.addMouseListener(mh);
+		
+		
 		
 	}
+		
 	
 	public void setEnabled(boolean tf){
 		m_enabled = tf;
@@ -35,8 +70,13 @@ public class Tile extends JButton {
 		m_flag = !m_flag;
 	}
 	
-	public void setGraphic(Graphics2D g){
-		m_graphic = g;
+	public void setGraphic(int mineCount){
+		switch (mineCount){
+		case 1:
+			m_graphic = new Graphics2D(/*pic of 1*/);
+			break;
+		case 2
+		}
 	}
 	public Graphics2D getGraphic(){
 		return m_graphic;
