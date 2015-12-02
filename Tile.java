@@ -44,6 +44,32 @@ public class Tile extends JButton {
 			m_graphic = new Graphics2D(/*pic of 1*/);
 			break;
 		case 2:
+			m_graphic = new Graphics2D(/*pic of 2*/);
+			break;
+		case 3:
+			m_graphic = new Graphics2D(/*pic of 3*/);
+			break;
+		case 4:
+			m_graphic = new Graphics2D(/*pic of 4*/);
+			break;
+		case 5:
+			m_graphic = new Graphics2D(/*pic of 5*/);
+			break;
+		case 6:
+			m_graphic = new Graphics2D(/*pic of 6*/);
+			break;
+		case 7:
+			m_graphic = new Graphics2D(/*pic of 7*/);
+			break;
+		case 8:
+			m_graphic = new Graphics2D(/*pic of 8*/);
+			break;
+		case 9:
+			m_graphic = new Graphics2D(/*pic of Flag*/);
+			break;
+		case 10:
+			m_graphic = new Graphics2D(/*pic of Bomb*/);
+			break;
 			
 		}
 	}
