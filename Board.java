@@ -1,7 +1,10 @@
 package kablewie;
 
 import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.GridLayout;
 
 import javax.swing.JPanel;
 
@@ -99,6 +102,17 @@ public class Board extends JPanel {
     public Board(int sideLength, int numberOfMines) {
         m_size = sideLength;
         m_numberOfMines = numberOfMines;
+        
+        GridLayout boardLayout = new GridLayout(0,m_size);
+        this.setLayout(boardLayout);
+        this.setAlignmentX(Component.CENTER_ALIGNMENT);
+        this.setPreferredSize(new Dimension(this.getWidth(), this.getHeight()));
+        
+        for (int i=0;i< m_size; i++) {
+        	for (int j=0;j < m_size; j++) {
+        		this.add(new Tile());
+        	}
+        }
     }
     
     /**
