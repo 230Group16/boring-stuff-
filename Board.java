@@ -106,7 +106,7 @@ public class Board extends JPanel {
         GridLayout boardLayout = new GridLayout(0,m_size);
         this.setLayout(boardLayout);
         this.setAlignmentX(Component.CENTER_ALIGNMENT);
-        this.setPreferredSize(new Dimension(this.getWidth(), this.getHeight()));
+        this.setPreferredSize(new Dimension(BAR_WIDTH, BAR_HEIGHT));
         
         for (int i=0;i< m_size; i++) {
         	for (int j=0;j < m_size; j++) {
