@@ -80,8 +80,8 @@ public class Board extends JPanel {
     }
     
     public void reveal(Tile tile) {
-    	int x = tile.getX();
-    	int y = tile.getY();
+    	int x = tile.getPosX();
+    	int y = tile.getPosY();
     	
     	tile.setEnabled(false);
     	
@@ -93,14 +93,18 @@ public class Board extends JPanel {
     	checkTile(tile);
     	
     	//If tile has no surrounding mines, reveal all surrounding tiles
-    	if ((m_tiles[tile.getX()][tile.getY()]).getGraphic() == null) {
-    		reveal(m_tiles[tile.getX()+ 1][tile.getY()+ 1]);
-        	reveal(m_tiles[tile.getX()][tile.getY()+ 1]);
-        	reveal(m_tiles[tile.getX()+ 1][tile.getY()]);
-        	reveal(m_tiles[tile.getX()- 1][tile.getY()- 1]);
-        	reveal(m_tiles[tile.getX()][tile.getY()- 1]);
-        	reveal(m_tiles[tile.getX()- 1][tile.getY()]);
-    	}
+    	try {
+    		if ((m_tiles[x][y]).getGraphic() == null) {
+        		if (m_tiles[x+1][y+1].isEnabled()) { reveal(m_tiles[x+1][y+1]); }
+        		if (m_tiles[x][y+1].isEnabled()) { reveal(m_tiles[x][y+1]); }
+        		if (m_tiles[x+1][y].isEnabled()) { reveal(m_tiles[x+1][y]); }
+        		if (m_tiles[x+1][y-1].isEnabled()) {reveal(m_tiles[x+1][y-1]); }
+        		if (m_tiles[x-1][y+1].isEnabled()) { reveal(m_tiles[x-1][y+1]); }
+        		if (m_tiles[x-1][y-1].isEnabled()) {reveal(m_tiles[x-1][y-1]); }
+        		if (m_tiles[x][y-1].isEnabled()) { reveal(m_tiles[x][y-1]); }
+        		if (m_tiles[x-1][y].isEnabled()) { reveal(m_tiles[x-1][y]); }
+        	}
+    	} catch (IndexOutOfBoundsException e) {}
     }
     
     private void checkTile(Tile tile){
@@ -108,34 +112,37 @@ public class Board extends JPanel {
     	int y = tile.getY();
     	
         int mineCount = 0;
-        	
-        //Tile to bottom right
-        if (m_tiles[x+1][y+1].hasMine()) {mineCount++; }
         
-       	//Tile below
-       	if (m_tiles[x][y+1].hasMine()) {mineCount++; }
-        	
-       	//Tile to the right
-       	if (m_tiles[x+1][y].hasMine()) {mineCount++; }
-        	
-       	//Tile to the left
-       	if (m_tiles[x-1][y].hasMine()) {mineCount++; }
-        	
-       	//Tile above
-       	if (m_tiles[x][y-1].hasMine()) {mineCount++; }
-        	
-       	//Tile to top right
-       	if (m_tiles[x+1][y-1].hasMine()) {mineCount++; }
-        	
-       	//Tile to bottom left
-       	if (m_tiles[x-1][y+1].hasMine()) {mineCount++; }
-        	
-       	//Tile to top left
-       	if (m_tiles[x-1][y-1].hasMine()) {mineCount++; }
+        try {
+        	//Tile to bottom right
+            if (m_tiles[x+1][y+1].hasMine()) {mineCount++; }
             
-        if(mineCount != 0){
-        	tile.setGraphic(mineCount);
-        }
+           	//Tile below
+           	if (m_tiles[x][y+1].hasMine()) {mineCount++; }
+            	
+           	//Tile to the right
+           	if (m_tiles[x+1][y].hasMine()) {mineCount++; }
+            	
+           	//Tile to the left
+           	if (m_tiles[x-1][y].hasMine()) {mineCount++; }
+            	
+           	//Tile above
+           	if (m_tiles[x][y-1].hasMine()) {mineCount++; }
+            	
+           	//Tile to top right
+           	if (m_tiles[x+1][y-1].hasMine()) {mineCount++; }
+            	
+           	//Tile to bottom left
+           	if (m_tiles[x-1][y+1].hasMine()) {mineCount++; }
+            	
+           	//Tile to top left
+           	if (m_tiles[x-1][y-1].hasMine()) {mineCount++; }
+                
+            /* if(mineCount != 0){
+            	tile.setGraphic(mineCount);
+            } */	
+        } catch (IndexOutOfBoundsException e) {}
+        
     }
     
     /**
