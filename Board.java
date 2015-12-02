@@ -71,21 +71,34 @@ public class Board extends JPanel {
 	}
 	
 	/**
-	* A constructor taking no arguments and returning a new instance of Board.
+	* A constructor taking no arguments and returning a new instance of Board with default values.
 	* @return New board object
 	*/
 	public Board() {
-		//Will handle the creation of a board using default values
+		m_size = 10;
+		m_numberOfMines = 10;
+		
+	}
+	
+	/**
+	* A constructor taking one argument and returning a new instance of Board with default number of mines.
+	* @param sideLength the length of a side of the board.
+	* @return New board object
+	*/
+	public Board(int sideLength) {
+		m_size = sideLength;
+		m_numberOfMines = sideLength;
 	}
 	
 	/**
 	* A constructor taking two arguments and returning a new instance of Board.
 	* @param sideLength the length of a side of the board.
-	* @param mines an array of Mine objects.
+	* @param numberOfMines an integer representing the number of mines.
 	* @return New board object
 	*/
-	public Board(int sideLength, Mine[] mines) {
-		//Will handle the creation of a board with values input by the user
+	public Board(int sideLength, int numberOfMines) {
+		m_size = sideLength;
+		m_numberOfMines = numberOfMines;
 	}
 	
 	/**
