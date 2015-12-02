@@ -73,24 +73,8 @@ public class Board extends JPanel {
         
     }
     
-    /**
-    * A constructor taking no arguments and returning a new instance of Board with default values.
-    * @return New board object
-    */
-    public Board() {
-        m_size = 10;
-        m_numberOfMines = 10;
-        
-    }
-    
-    /**
-    * A constructor taking one argument and returning a new instance of Board with default number of mines.
-    * @param sideLength the length of a side of the board.
-    * @return New board object
-    */
-    public Board(int sideLength) {
-        m_size = sideLength;
-        m_numberOfMines = sideLength;
+    public void revealSurrounding(Tile tile) {
+    	
     }
     
     /**
@@ -100,9 +84,16 @@ public class Board extends JPanel {
     * @return New board object
     */
     public Board(int sideLength, int numberOfMines) {
-        m_size = sideLength;
-        m_numberOfMines = numberOfMines;
+        if (sideLength == -1) {
+        	m_size = 10;
+        } else {
+            m_size = sideLength;        	
+        }
         
+        if (numberOfMines == -1) {
+        	m_numberOfMines = numberOfMines;
+        }
+
         GridLayout boardLayout = new GridLayout(0,m_size);
         this.setLayout(boardLayout);
         this.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -110,7 +101,7 @@ public class Board extends JPanel {
         
         for (int i=0;i< m_size; i++) {
         	for (int j=0;j < m_size; j++) {
-        		this.add(new Tile());
+        		this.add(new Tile(i,j)); //Create new tile with location (i,j)
         	}
         }
     }
@@ -133,10 +124,6 @@ public class Board extends JPanel {
         FIRST_Y_COORD,
         BAR_WIDTH,
         BAR_HEIGHT);
-        
-        /* set new drawing color using predefined variable */
-        graphics.setColor(Color.BLUE);
-        graphics.drawString( "Board goes here.", TEXT_X_COORD, TEXT_Y_COORD );
     }
     
     int m_size;
@@ -147,6 +134,7 @@ public class Board extends JPanel {
     private static final int COLOR_COMPONENT = 0;
     private static final int FIRST_X_COORD = 0;
     private static final int FIRST_Y_COORD = 0;
+    private static final int TILE_SIZE = 30;
     private static final int BAR_HEIGHT = Game.getMBarHeight() - 100;
     private static final int BAR_WIDTH = Game.getMBarWidth();
     private static final int TEXT_X_COORD = 30;
