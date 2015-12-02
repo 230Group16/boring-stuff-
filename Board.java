@@ -1,10 +1,14 @@
 package kablewie;
 
+import javax.swing.*;
+
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JPanel;
 
@@ -70,11 +74,68 @@ public class Board extends JPanel {
     * A method that updates all necessary data when called.
     */
     public void updateGameState() {
-        
+        if (m_gameOver) {
+        	
+        }
     }
     
-    public void revealSurrounding(Tile tile) {
+    public void reveal(Tile tile) {
+    	int x = tile.getX();
+    	int y = tile.getY();
     	
+    	tile.setEnabled(false);
+    	
+    	if (tile.hasMine()) {
+    		m_gameOver = true;
+    		updateGameState();
+    	}
+    	
+    	checkTile(tile);
+    	
+    	//If tile has no surrounding mines, reveal all surrounding tiles
+    	if ((m_tiles[tile.getX()][tile.getY()]).getGraphic() == null) {
+    		reveal(m_tiles[tile.getX()+ 1][tile.getY()+ 1]);
+        	reveal(m_tiles[tile.getX()][tile.getY()+ 1]);
+        	reveal(m_tiles[tile.getX()+ 1][tile.getY()]);
+        	reveal(m_tiles[tile.getX()- 1][tile.getY()- 1]);
+        	reveal(m_tiles[tile.getX()][tile.getY()- 1]);
+        	reveal(m_tiles[tile.getX()- 1][tile.getY()]);
+    	}
+    }
+    
+    private void checkTile(Tile tile){
+    	int x = tile.getX();
+    	int y = tile.getY();
+    	
+        int mineCount = 0;
+        	
+        //Tile to bottom right
+        if (m_tiles[x+1][y+1].hasMine()) {mineCount++; }
+        
+       	//Tile below
+       	if (m_tiles[x][y+1].hasMine()) {mineCount++; }
+        	
+       	//Tile to the right
+       	if (m_tiles[x+1][y].hasMine()) {mineCount++; }
+        	
+       	//Tile to the left
+       	if (m_tiles[x-1][y].hasMine()) {mineCount++; }
+        	
+       	//Tile above
+       	if (m_tiles[x][y-1].hasMine()) {mineCount++; }
+        	
+       	//Tile to top right
+       	if (m_tiles[x+1][y-1].hasMine()) {mineCount++; }
+        	
+       	//Tile to bottom left
+       	if (m_tiles[x-1][y+1].hasMine()) {mineCount++; }
+        	
+       	//Tile to top left
+       	if (m_tiles[x-1][y-1].hasMine()) {mineCount++; }
+            
+        if(mineCount != 0){
+        	tile.setGraphic(mineCount);
+        }
     }
     
     /**
@@ -93,6 +154,8 @@ public class Board extends JPanel {
         if (numberOfMines == -1) {
         	m_numberOfMines = numberOfMines;
         }
+        
+        m_tiles = new Tile[sideLength][sideLength];
 
         GridLayout boardLayout = new GridLayout(0,m_size);
         this.setLayout(boardLayout);
@@ -101,36 +164,18 @@ public class Board extends JPanel {
         
         for (int i=0;i< m_size; i++) {
         	for (int j=0;j < m_size; j++) {
-        		this.add(new Tile(i,j)); //Create new tile with location (i,j)
+        		Tile tile = new Tile(i,j);
+        		this.add(tile); //Create new tile with location (i,j)
+        		m_tiles[i][j] = tile;
         	}
         }
-    }
-    
-    /**
-    * A method taking in one argument that displays the board on the screen
-    * @param graphics the object to be displayed on the screen.
-    * @see Game.java
-    */
-    public void paintComponent( Graphics graphics ) {
-        
-        /* call superclass's paintComponent */
-        super.paintComponent( graphics );
-        
-        /* set new drawing color using integers */
-        graphics.setColor(new Color(COLOR_COMPONENT,
-        COLOR_COMPONENT,
-        COLOR_COMPONENT ) );
-        graphics.fillRect( FIRST_X_COORD,
-        FIRST_Y_COORD,
-        BAR_WIDTH,
-        BAR_HEIGHT);
     }
     
     int m_size;
     int m_numberOfMines;
     int[] m_mineLocations;
     boolean m_gameOver;
-    Tile[] m_tiles;
+    Tile[][] m_tiles;
     private static final int COLOR_COMPONENT = 0;
     private static final int FIRST_X_COORD = 0;
     private static final int FIRST_Y_COORD = 0;
