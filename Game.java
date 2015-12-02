@@ -14,7 +14,10 @@ package kablewie;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.GridLayout;
+
 import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 
 public class Game {
@@ -54,9 +57,10 @@ public class Game {
         scoreboardpanel.setPreferredSize(new Dimension(scoreboardpanel.getWidth(), scoreboardpanel.getHeight()));
         
         Board boardpanel = new Board();
+        GridLayout boardLayout = new GridLayout(0,2);
+        boardpanel.setLayout(boardLayout);
         boardpanel.setAlignmentX(Component.CENTER_ALIGNMENT);
         boardpanel.setPreferredSize(new Dimension(boardpanel.getWidth(), boardpanel.getHeight()));
-        
         
         /* set frame size */
         //frame.setSize( FRAME_HEIGHT, FRAME_WIDTH );
