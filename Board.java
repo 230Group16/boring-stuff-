@@ -2,14 +2,12 @@ package kablewie;
 
 import javax.swing.*;
 
-import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.concurrent.TimeUnit;
 
 import javax.swing.JPanel;
 
@@ -97,62 +95,36 @@ public class Board extends JPanel {
     	Timer timer = new Timer( delay, new ActionListener(){
     		@Override
     		public void actionPerformed( ActionEvent e ){  
+    			//If tile has no surrounding mines, reveal all surrounding tiles
     			if ((m_tiles[x][y]).getGraphic() == null) {
     				if ((x+1 < m_size) && (y+1 < m_size)) {
-    					if (m_tiles[x+1][y+1].isEnabled()) { 
-    					  reveal(m_tiles[x+1][y+1]); //Bottom right
-    					} 
-    				}
-    				
-    				if (y+1 < m_size) {
-    					if (m_tiles[x][y+1].isEnabled()) { 
-    	       				reveal(m_tiles[x][y+1]); //Bottom
-    	       			} 
-    				}
-    				
-    				if (x+1 < m_size) {
-    					if (m_tiles[x+1][y].isEnabled()) { 
-    	       				reveal(m_tiles[x+1][y]); //Right
-    	       			} 
-    				}
-    				
-    				if ((x+1 < m_size) && (y-1 >= 0)) {
-    					if (m_tiles[x+1][y-1].isEnabled()) {
-    	       				reveal(m_tiles[x+1][y-1]); //Top right
-    	       			} 
-    				}
-    				
-    				if ((x-1 >= 0) && (y+1 < m_size)) {
-    					if (m_tiles[x-1][y+1].isEnabled()) { 
-    	       				reveal(m_tiles[x-1][y+1]); //Bottom left
-    	       			}
+    					if (m_tiles[x+1][y+1].isEnabled()) { reveal(m_tiles[x+1][y+1]); } //Bottom right
+    					if (m_tiles[x+1][y].isEnabled()) { reveal(m_tiles[x+1][y]); } //Right
+    					if (m_tiles[x][y+1].isEnabled()) { reveal(m_tiles[x][y+1]); } //Bottom
     				}
     				
     				if ((x-1 >= 0) && (y-1 >= 0)) {
-    					if (m_tiles[x-1][y-1].isEnabled()) {
-    	       				reveal(m_tiles[x-1][y-1]); //Top left
-    	       			} 
+    					if (m_tiles[x-1][y-1].isEnabled()) { reveal(m_tiles[x-1][y-1]); } //Top left
+    					if (m_tiles[x][y-1].isEnabled()) { reveal(m_tiles[x][y-1]); } //Top
+    					if (m_tiles[x-1][y].isEnabled()) { reveal(m_tiles[x-1][y]); } //Left
     				}
     				
-    				if ((y-1 >= 0)) {
-    					if (m_tiles[x][y-1].isEnabled()) {
-    	       				reveal(m_tiles[x][y-1]); //Top
-    	       			} 
+    				if ((x+1 < m_size) && (y-1 >= 0)) {
+    					if (m_tiles[x+1][y-1].isEnabled()) { reveal(m_tiles[x+1][y-1]); }//Top right
+    					 
     				}
     				
-    				if ((x-1 >= 0)) {
-    					if (m_tiles[x-1][y].isEnabled()) { 
-    	       				reveal(m_tiles[x-1][y]); //Left
-    	       			} 
-    				}
-       		}
-    	  }
+    				if ((x-1 >= 0) && (y+1 < m_size)) {
+    					if (m_tiles[x-1][y+1].isEnabled()) { reveal(m_tiles[x-1][y+1]); }//Bottom left
+       				}
+    				
+    				
+    			}
+    		}
     	} );
+    	
     	timer.setRepeats( false );
     	timer.start();
-    	
-    	//If tile has no surrounding mines, reveal all surrounding tiles
-    	
     }
     
     private void checkTile(Tile tile){
