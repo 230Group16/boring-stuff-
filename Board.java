@@ -9,6 +9,7 @@ import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.concurrent.TimeUnit;
 
 import javax.swing.JPanel;
 
@@ -92,19 +93,29 @@ public class Board extends JPanel {
     	
     	checkTile(tile);
     	
+    	int delay = 50;
+    	Timer timer = new Timer( delay, new ActionListener(){
+    	  @Override
+    	  public void actionPerformed( ActionEvent e ){
+    		  try {
+    	    		if ((m_tiles[x][y]).getGraphic() == null) {
+    	        		if (m_tiles[x+1][y+1].isEnabled()) { reveal(m_tiles[x+1][y+1]); }
+    	        		if (m_tiles[x][y+1].isEnabled()) { reveal(m_tiles[x][y+1]); }
+    	        		if (m_tiles[x+1][y].isEnabled()) { reveal(m_tiles[x+1][y]); }
+    	        		if (m_tiles[x+1][y-1].isEnabled()) {reveal(m_tiles[x+1][y-1]); }
+    	        		if (m_tiles[x-1][y+1].isEnabled()) { reveal(m_tiles[x-1][y+1]); }
+    	        		if (m_tiles[x-1][y-1].isEnabled()) {reveal(m_tiles[x-1][y-1]); }
+    	        		if (m_tiles[x][y-1].isEnabled()) { reveal(m_tiles[x][y-1]); }
+    	        		if (m_tiles[x-1][y].isEnabled()) { reveal(m_tiles[x-1][y]); }
+    	        	}
+    	    	} catch (IndexOutOfBoundsException outOfBoundsEx) {}
+    	  }
+    	} );
+    	timer.setRepeats( false );
+    	timer.start();
+    	
     	//If tile has no surrounding mines, reveal all surrounding tiles
-    	try {
-    		if ((m_tiles[x][y]).getGraphic() == null) {
-        		if (m_tiles[x+1][y+1].isEnabled()) { reveal(m_tiles[x+1][y+1]); }
-        		if (m_tiles[x][y+1].isEnabled()) { reveal(m_tiles[x][y+1]); }
-        		if (m_tiles[x+1][y].isEnabled()) { reveal(m_tiles[x+1][y]); }
-        		if (m_tiles[x+1][y-1].isEnabled()) {reveal(m_tiles[x+1][y-1]); }
-        		if (m_tiles[x-1][y+1].isEnabled()) { reveal(m_tiles[x-1][y+1]); }
-        		if (m_tiles[x-1][y-1].isEnabled()) {reveal(m_tiles[x-1][y-1]); }
-        		if (m_tiles[x][y-1].isEnabled()) { reveal(m_tiles[x][y-1]); }
-        		if (m_tiles[x-1][y].isEnabled()) { reveal(m_tiles[x-1][y]); }
-        	}
-    	} catch (IndexOutOfBoundsException e) {}
+    	
     }
     
     private void checkTile(Tile tile){
