@@ -80,8 +80,8 @@ public class Board extends JPanel {
         }
     }
     
-    public void reveal(Tile tile) {
-    	int x = tile.getPosX();
+	public void reveal(Tile tile) {
+		int x = tile.getPosX();
     	int y = tile.getPosY();
     	
     	tile.setEnabled(false);
@@ -95,20 +95,57 @@ public class Board extends JPanel {
     	
     	int delay = 50;
     	Timer timer = new Timer( delay, new ActionListener(){
-    	  @Override
-    	  public void actionPerformed( ActionEvent e ){
-    		  try {
-    	    		if ((m_tiles[x][y]).getGraphic() == null) {
-    	        		if (m_tiles[x+1][y+1].isEnabled()) { reveal(m_tiles[x+1][y+1]); }
-    	        		if (m_tiles[x][y+1].isEnabled()) { reveal(m_tiles[x][y+1]); }
-    	        		if (m_tiles[x+1][y].isEnabled()) { reveal(m_tiles[x+1][y]); }
-    	        		if (m_tiles[x+1][y-1].isEnabled()) {reveal(m_tiles[x+1][y-1]); }
-    	        		if (m_tiles[x-1][y+1].isEnabled()) { reveal(m_tiles[x-1][y+1]); }
-    	        		if (m_tiles[x-1][y-1].isEnabled()) {reveal(m_tiles[x-1][y-1]); }
-    	        		if (m_tiles[x][y-1].isEnabled()) { reveal(m_tiles[x][y-1]); }
-    	        		if (m_tiles[x-1][y].isEnabled()) { reveal(m_tiles[x-1][y]); }
-    	        	}
-    	    	} catch (IndexOutOfBoundsException outOfBoundsEx) {}
+    		@Override
+    		public void actionPerformed( ActionEvent e ){  
+    			if ((m_tiles[x][y]).getGraphic() == null) {
+    				if ((x+1 < m_size) && (y+1 < m_size)) {
+    					if (m_tiles[x+1][y+1].isEnabled()) { 
+    					  reveal(m_tiles[x+1][y+1]); //Bottom right
+    					} 
+    				}
+    				
+    				if (y+1 < m_size) {
+    					if (m_tiles[x][y+1].isEnabled()) { 
+    	       				reveal(m_tiles[x][y+1]); //Bottom
+    	       			} 
+    				}
+    				
+    				if (x+1 < m_size) {
+    					if (m_tiles[x+1][y].isEnabled()) { 
+    	       				reveal(m_tiles[x+1][y]); //Right
+    	       			} 
+    				}
+    				
+    				if ((x+1 < m_size) && (y-1 >= 0)) {
+    					if (m_tiles[x+1][y-1].isEnabled()) {
+    	       				reveal(m_tiles[x+1][y-1]); //Top right
+    	       			} 
+    				}
+    				
+    				if ((x-1 >= 0) && (y+1 < m_size)) {
+    					if (m_tiles[x-1][y+1].isEnabled()) { 
+    	       				reveal(m_tiles[x-1][y+1]); //Bottom left
+    	       			}
+    				}
+    				
+    				if ((x-1 >= 0) && (y-1 >= 0)) {
+    					if (m_tiles[x-1][y-1].isEnabled()) {
+    	       				reveal(m_tiles[x-1][y-1]); //Top left
+    	       			} 
+    				}
+    				
+    				if ((y-1 >= 0)) {
+    					if (m_tiles[x][y-1].isEnabled()) {
+    	       				reveal(m_tiles[x][y-1]); //Top
+    	       			} 
+    				}
+    				
+    				if ((x-1 >= 0)) {
+    					if (m_tiles[x-1][y].isEnabled()) { 
+    	       				reveal(m_tiles[x-1][y]); //Left
+    	       			} 
+    				}
+       		}
     	  }
     	} );
     	timer.setRepeats( false );
@@ -119,8 +156,8 @@ public class Board extends JPanel {
     }
     
     private void checkTile(Tile tile){
-    	int x = tile.getX();
-    	int y = tile.getY();
+    	int x = tile.getPosX();
+    	int y = tile.getPosY();
     	
         int mineCount = 0;
         
@@ -180,11 +217,11 @@ public class Board extends JPanel {
         this.setAlignmentX(Component.CENTER_ALIGNMENT);
         this.setPreferredSize(new Dimension(BAR_WIDTH, BAR_HEIGHT));
         
-        for (int i=0;i< m_size; i++) {
-        	for (int j=0;j < m_size; j++) {
-        		Tile tile = new Tile(i,j);
+        for (int y=0;y< m_size; y++) {
+        	for (int x=0;x < m_size; x++) {
+        		Tile tile = new Tile(x,y);
         		this.add(tile); //Create new tile with location (i,j)
-        		m_tiles[i][j] = tile;
+        		m_tiles[x][y] = tile;
         	}
         }
     }
