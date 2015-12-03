@@ -203,13 +203,8 @@ public class Board extends JPanel {
     int[] m_mineLocations;
     boolean m_gameOver;
     Tile[][] m_tiles;
-    private static final int COLOR_COMPONENT = 0;
-    private static final int FIRST_X_COORD = 0;
-    private static final int FIRST_Y_COORD = 0;
     private static final int TILE_SIZE = 30;
     private static final int BAR_HEIGHT = Game.getMBarHeight() - 100;
     private static final int BAR_WIDTH = Game.getMBarWidth();
-    private static final int TEXT_X_COORD = 30;
-    private static final int TEXT_Y_COORD = 230;
     
 }
