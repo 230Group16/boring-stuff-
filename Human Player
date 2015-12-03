@@ -1,0 +1,32 @@
+package kablewie;
+
+public class Human{
+
+
+    
+    
+    public String getName (){
+        return Name;
+    }
+    
+   
+    public void setName () {
+    
+    }
+
+    
+    public void TakeTurn() {
+        
+    }
+
+    public Human (String name){
+        m_Name = name ;
+    }
+    
+
+    String m_Name;
+
+
+}
+    
+   
