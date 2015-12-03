@@ -11,6 +11,7 @@
 
 package kablewie;
 
+import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
@@ -19,8 +20,9 @@ import java.awt.GridLayout;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
-public class Game {
+public class Game extends JPanel {
     
     /* *
     * Get method for frame Height
@@ -52,22 +54,19 @@ public class Game {
         pane.setLayout(new BoxLayout(pane, BoxLayout.Y_AXIS));
         
         /* creates Board and Scoreboard panels and sets their verticle alignmenrt and preferred sizes */
-        Scoreboard scoreboardpanel = new Scoreboard();
-        scoreboardpanel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        scoreboardpanel.setPreferredSize(new Dimension(scoreboardpanel.getWidth(), scoreboardpanel.getHeight()));
+        Scoreboard scoreboardPanel = new Scoreboard();
+        scoreboardPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        scoreboardPanel.setPreferredSize(new Dimension(scoreboardPanel.getWidth(), scoreboardPanel.getHeight()));
         
-        Board boardpanel = new Board();
-        GridLayout boardLayout = new GridLayout(0,2);
-        boardpanel.setLayout(boardLayout);
-        boardpanel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        boardpanel.setPreferredSize(new Dimension(boardpanel.getWidth(), boardpanel.getHeight()));
+        
+        Board boardPanel = new Board(10,10);
         
         /* set frame size */
         //frame.setSize( FRAME_HEIGHT, FRAME_WIDTH );
         
-        /* add boardpanel and scoreboardpanel to frame */
-        pane.add(scoreboardpanel);
-        pane.add(boardpanel);
+        /* add boardPanel and scoreboardPanel to frame */
+        pane.add(scoreboardPanel, BorderLayout.NORTH);
+        pane.add(boardPanel, BorderLayout.CENTER);
         
         /* Sets frame size */
         frame.setSize(BAR_WIDTH, BAR_HEIGHT);
@@ -77,6 +76,8 @@ public class Game {
         
         /* set frame resizable to false */
         frame.setResizable(false);
+        
+        
     }
     
     private static final int BAR_WIDTH = 700;
