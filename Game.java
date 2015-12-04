@@ -24,6 +24,13 @@ import javax.swing.JPanel;
 
 public class Game extends JPanel {
     
+	public Board getBoard() {
+		return m_board;
+	}
+	
+	public Scoreboard getScoreboard() {
+		return m_scoreboard;
+	}
     /* *
     * Get method for frame Height
     * @return Frame's height
@@ -57,9 +64,10 @@ public class Game extends JPanel {
         Scoreboard scoreboardPanel = new Scoreboard();
         scoreboardPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
         scoreboardPanel.setPreferredSize(new Dimension(scoreboardPanel.getWidth(), scoreboardPanel.getHeight()));
-        
+        m_scoreboard = scoreboardPanel;
         
         Board boardPanel = new Board(10,10);
+        m_board = boardPanel;
         
         /* set frame size */
         //frame.setSize( FRAME_HEIGHT, FRAME_WIDTH );
@@ -82,5 +90,6 @@ public class Game extends JPanel {
     
     private static final int BAR_WIDTH = 700;
     private static final int BAR_HEIGHT = 700;
-    
+    static Board m_board;
+    static Scoreboard m_scoreboard;
 }
