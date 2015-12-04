@@ -15,9 +15,12 @@ public class Scoreboard extends JPanel {
     int m_minesDiffused;
     int m_numberOfTilesRevealed;
     
-    
     public void update() {
         
+    }
+    
+    public void setPlayerName(String name) {
+    	m_playerName = name;
     }
     
     public Calendar getGameTime() {
@@ -70,9 +73,6 @@ public class Scoreboard extends JPanel {
         this.add(x);
     }
     
-    /* Creates a label for the player's name */
-    JLabel namelbl = new JLabel("player's name" + getPlayername());
-    
     /* Getter methods for weidth, height and player's name */
     public int getWidth(){
         return BAR_WIDTH;
@@ -82,12 +82,15 @@ public class Scoreboard extends JPanel {
         return BAR_HEIGHT;
     }
     
-    public String getPlayername(){
-        return playername;
+    public String getPlayerName(){
+        return m_playerName;
     }
     
     /* Initialixation of variables */
-    private String playername = "";
+    private String m_playerName = "";
+    /* Creates a label for the player's name */
+    JLabel namelbl = new JLabel("player's name: " + m_playerName);
+    
     private static final int COLOR_COMPONENT = 255;
     private static final int FIRST_X_COORD = 0;
     private static final int FIRST_Y_COORD = 0;
