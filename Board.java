@@ -1,6 +1,7 @@
 package kablewie;
 
 import javax.swing.*;
+import java.util.Random;
 
 import java.awt.Component;
 import java.awt.Dimension;
@@ -96,7 +97,7 @@ public class Board extends JPanel {
     		@Override
     		public void actionPerformed( ActionEvent e ){  
     			//If tile has no surrounding mines, reveal all surrounding tiles
-    			if ((m_tiles[x][y]).getGraphic() == null) {
+    			if (!m_tiles[x][y].hasMine() || checkTile(m_tiles[x][y]) == 0) {
     				if ((x+1 < m_size) && (y+1 < m_size)) {
     					if (m_tiles[x+1][y+1].isEnabled()) { reveal(m_tiles[x+1][y+1]); } //Bottom right
     					if (m_tiles[x+1][y].isEnabled()) { reveal(m_tiles[x+1][y]); } //Right
@@ -127,13 +128,13 @@ public class Board extends JPanel {
     	timer.start();
     }
     
-    private void checkTile(Tile tile){
+    private int checkTile(Tile tile){
     	int x = tile.getPosX();
     	int y = tile.getPosY();
     	
         int mineCount = 0;
         
-        try {
+        try {	
         	//Tile to bottom right
             if (m_tiles[x+1][y+1].hasMine()) {mineCount++; }
             
@@ -158,11 +159,14 @@ public class Board extends JPanel {
            	//Tile to top left
            	if (m_tiles[x-1][y-1].hasMine()) {mineCount++; }
                 
-            /* if(mineCount != 0){
-            	tile.setGraphic(mineCount);
-            } */	
-        } catch (IndexOutOfBoundsException e) {}
+            if(mineCount != 0){
+            	tile.showGraphic(0);
+            }
+        } catch (IndexOutOfBoundsException e) {
+			System.out.println("WE MUST FIX THIS")
+		}
         
+		return mineCount;
     }
     
     /**
@@ -178,9 +182,11 @@ public class Board extends JPanel {
             m_size = sideLength;        	
         }
         
-        if (numberOfMines == -1) {
+        if (numberOfMines != 0) {
         	m_numberOfMines = numberOfMines;
-        }
+        } else {
+			m_numberOfMines = m_size;
+		}
         
         m_tiles = new Tile[sideLength][sideLength];
 
@@ -189,9 +195,9 @@ public class Board extends JPanel {
         this.setAlignmentX(Component.CENTER_ALIGNMENT);
         this.setPreferredSize(new Dimension(BAR_WIDTH, BAR_HEIGHT));
         
-        for (int y=0;y< m_size; y++) {
-        	for (int x=0;x < m_size; x++) {
-        		Tile tile = new Tile(x,y);
+        for (int y = 0; y < m_size; y++) {
+        	for (int x = 0; x < m_size; x++) {
+        		Tile tile = new Tile(x, y);
         		this.add(tile); //Create new tile with location (i,j)
         		m_tiles[x][y] = tile;
         	}
@@ -200,11 +206,34 @@ public class Board extends JPanel {
     
     int m_size;
     int m_numberOfMines;
-    int[] m_mineLocations;
+    boolean[][] m_mineLocations;
     boolean m_gameOver;
     Tile[][] m_tiles;
     private static final int TILE_SIZE = 30;
     private static final int BAR_HEIGHT = Game.getMBarHeight() - 100;
     private static final int BAR_WIDTH = Game.getMBarWidth();
     
+
+	public void randomSquares () {
+		Random randomMines = new Random();
+		m_mineLocations = boolean[m_size][m_size];
+		
+		for(int i = 0; i < m_size; i++){
+			for(int j = 0; j < m_size; j++) { m_mineLocations[i][j] = false; }
+		}
+		
+		int mineCount = 0;
+		
+		while(mineCount < m_numberOfMines) {
+			int x = randomMines.nextInt(m_size - 1);
+			int y = randomMines.nextInt(m_size - 1);
+			
+			if(!m_mineLocations[x][y]){
+				m_tiles[x][y] = (Mine) m_tiles[x][y];
+				m_mineLocations[x][y] = true;
+				mineCount++;
+			}
+		}
+	}
 }
+	
