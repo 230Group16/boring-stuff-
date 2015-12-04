@@ -50,7 +50,7 @@ public class Board extends JPanel {
     * An accessor method taking in no arguments and returning the value of m_mineLocations
     * @return Value of m_mineLocations
     */
-    public int[] getMineLocations() {
+    public boolean[][] getMineLocations() {
         return m_mineLocations;
     }
     
@@ -162,9 +162,9 @@ public class Board extends JPanel {
 		if (m_tiles[x-1][y+1].hasMine()) {mineCount++; }
         }
 			
-        if(mineCount != 0){
+        /*if(mineCount != 0){
             	tile.showGraphic(0);
-        }
+        }*/
         
 	return mineCount;
     }
@@ -202,6 +202,8 @@ public class Board extends JPanel {
         		m_tiles[x][y] = tile;
         	}
         }
+        
+        allocateMines();
     }
     
     int m_size;
@@ -214,9 +216,9 @@ public class Board extends JPanel {
     private static final int BAR_WIDTH = Game.getMBarWidth();
     
 
-	public void randomSquares () {
+	public void allocateMines () {
 		Random randomMines = new Random();
-		m_mineLocations = boolean[m_size][m_size];
+		m_mineLocations = new boolean[m_size][m_size];
 		
 		for(int i = 0; i < m_size; i++){
 			for(int j = 0; j < m_size; j++) { m_mineLocations[i][j] = false; }
@@ -229,7 +231,7 @@ public class Board extends JPanel {
 			int y = randomMines.nextInt(m_size - 1);
 			
 			if(!m_mineLocations[x][y]){
-				m_tiles[x][y] = (Mine) m_tiles[x][y];
+				m_tiles[x][y] = new Mine(x,y);
 				m_mineLocations[x][y] = true;
 				mineCount++;
 			}
