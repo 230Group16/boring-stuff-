@@ -29,41 +29,41 @@ public class Tile extends JButton {
         m_flag = !m_flag;
     }
     
-    public void m_showGraphic(int mineCount){
+    /* public void m_showGraphic(int mineCount){
         switch (mineCount){
             case 1:
-            m_graphic = new Graphics2D(/*pic of 1*/);
+            m_graphic = new Graphics2D();
             break;
             case 2:
-            m_graphic = new Graphics2D(/*pic of 2*/);
+            m_graphic = new Graphics2D();
             break;
             case 3:
-            m_graphic = new Graphics2D(/*pic of 3*/);
+            m_graphic = new Graphics2D();
             break;
             case 4:
-            m_graphic = new Graphics2D(/*pic of 4*/);
+            m_graphic = new Graphics2D();
             break;
             case 5:
-            m_graphic = new Graphics2D(/*pic of 5*/);
+            m_graphic = new Graphics2D();
             break;
             case 6:
-            m_graphic = new Graphics2D(/*pic of 6*/);
+            m_graphic = new Graphics2D();
             break;
             case 7:
-            m_graphic = new Graphics2D(/*pic of 7*/);
+            m_graphic = new Graphics2D();
             break;
             case 8:
-            m_graphic = new Graphics2D(/*pic of 8*/);
+            m_graphic = new Graphics2D();
             break;
             case 9:
-            m_graphic = new Graphics2D(/*pic of Flag*/);
+            m_graphic = new Graphics2D();
             break;
             case 10:
-            m_graphic = new Graphics2D(/*pic of Bomb*/);
+            m_graphic = new Graphics2D();
             break;
             
         }
-    }
+    } */
     
     public Graphics2D getGraphic(){
         return m_graphic;
