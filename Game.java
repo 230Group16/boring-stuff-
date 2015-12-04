@@ -44,7 +44,7 @@ public class Game extends JPanel {
     public static void main( String args[] ) {
         
         /* create frame for Board and Scoreboard */
-        JFrame frame = new JFrame( "Klablewie!!!");
+        JFrame frame = new JFrame( "Kablewie!!!");
         frame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
         
         /* create container */
