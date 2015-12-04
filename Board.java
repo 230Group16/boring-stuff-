@@ -134,39 +134,39 @@ public class Board extends JPanel {
     	
         int mineCount = 0;
         
-        try {	
-        	//Tile to bottom right
-            if (m_tiles[x+1][y+1].hasMine()) {mineCount++; }
-            
-           	//Tile below
-           	if (m_tiles[x][y+1].hasMine()) {mineCount++; }
-            	
-           	//Tile to the right
-           	if (m_tiles[x+1][y].hasMine()) {mineCount++; }
-            	
-           	//Tile to the left
-           	if (m_tiles[x-1][y].hasMine()) {mineCount++; }
-            	
-           	//Tile above
-           	if (m_tiles[x][y-1].hasMine()) {mineCount++; }
-            	
-           	//Tile to top right
-           	if (m_tiles[x+1][y-1].hasMine()) {mineCount++; }
-            	
-           	//Tile to bottom left
-           	if (m_tiles[x-1][y+1].hasMine()) {mineCount++; }
-            	
-           	//Tile to top left
-           	if (m_tiles[x-1][y-1].hasMine()) {mineCount++; }
-                
-            if(mineCount != 0){
+       	if ((x+1 < m_size) && (y+1 < m_size)) {
+		//Tile to bottom right
+		if (m_tiles[x+1][y+1].hasMine()) {mineCount++; }
+		//Tile below
+		if (m_tiles[x][y+1].hasMine()) {mineCount++; }	
+		//Tile to the right
+		if (m_tiles[x+1][y].hasMine()) {mineCount++; }
+        }
+			
+	if ((x-1 >= 0) && (y-1 >= 0)) {
+		//Tile to top left
+		if (m_tiles[x-1][y-1].hasMine()) {mineCount++; }
+		//Tile to the left
+		if (m_tiles[x-1][y].hasMine()) {mineCount++; }
+		//Tile above
+		if (m_tiles[x][y-1].hasMine()) {mineCount++; }
+	}
+           	
+	if ((x+1 < m_size) && (y-1 >= 0)) {	
+		//Tile to top right
+		if (m_tiles[x+1][y-1].hasMine()) {mineCount++; }
+	}
+			
+	if ((x-1 >= 0) && (y+1 < m_size)) {
+		//Tile to bottom left
+		if (m_tiles[x-1][y+1].hasMine()) {mineCount++; }
+        }
+			
+        if(mineCount != 0){
             	tile.showGraphic(0);
-            }
-        } catch (IndexOutOfBoundsException e) {
-			System.out.println("WE MUST FIX THIS")
-		}
+        }
         
-		return mineCount;
+	return mineCount;
     }
     
     /**
@@ -185,8 +185,8 @@ public class Board extends JPanel {
         if (numberOfMines != 0) {
         	m_numberOfMines = numberOfMines;
         } else {
-			m_numberOfMines = m_size;
-		}
+		m_numberOfMines = m_size;
+	}
         
         m_tiles = new Tile[sideLength][sideLength];
 
