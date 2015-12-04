@@ -1,32 +1,58 @@
 package kablewie;
 
 public class Human{
-
-
+    
+    
     
     
     public String getName (){
         return m_name;
     }
     
-   
-    public void setName () {
     
+    public void setName (String n) {
+        m_name = n;
     }
-
     
-    public void TakeTurn() {
+    
+    public void takeTurn() {
+        s.setNumberOfMines(b.getNumberOfMines());
+        s.setNumberOfMinesDeffused(b.getNumberOfMinesDeffused());
+        s.setNumberOfTilesRevealed(b.getNumberOfTilesRevealed());
+        s.setNumberOfHiddenSquares(b.getNnumberOfHiddenSquares());
+        if(b.isGameOver()){
+            if(b.getWin){
+                m_g.endGame(true);
+            } else {
+                m_g.endGame(false);
+            }
+        }
         
     }
-
-    public Human (String name){
-        m_name = name ;
+    
+    public Human (String name, Game g){
+        m_Name = name ;
+        m_g = g;
+        m_b = g.getBoard();
+        m_s = g.getScoreboard();
+        s.setPlayerName(m_name);
+        
+        takeTurn();
+        
+        class GameListener implements ActionListener{
+            public void actionPerformed(actionEvent e){
+                takeTurn();
+            }
+        }
+        
+        GameListener gl = new GameListener;
+        mg.addActionListener(gl);
+        
     }
     
-
-    String m_name;
-
-
-}
     
-   
+    private String m_name;
+    private Board m_b;
+    private Scoreboard m_s;
+    private Game m_g;
+}
