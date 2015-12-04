@@ -35,7 +35,7 @@ public class Mine extends Tile {
 	* An display method taking in one argument and calling a method from Tile.
 	* @param mineCount an integer argument.
 	*/
-    public void m_showGraphic(int mineCount){
+   /* public void m_showGraphic(int mineCount){
         super.m_showGraphic(mineCount);
-    }
+    }*/
 }
