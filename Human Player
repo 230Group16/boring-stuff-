@@ -1,20 +1,36 @@
 package kablewie;
-
+/**
+* @file Human.java
+* @author Aled...
+* @date 04 Dec 2015
+* @see Game.java, Board.java, and Scoreboard.java for related information.
+*
+* Handles player actions.
+*/
 public class Human{
     
     
     
-    
+	/**
+	* An accessor method taking in no arguments and returning the value of m_name
+	* @return Value of n_name
+	*/
     public String getName (){
         return m_name;
     }
     
     
+    /**
+	* An assigning method taking in one argument and setting it as m_name.
+	* @param n a string
+	*/
     public void setName (String n) {
         m_name = n;
     }
     
-    
+    /**
+	* A method that keeps track of the player and his progress, taking no arguments???---------------------------------
+	*/
     public void takeTurn() {
         s.setNumberOfMines(b.getNumberOfMines());
         s.setNumberOfMinesDeffused(b.getNumberOfMinesDeffused());
@@ -29,9 +45,14 @@ public class Human{
         }
         
     }
-    
+    /**
+     * A constructor taking two arguments and returning a new instance of Human.
+     * @param name is the name of the player.
+     * @param g an instance of the object Game.class.
+     * @return New human(player) object
+     */
     public Human (String name, Game g){
-        m_Name = name ;
+        m_name = name ;
         m_g = g;
         m_b = g.getBoard();
         m_s = g.getScoreboard();
