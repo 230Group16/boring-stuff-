@@ -37,10 +37,12 @@ public class Tile extends JButton {
         }
     }
     
-    public void m_showGraphic(int mineCount) throws IOException{
-        	switch (mineCount){
-            case 1:
-            /*m_graphic = new Graphics2D();
+    public void showGraphic(int mineCount) throws IOException{
+            setIcon(new ImageIcon(Game.class.getResource("/images/" + mineCount + ".jpg")));
+            
+            /*switch(mineCount){
+            case 1: 
+            m_graphic = new Graphics2D();
             break;
             case 2:
             m_graphic = new Graphics2D();
@@ -67,9 +69,10 @@ public class Tile extends JButton {
             m_graphic = new Graphics2D();
             break;
             case 10:
-            m_graphic = new Graphics2D()*/;
+            m_graphic = new Graphics2D()
             break;
-        }
+            }*/
+        
     }
     
     public Graphics2D getGraphic(){
