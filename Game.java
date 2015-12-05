@@ -16,6 +16,8 @@ import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -47,6 +49,22 @@ public class Game extends JPanel {
         return BAR_WIDTH;
     }
     
+    static Timer timer = new Timer();
+    static int seconds = 0;
+    public static boolean running = true;
+    
+    private static void updatetime(){
+		/* Creates a timer and sets a task to iterate m_time at every second */
+        Timer timer = new Timer();
+        timer.scheduleAtFixedRate(new TimerTask()
+        {
+             public void run()
+             {
+            	 Scoreboard.m_time += 1;
+             	 System.out.println(Scoreboard.m_time);
+             }
+        }, MS_IN_SECOND, MS_IN_SECOND);
+	}
     
     public static void main( String args[] ) {
         
@@ -56,6 +74,8 @@ public class Game extends JPanel {
         
         /* create container */
         Container pane = frame.getContentPane();
+        
+        updatetime();
         
         /* set container layout to boxlayout */
         pane.setLayout(new BoxLayout(pane, BoxLayout.Y_AXIS));
@@ -85,11 +105,15 @@ public class Game extends JPanel {
         /* set frame resizable to false */
         frame.setResizable(false);
         
+        while(running){
+        	scoreboardPanel.update();
+        }
         
     }
     
     private static final int BAR_WIDTH = 700;
     private static final int BAR_HEIGHT = 700;
+    final static long MS_IN_SECOND = 1000L;
     static Board m_board;
     static Scoreboard m_scoreboard;
 }
