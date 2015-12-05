@@ -11,20 +11,16 @@ import javax.swing.SpringLayout;
 
 public class Scoreboard extends JPanel {
     
-    Calendar m_gameTime;
+    static int m_time;
     int m_minesDiffused;
     int m_numberOfTilesRevealed;
-    
-    public void update() {
-        
-    }
     
     public void setPlayerName(String name) {
     	m_playerName = name;
     }
     
-    public Calendar getGameTime() {
-        return m_gameTime;
+    public int getGameTime() {
+        return m_time;
     }
     
     public int getMinesDiffused() {
@@ -59,6 +55,7 @@ public class Scoreboard extends JPanel {
         
         
         this.addComponent(namelbl);
+        this.addComponent(gTimelbl);
         
         layout.putConstraint(SpringLayout.WEST, namelbl,
         5,
@@ -86,11 +83,20 @@ public class Scoreboard extends JPanel {
         return m_playerName;
     }
     
+    public static int getGTime(){
+		return m_time;
+	}
+	
+    public void update() {
+	      gTimelbl.setText("Game time: " + getGTime());
+	}
+	
     /* Initialixation of variables */
     private String m_playerName = "";
     /* Creates a label for the player's name */
     JLabel namelbl = new JLabel("player's name: " + m_playerName);
-    
+    /* Creates a label for the player's name */
+	JLabel gTimelbl = new JLabel("Game time: " + getGTime());
     private static final int COLOR_COMPONENT = 255;
     private static final int FIRST_X_COORD = 0;
     private static final int FIRST_Y_COORD = 0;
