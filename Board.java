@@ -84,49 +84,54 @@ public class Board extends JPanel {
 		int x = tile.getPosX();
     	int y = tile.getPosY();
     	
-    	tile.setEnabled(false);
-    	
-    	if (tile.hasMine()) {
-    		m_gameOver = true;
-    		updateGameState();
-    	}
-    	
     	checkTile(tile);
     	
-    	int delay = 50;
-    	Timer timer = new Timer( delay, new ActionListener(){
-    		@Override
-    		public void actionPerformed( ActionEvent e ){  
-    			//If tile has no surrounding mines, reveal all surrounding tiles
-    			if (!m_tiles[x][y].hasMine() || checkTile(m_tiles[x][y]) == 0) {
-    				if ((x+1 < m_size) && (y+1 < m_size)) {
-    					if (m_tiles[x+1][y+1].isEnabled()) { reveal(m_tiles[x+1][y+1]); } //Bottom right
-    					if (m_tiles[x+1][y].isEnabled()) { reveal(m_tiles[x+1][y]); } //Right
-    					if (m_tiles[x][y+1].isEnabled()) { reveal(m_tiles[x][y+1]); } //Bottom
-    				}
-    				
-    				if ((x-1 >= 0) && (y-1 >= 0)) {
-    					if (m_tiles[x-1][y-1].isEnabled()) { reveal(m_tiles[x-1][y-1]); } //Top left
-    					if (m_tiles[x][y-1].isEnabled()) { reveal(m_tiles[x][y-1]); } //Top
-    					if (m_tiles[x-1][y].isEnabled()) { reveal(m_tiles[x-1][y]); } //Left
-    				}
-    				
-    				if ((x+1 < m_size) && (y-1 >= 0)) {
-    					if (m_tiles[x+1][y-1].isEnabled()) { reveal(m_tiles[x+1][y-1]); }//Top right
-    					 
-    				}
-    				
-    				if ((x-1 >= 0) && (y+1 < m_size)) {
-    					if (m_tiles[x-1][y+1].isEnabled()) { reveal(m_tiles[x-1][y+1]); }//Bottom left
-       				}
-    				
-    				
-    			}
-    		}
-    	} );
+    	if (tile.getIcon() == new JButton().getIcon()) {
+    		tile.setEnabled(false);
+        	
+        	if (tile.hasMine()) {
+        		m_gameOver = true;
+        		updateGameState();
+        	}
+        	
+        	
+        	
+        	int delay = 50;
+        	Timer timer = new Timer( delay, new ActionListener(){
+        		@Override
+        		public void actionPerformed( ActionEvent e ){  
+        			//If tile has no surrounding mines, reveal all surrounding tiles
+        			if (!m_tiles[x][y].hasMine() || checkTile(m_tiles[x][y]) == 0) {
+        				if ((x+1 < m_size) && (y+1 < m_size)) {
+        					if (m_tiles[x+1][y+1].isEnabled()) { reveal(m_tiles[x+1][y+1]); } //Bottom right
+        					if (m_tiles[x+1][y].isEnabled()) { reveal(m_tiles[x+1][y]); } //Right
+        					if (m_tiles[x][y+1].isEnabled()) { reveal(m_tiles[x][y+1]); } //Bottom
+        				}
+        				
+        				if ((x-1 >= 0) && (y-1 >= 0)) {
+        					if (m_tiles[x-1][y-1].isEnabled()) { reveal(m_tiles[x-1][y-1]); } //Top left
+        					if (m_tiles[x][y-1].isEnabled()) { reveal(m_tiles[x][y-1]); } //Top
+        					if (m_tiles[x-1][y].isEnabled()) { reveal(m_tiles[x-1][y]); } //Left
+        				}
+        				
+        				if ((x+1 < m_size) && (y-1 >= 0)) {
+        					if (m_tiles[x+1][y-1].isEnabled()) { reveal(m_tiles[x+1][y-1]); }//Top right
+        					 
+        				}
+        				
+        				if ((x-1 >= 0) && (y+1 < m_size)) {
+        					if (m_tiles[x-1][y+1].isEnabled()) { reveal(m_tiles[x-1][y+1]); }//Bottom left
+           				}
+        				
+        				
+        			}
+        		}
+        	} );
+        	
+        	timer.setRepeats( false );
+        	timer.start();
+    	}
     	
-    	timer.setRepeats( false );
-    	timer.start();
     }
     
     private int checkTile(Tile tile){
@@ -135,32 +140,30 @@ public class Board extends JPanel {
     	
         int mineCount = 0;
         
-        if (m_tiles[x][y].hasMine()) {mineCount++; } //This tile
-        
        	if ((x+1 < m_size) && (y+1 < m_size)) {
-		//Tile to bottom right
-		if (m_tiles[x+1][y+1].hasMine()) {mineCount++; }
-		//Tile below
-		if (m_tiles[x][y+1].hasMine()) {mineCount++; }	
-		//Tile to the right
-		if (m_tiles[x+1][y].hasMine()) {mineCount++; }
+			//Tile to bottom right
+			if (m_tiles[x+1][y+1].hasMine()) {mineCount++; }
+			//Tile below
+			if (m_tiles[x][y+1].hasMine()) {mineCount++; }	
+			//Tile to the right
+			if (m_tiles[x+1][y].hasMine()) {mineCount++; }
         }
-			
-	if ((x-1 >= 0) && (y-1 >= 0)) {
-		//Tile to top left
-		if (m_tiles[x-1][y-1].hasMine()) {mineCount++; }
-		//Tile to the left
-		if (m_tiles[x-1][y].hasMine()) {mineCount++; }
-		//Tile above
-		if (m_tiles[x][y-1].hasMine()) {mineCount++; }
-	}
-           	
-	if ((x+1 < m_size) && (y-1 >= 0)) {	
-		//Tile to top right
-		if (m_tiles[x+1][y-1].hasMine()) {mineCount++; }
-	}
-			
-	if ((x-1 >= 0) && (y+1 < m_size)) {
+				
+		if ((x-1 >= 0) && (y-1 >= 0)) {
+			//Tile to top left
+			if (m_tiles[x-1][y-1].hasMine()) {mineCount++; }
+			//Tile to the left
+			if (m_tiles[x-1][y].hasMine()) {mineCount++; }
+			//Tile above
+			if (m_tiles[x][y-1].hasMine()) {mineCount++; }
+		}
+	           	
+		if ((x+1 < m_size) && (y-1 >= 0)) {	
+			//Tile to top right
+			if (m_tiles[x+1][y-1].hasMine()) {mineCount++; }
+		}
+				
+		if ((x-1 >= 0) && (y+1 < m_size)) {
 		//Tile to bottom left
 		if (m_tiles[x-1][y+1].hasMine()) {mineCount++; }
         }
@@ -170,10 +173,16 @@ public class Board extends JPanel {
 		}
 			
         if(mineCount != 0){
-            	try {
-					tile.showGraphic(mineCount);
-				} catch (IOException e) {
-				}
+            	
+					
+						try {
+							tile.showGraphic(mineCount);
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					
+				
         }
         
 	return mineCount;
