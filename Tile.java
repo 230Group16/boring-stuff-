@@ -1,24 +1,24 @@
 package kablewie;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
+
 import java.awt.*;
 import java.awt.event.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 
 public class Tile extends JButton {
-    
-    private boolean m_enabled;
-    private boolean m_flag;
+
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private boolean m_flag;
     private Graphics2D m_graphic;
     private int m_x;
     private int m_y;
-    private Graphics2D img[];
+    //private Graphics2D img[];
     
     public Tile(int x, int y){
-        m_enabled = true;
         m_flag = false;
         m_graphic = null;
         m_x = x;
@@ -38,41 +38,14 @@ public class Tile extends JButton {
     }
     
     public void showGraphic(int mineCount) throws IOException{
-            setIcon(new ImageIcon(Game.class.getResource("/images/" + mineCount + ".jpg")));
+            //setIcon(new ImageIcon(Game.class.getResource("/images/" + mineCount + ".jpg")));
             
-            /*switch(mineCount){
-            case 1: 
-            m_graphic = new Graphics2D();
-            break;
-            case 2:
-            m_graphic = new Graphics2D();
-            break;
-            case 3:
-            m_graphic = new Graphics2D();
-            break;
-            case 4:
-            m_graphic = new Graphics2D();
-            break;
-            case 5:
-            m_graphic = new Graphics2D();
-            break;
-            case 6:
-            m_graphic = new Graphics2D();
-            break;
-            case 7:
-            m_graphic = new Graphics2D();
-            break;
-            case 8:
-            m_graphic = new Graphics2D();
-            break;
-            case 9:
-            m_graphic = new Graphics2D();
-            break;
-            case 10:
-            m_graphic = new Graphics2D()
-            break;
-            }*/
-        
+            if (mineCount != 0) {
+            	setIcon(new ImageIcon(Game.class.getResource("/images/" + mineCount + ".jpg")));
+            } else {
+            	setIcon(new ImageIcon(Game.class.getResource("/images/mine.jpg")));  
+            }
+           
     }
     
     public Graphics2D getGraphic(){
@@ -94,6 +67,7 @@ public class Tile extends JButton {
                 {
                     Board b = (Board) getParent();
                     b.reveal(getThis());
+                    //b.reveal(getThis());
                 }
                 else if((e.getButton() == MouseEvent.BUTTON3) && isEnabled() 
                 		&& ((getIcon() == new JButton().getIcon() || m_flag)))
@@ -124,7 +98,7 @@ public class Tile extends JButton {
     }
     
     public void createGraphicsArray(){
-        img = new Graphics2D[10];
+        //img = new Graphics2D[10];
         //add images for each Aled
     }
     
