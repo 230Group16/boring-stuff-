@@ -3,7 +3,6 @@ package kablewie;
 import javax.swing.*;
 
 import java.util.Random;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -34,6 +33,10 @@ public class Board extends JPanel {
     */
     public boolean isGameOver() {
         return m_gameOver;
+    }
+    
+    public Tile getTile(int x, int y) {
+    	return m_tiles[x][y];
     }
     
     public int getSideLength() {
@@ -70,7 +73,7 @@ public class Board extends JPanel {
     */
     public void updateGameState() {
         if (m_gameOver) {
-        	
+        	((Game) getParent()).endGame('l');
         }
     }
     
@@ -80,6 +83,8 @@ public class Board extends JPanel {
     	
     	if (m_tiles[x][y].hasMine()) {
     		System.out.println("mine");
+    		m_gameOver = true;
+       		updateGameState();
     		//Mine mine = (Mine) m_tiles[tile.getPosX()][tile.getPosY()];
 			try {
 				tile.showGraphic(0);
@@ -88,14 +93,7 @@ public class Board extends JPanel {
     	} else {
     		checkTile(tile);
         	if (tile.getIcon() == new JButton().getIcon()) {
-            	
-           	if (tile.hasMine()) {
-            	m_gameOver = true;
-           		updateGameState();
-           	}
-            	
-            	
-            	
+	
             	int delay = 50;
             	Timer timer = new Timer( delay, new ActionListener(){
             		@Override
@@ -200,7 +198,7 @@ public class Board extends JPanel {
         	tile.setEnabled(false);
         }
         
-	return mineCount;
+        return mineCount;
     }
     
     /**
@@ -213,38 +211,32 @@ public class Board extends JPanel {
         if (sideLength == -1) {
         	m_size = 10;
         } else {
-            m_size = sideLength;        	
+            m_size = sideLength;
         }
         
-        if (numberOfMines != 0) {
-        	m_numberOfMines = numberOfMines;
-        } else {
+        if (numberOfMines == -1) {
         	m_numberOfMines = m_size;
+        } else {
+        	m_numberOfMines = numberOfMines;
         }
         
-        m_tiles = new Tile[sideLength][sideLength];
+        m_tiles = new Tile[m_size][m_size];
 
         GridLayout boardLayout = new GridLayout(m_size,m_size);
         setLayout(boardLayout);
         setPreferredSize(new Dimension(getSideLength(), getSideLength()));
         
+        //Create array of tiles
         for (int y = 0; y < m_size; y++) {
         	for (int x = 0; x < m_size; x++) {
         		Tile tile = new Tile(x, y);
-        		this.add(tile); //Create new tile with location (i,j)
+        		add(tile);
         		m_tiles[x][y] = tile;
         	}
         }
         
-        //m_tiles[0][0] = new Mine(0,0);
         allocateMines();
     }
-    
-    int m_size;
-    int m_numberOfMines;
-    boolean[][] m_mineLocations;
-    boolean m_gameOver;
-    Tile[][] m_tiles;
     
 
 	public void allocateMines () {
@@ -268,5 +260,11 @@ public class Board extends JPanel {
 			}
 		}
 	}
+	
+	int m_size;
+	int m_numberOfMines;
+	boolean[][] m_mineLocations;
+	boolean m_gameOver;
+	Tile[][] m_tiles;
 }
 	
