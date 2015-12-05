@@ -1,9 +1,12 @@
 package kablewie;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 public class Tile extends JButton {
     
@@ -27,12 +30,17 @@ public class Tile extends JButton {
     
     public void toggleFlag(){
         m_flag = !m_flag;
+        if (m_flag) {
+        	setIcon(new ImageIcon(Game.class.getResource("/images/flag.jpg")));
+        } else {
+        	setIcon(new JButton().getIcon());
+        }
     }
     
-    /* public void m_showGraphic(int mineCount){
-        switch (mineCount){
+    public void m_showGraphic(int mineCount) throws IOException{
+        	switch (mineCount){
             case 1:
-            m_graphic = new Graphics2D();
+            /*m_graphic = new Graphics2D();
             break;
             case 2:
             m_graphic = new Graphics2D();
@@ -59,11 +67,10 @@ public class Tile extends JButton {
             m_graphic = new Graphics2D();
             break;
             case 10:
-            m_graphic = new Graphics2D();
+            m_graphic = new Graphics2D()*/;
             break;
-            
         }
-    } */
+    }
     
     public Graphics2D getGraphic(){
         return m_graphic;
@@ -82,7 +89,6 @@ public class Tile extends JButton {
             public void mousePressed(MouseEvent e){
                 if(e.getButton() == MouseEvent.BUTTON1)
                 {
-                    setEnabled(false);
                     Board b = (Board) getParent();
                     b.reveal(getThis());
                 }
