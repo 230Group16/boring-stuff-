@@ -71,6 +71,17 @@ public class Game extends JPanel {
 
         setPreferredSize(new Dimension(m_width, m_height));
     }
+    
+    public void endGame(boolean tf) {
+    	//Stop timer
+    	removeAll();
+    	
+    	if (tf) {
+    		//Win
+    	} else {
+    		//Loss and display animation
+    	}
+    }
 
     
     private Board m_board;
