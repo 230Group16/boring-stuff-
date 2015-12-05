@@ -90,12 +90,13 @@ public class Tile extends JButton {
     public void addHandler(){
         class MouseHandle implements MouseListener{
             public void mousePressed(MouseEvent e){
-                if((e.getButton() == MouseEvent.BUTTON1) && isEnabled())
+                if((e.getButton() == MouseEvent.BUTTON1) && isEnabled() && (getIcon() == new JButton().getIcon()))
                 {
                     Board b = (Board) getParent();
                     b.reveal(getThis());
                 }
-                else if((e.getButton() == MouseEvent.BUTTON3) && isEnabled())
+                else if((e.getButton() == MouseEvent.BUTTON3) && isEnabled() 
+                		&& ((getIcon() == new JButton().getIcon() || m_flag)))
                 {
                     toggleFlag();
                 }
