@@ -11,20 +11,10 @@
 
 package kablewie;
 
-import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.ComponentOrientation;
-import java.awt.Container;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.util.Timer;
-import java.util.TimerTask;
 
-import javax.swing.BoxLayout;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 public class Game extends JPanel {
     
