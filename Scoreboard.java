@@ -1,16 +1,12 @@
 package kablewie;
 
-import java.awt.Color;
 import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.SpringLayout;
 
 public class Scoreboard extends JPanel {
     
@@ -40,10 +36,16 @@ public class Scoreboard extends JPanel {
     
     public Scoreboard() {
         /*Sets grid layout for scoreboard */
-        this.setLayout(new GridLayout(3,1));
+        setLayout(new GridLayout(3,1));
  
-        this.addComponent(lblName);
-        this.addComponent(lblTime);
+        m_playerName = "";
+        lblName = new JLabel("Player's Name: " + m_playerName);
+    	lblTime = new JLabel("Game time: " + getGTime());
+    	lblGameState = new JLabel("Good luck!");
+    	
+        addComponent(lblName);
+        addComponent(lblTime);
+        addComponent(lblGameState);
     }
     
     private void addComponent(Component x){
@@ -58,28 +60,35 @@ public class Scoreboard extends JPanel {
 		return m_time;
 	}
 	
-    public void update() {
-	      lblTime.setText("Game time: " + getGTime());
+    public void setGameStateMessage(String message) {
+		lblGameState.setText(message);
+		
 	}
     
+    public void update() {
+	      lblTime.setText(("Game time - " + (getGTime()/(SECS_MINS * SECS_MINS)) + ":" + (getGTime()/SECS_MINS) + ":" + (getGTime() % SECS_MINS)));
+    }
+    
     public static void updatetime(){
-		//Creates a timer and sets a task to iterate m_time at every second
+    	//Creates a timer and sets a task to iterate m_time at every second
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask()
         {
              public void run()
              {
             	 Scoreboard.m_time += 1;
-             	 System.out.println(Scoreboard.m_time);
+             	 //System.out.println(Scoreboard.m_time);
              }
         }, MS_IN_SECOND, MS_IN_SECOND);
 	}
 	
-    /* Initialisation of variables */
-    private String m_playerName = "";
-    /* Creates a label for the player's name */
-    JLabel lblName = new JLabel("Player's Name: " + m_playerName);
-    /* Creates a label for the player's name */
-	JLabel lblTime = new JLabel("Game time: " + getGTime());
+    /* Initialisation of variables */	
+	private String m_playerName;
+	JLabel lblName;
+	JLabel lblTime;
+	JLabel lblGameState;
     final static long MS_IN_SECOND = 1000L;
+    public final int SECS_MINS = 60;
+
+	
 }
