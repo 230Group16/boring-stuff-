@@ -16,6 +16,7 @@ public class Tile extends JButton {
     private Graphics2D m_graphic;
     private int m_x;
     private int m_y;
+    public static final int TILE_SIZE = 30;
     //private Graphics2D img[];
     
     public Tile(int x, int y){
@@ -23,6 +24,7 @@ public class Tile extends JButton {
         m_graphic = null;
         m_x = x;
         m_y = y;
+        setPreferredSize(new Dimension(TILE_SIZE, TILE_SIZE));
         
         createGraphicsArray();
         addHandler();
