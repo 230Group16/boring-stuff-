@@ -9,6 +9,17 @@
 
 package kablewie;
 
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+
 
 public class Mine extends Tile {
     
@@ -35,7 +46,7 @@ public class Mine extends Tile {
 	* An display method taking in one argument and calling a method from Tile.
 	* @param mineCount an integer argument.
 	*/
-   /* public void m_showGraphic(int mineCount){
-        super.m_showGraphic(mineCount);
-    }*/
+    public void showGraphic(int mines) {
+    	    setIcon(new ImageIcon(Game.class.getResource("/images/mine.jpg")));
+    }
 }
