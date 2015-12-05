@@ -84,7 +84,12 @@ public class Board extends JPanel {
         	
         }
     }
-    
+    	/**
+    	* A method that takes a Tile object as a parameter 
+	* and reveals the tiles around the clicked tile, 
+	* or just the tile itself if it is not a mine.
+	* @param tile takes an object representing one tile.
+    	*/
 	public void reveal(Tile tile) {
 		int x = tile.getPosX();
     	int y = tile.getPosY();
@@ -104,7 +109,6 @@ public class Board extends JPanel {
             	m_gameOver = true;
            		updateGameState();
            	}
-            	
             	
             	
             	int delay = 50;
@@ -156,7 +160,13 @@ public class Board extends JPanel {
     	
     }
     
-    private int checkTile(Tile tile){
+     /**
+     * A method that take a Tile object as a parameter and 
+     * checks whether the clicked tile is a mine or not.
+     * @return returns mineCount an integer argument.
+     * @param tile takes an object representing one tile.
+     */
+     private int checkTile(Tile tile){
     	int x = tile.getPosX();
     	int y = tile.getPosY();
     	
@@ -261,7 +271,9 @@ public class Board extends JPanel {
     private static final int BAR_HEIGHT = Game.getMBarHeight() - 100;
     private static final int BAR_WIDTH = Game.getMBarWidth();
     
-
+	/**
+        * A method that randomly assigns mines to different tiles. 
+        */
 	public void allocateMines () {
 		Random randomMines = new Random();
 		m_mineLocations = new boolean[m_size][m_size];
@@ -284,4 +296,3 @@ public class Board extends JPanel {
 		}
 	}
 }
-	
