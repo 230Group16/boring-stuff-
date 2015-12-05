@@ -1,11 +1,10 @@
 package kablewie;
 
 import javax.swing.*;
-import java.util.Random;
 
+import java.util.Random;
 import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -24,6 +23,12 @@ import javax.swing.JPanel;
 public class Board extends JPanel {
     
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+
+	/**
     * An accessor method taking in no arguments and returning the value of m_gameOver
     * @return Value of m_gameOver
     */
@@ -84,53 +89,70 @@ public class Board extends JPanel {
 		int x = tile.getPosX();
     	int y = tile.getPosY();
     	
-    	checkTile(tile);
-    	
-    	if (tile.getIcon() == new JButton().getIcon()) {
-    		tile.setEnabled(false);
-        	
-        	if (tile.hasMine()) {
-        		m_gameOver = true;
-        		updateGameState();
+    	if (m_tiles[x][y].hasMine()) {
+    		System.out.println("mine");
+    		//Mine mine = (Mine) m_tiles[tile.getPosX()][tile.getPosY()];
+			try {
+				tile.showGraphic(0);
+			} catch (IOException e) {
+			}
+    	} else {
+    		checkTile(tile);
+        	if (tile.getIcon() == new JButton().getIcon()) {
+            	
+           	if (tile.hasMine()) {
+            	m_gameOver = true;
+           		updateGameState();
+           	}
+            	
+            	
+            	
+            	int delay = 50;
+            	Timer timer = new Timer( delay, new ActionListener(){
+            		@Override
+            		public void actionPerformed( ActionEvent e ){  
+            			//If tile has no surrounding mines, reveal all surrounding tiles
+            			if (!m_tiles[x][y].hasMine() || checkTile(m_tiles[x][y]) == 0) {
+            				if ((x+1 < m_size) && (y+1 < m_size)) {
+            					if (m_tiles[x+1][y+1].isEnabled()) { reveal(m_tiles[x+1][y+1]); } //Bottom right
+            					if (m_tiles[x+1][y].isEnabled()) { reveal(m_tiles[x+1][y]); } //Right
+            					if (m_tiles[x][y+1].isEnabled()) { reveal(m_tiles[x][y+1]); } //Bottom
+            				}
+            				
+            				if ((x-1 >= 0) && (y-1 >= 0)) {
+            					if (m_tiles[x-1][y-1].isEnabled()) { reveal(m_tiles[x-1][y-1]); } //Top left
+            					if (m_tiles[x][y-1].isEnabled()) { reveal(m_tiles[x][y-1]); } //Top
+            					if (m_tiles[x-1][y].isEnabled()) { reveal(m_tiles[x-1][y]); } //Left
+            				}
+            				
+            				if ((x+1 < m_size) && (y-1 >= 0)) {
+            					if (m_tiles[x+1][y-1].isEnabled()) { reveal(m_tiles[x+1][y-1]); }//Top right
+            					 
+            				}
+            				
+            				if ((x-1 >= 0) && (y+1 < m_size)) {
+            					if (m_tiles[x-1][y+1].isEnabled()) { reveal(m_tiles[x-1][y+1]); }//Bottom left
+               				}
+            				
+            				
+            			}
+            		}
+            	} );
+            	
+            	timer.setRepeats( false );
+            	timer.start();
         	}
         	
-        	
-        	
-        	int delay = 50;
-        	Timer timer = new Timer( delay, new ActionListener(){
-        		@Override
-        		public void actionPerformed( ActionEvent e ){  
-        			//If tile has no surrounding mines, reveal all surrounding tiles
-        			if (!m_tiles[x][y].hasMine() || checkTile(m_tiles[x][y]) == 0) {
-        				if ((x+1 < m_size) && (y+1 < m_size)) {
-        					if (m_tiles[x+1][y+1].isEnabled()) { reveal(m_tiles[x+1][y+1]); } //Bottom right
-        					if (m_tiles[x+1][y].isEnabled()) { reveal(m_tiles[x+1][y]); } //Right
-        					if (m_tiles[x][y+1].isEnabled()) { reveal(m_tiles[x][y+1]); } //Bottom
-        				}
-        				
-        				if ((x-1 >= 0) && (y-1 >= 0)) {
-        					if (m_tiles[x-1][y-1].isEnabled()) { reveal(m_tiles[x-1][y-1]); } //Top left
-        					if (m_tiles[x][y-1].isEnabled()) { reveal(m_tiles[x][y-1]); } //Top
-        					if (m_tiles[x-1][y].isEnabled()) { reveal(m_tiles[x-1][y]); } //Left
-        				}
-        				
-        				if ((x+1 < m_size) && (y-1 >= 0)) {
-        					if (m_tiles[x+1][y-1].isEnabled()) { reveal(m_tiles[x+1][y-1]); }//Top right
-        					 
-        				}
-        				
-        				if ((x-1 >= 0) && (y+1 < m_size)) {
-        					if (m_tiles[x-1][y+1].isEnabled()) { reveal(m_tiles[x-1][y+1]); }//Bottom left
-           				}
-        				
-        				
-        			}
-        		}
-        	} );
-        	
-        	timer.setRepeats( false );
-        	timer.start();
+        	if (m_tiles[x][y].hasMine()) {
+        		try {
+    				m_tiles[x][y].showGraphic(0);
+    			} catch (IOException e) {
+    				// TODO Auto-generated catch block
+    				e.printStackTrace();
+    			}
+        	}
     	}
+    	
     	
     }
     
@@ -171,18 +193,16 @@ public class Board extends JPanel {
 		if (m_tiles[x][y].hasMine()) {
 			tile.hasMine();
 		}
-			
-        if(mineCount != 0){
-            	
-					
+		
+		
+		
+        if(mineCount != 0 || (tile.hasMine())){		
 						try {
 							tile.showGraphic(mineCount);
 						} catch (IOException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
 						}
-					
-				
+        } else {
+        	tile.setEnabled(false);
         }
         
 	return mineCount;
@@ -222,6 +242,7 @@ public class Board extends JPanel {
         	}
         }
         
+        //m_tiles[0][0] = new Mine(0,0);
         allocateMines();
     }
     
@@ -230,7 +251,7 @@ public class Board extends JPanel {
     boolean[][] m_mineLocations;
     boolean m_gameOver;
     Tile[][] m_tiles;
-    private static final int TILE_SIZE = 30;
+    //private static final int TILE_SIZE = 30;
     private static final int BAR_HEIGHT = Game.getMBarHeight() - 100;
     private static final int BAR_WIDTH = Game.getMBarWidth();
     
