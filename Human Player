@@ -1,7 +1,5 @@
 package kablewie;
 
-import java.awt.event.ActionListener;
-
 /**
 * @file Human.java
 * @author Aled...
@@ -68,7 +66,7 @@ public class Human{
         }
         
         GameListener gl = new GameListener();
-        mg.addActionListener(gl); */
+        m_game.addActionListener(gl); */
     }
     
     
