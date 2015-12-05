@@ -9,6 +9,7 @@ import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 import javax.swing.JPanel;
 
@@ -134,6 +135,8 @@ public class Board extends JPanel {
     	
         int mineCount = 0;
         
+        if (m_tiles[x][y].hasMine()) {mineCount++; } //This tile
+        
        	if ((x+1 < m_size) && (y+1 < m_size)) {
 		//Tile to bottom right
 		if (m_tiles[x+1][y+1].hasMine()) {mineCount++; }
@@ -161,10 +164,17 @@ public class Board extends JPanel {
 		//Tile to bottom left
 		if (m_tiles[x-1][y+1].hasMine()) {mineCount++; }
         }
+	
+		if (m_tiles[x][y].hasMine()) {
+			tile.hasMine();
+		}
 			
-        /*if(mineCount != 0){
-            	tile.showGraphic(0);
-        }*/
+        if(mineCount != 0){
+            	try {
+					tile.showGraphic(mineCount);
+				} catch (IOException e) {
+				}
+        }
         
 	return mineCount;
     }
