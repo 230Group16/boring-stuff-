@@ -36,6 +36,10 @@ public class Board extends JPanel {
         return m_gameOver;
     }
     
+    public int getSideLength() {
+    return m_size * Tile.TILE_SIZE;
+    }
+    
     /**
     * An accessor method taking in no arguments and returning the value of m_size
     * @return Value of m_size
@@ -60,21 +64,6 @@ public class Board extends JPanel {
         return m_mineLocations;
     }
     
-    /**
-    * An accessor method taking in no arguments and returning the value of BAR_WIDTH
-    * @return Value of BAR_WIDTH
-    */
-    public int getWidth(){
-        return BAR_WIDTH;
-    }
-    
-    /**
-    * An accessor method taking in no arguments and returning the value of BAR_HEIGHT
-    * @return Value of BAR_HEIGHT
-    */
-    public int getHeight(){
-        return BAR_HEIGHT;
-    }
     
     /**
     * A method that updates all necessary data when called.
@@ -84,12 +73,7 @@ public class Board extends JPanel {
         	
         }
     }
-    	/**
-    	* A method that takes a Tile object as a parameter 
-	* and reveals the tiles around the clicked tile, 
-	* or just the tile itself if it is not a mine.
-	* @param tile takes an object representing one tile.
-    	*/
+    
 	public void reveal(Tile tile) {
 		int x = tile.getPosX();
     	int y = tile.getPosY();
@@ -109,6 +93,7 @@ public class Board extends JPanel {
             	m_gameOver = true;
            		updateGameState();
            	}
+            	
             	
             	
             	int delay = 50;
@@ -160,13 +145,7 @@ public class Board extends JPanel {
     	
     }
     
-     /**
-     * A method that take a Tile object as a parameter and 
-     * checks whether the clicked tile is a mine or not.
-     * @return returns mineCount an integer argument.
-     * @param tile takes an object representing one tile.
-     */
-     private int checkTile(Tile tile){
+    private int checkTile(Tile tile){
     	int x = tile.getPosX();
     	int y = tile.getPosY();
     	
@@ -240,15 +219,14 @@ public class Board extends JPanel {
         if (numberOfMines != 0) {
         	m_numberOfMines = numberOfMines;
         } else {
-		m_numberOfMines = m_size;
-	}
+        	m_numberOfMines = m_size;
+        }
         
         m_tiles = new Tile[sideLength][sideLength];
 
-        GridLayout boardLayout = new GridLayout(0,m_size);
-        this.setLayout(boardLayout);
-        this.setAlignmentX(Component.CENTER_ALIGNMENT);
-        this.setPreferredSize(new Dimension(BAR_WIDTH, BAR_HEIGHT));
+        GridLayout boardLayout = new GridLayout(m_size,m_size);
+        setLayout(boardLayout);
+        setPreferredSize(new Dimension(getSideLength(), getSideLength()));
         
         for (int y = 0; y < m_size; y++) {
         	for (int x = 0; x < m_size; x++) {
@@ -267,13 +245,8 @@ public class Board extends JPanel {
     boolean[][] m_mineLocations;
     boolean m_gameOver;
     Tile[][] m_tiles;
-    //private static final int TILE_SIZE = 30;
-    private static final int BAR_HEIGHT = Game.getMBarHeight() - 100;
-    private static final int BAR_WIDTH = Game.getMBarWidth();
     
-	/**
-        * A method that randomly assigns mines to different tiles. 
-        */
+
 	public void allocateMines () {
 		Random randomMines = new Random();
 		m_mineLocations = new boolean[m_size][m_size];
@@ -296,3 +269,4 @@ public class Board extends JPanel {
 		}
 	}
 }
+	
