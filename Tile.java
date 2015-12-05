@@ -58,7 +58,7 @@ public class Tile extends JButton {
         return false;
     }
     
-    public boolean m_hasFlag(){
+    public boolean hasFlag(){
         return m_flag;
     }
     
