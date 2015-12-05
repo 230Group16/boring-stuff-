@@ -162,40 +162,46 @@ public class Board extends JPanel {
     	
         int mineCount = 0;
         
-       	if ((x+1 < m_size) && (y+1 < m_size)) {
-			//Tile to bottom right
-			if (m_tiles[x+1][y+1].hasMine()) {mineCount++; }
-			//Tile below
-			if (m_tiles[x][y+1].hasMine()) {mineCount++; }	
-			//Tile to the right
+        if (x+1 < m_size) {
+        	//Tile to the right
 			if (m_tiles[x+1][y].hasMine()) {mineCount++; }
         }
-				
-		if ((x-1 >= 0) && (y-1 >= 0)) {
-			//Tile to top left
-			if (m_tiles[x-1][y-1].hasMine()) {mineCount++; }
-			//Tile to the left
+        
+        if (x-1 >= 0) {
+        	//Tile to the left
 			if (m_tiles[x-1][y].hasMine()) {mineCount++; }
-			//Tile above
-			if (m_tiles[x][y-1].hasMine()) {mineCount++; }
-		}
-	           	
-		if ((x+1 < m_size) && (y-1 >= 0)) {	
-			//Tile to top right
-			if (m_tiles[x+1][y-1].hasMine()) {mineCount++; }
-		}
-				
-		if ((x-1 >= 0) && (y+1 < m_size)) {
-		//Tile to bottom left
-		if (m_tiles[x-1][y+1].hasMine()) {mineCount++; }
         }
-	
-		if (m_tiles[x][y].hasMine()) {
-			tile.hasMine();
-		}
-		
-		
-		
+        
+        if ((y+1 < m_size)) {
+        	//Tile below
+			if (m_tiles[x][y+1].hasMine()) {mineCount++; }	
+        }
+        
+        if (y-1 >= 0) {
+        	//Tile above
+			if (m_tiles[x][y-1].hasMine()) {mineCount++; }
+        }
+        
+        if ((x-1 >= 0) && (y-1 >= 0)) {
+        	//Tile to top left
+			if (m_tiles[x-1][y-1].hasMine()) {mineCount++; }
+        }
+        
+        if ((x+1 < m_size) && (y-1 >= 0)) {
+        	//Tile to top right
+			if (m_tiles[x+1][y-1].hasMine()) {mineCount++; }
+        }
+        
+        if ((x-1 >= 0) && (y+1 < m_size)) {
+        	//Tile to bottom left
+			if (m_tiles[x-1][y+1].hasMine()) {mineCount++; }
+        }
+        
+        if ((x+1 < m_size) && (y+1 < m_size)) {
+        	//Tile to bottom right
+			if (m_tiles[x+1][y+1].hasMine()) {mineCount++; }
+        }
+
         if(mineCount != 0 || (tile.hasMine())){		
 						try {
 							tile.showGraphic(mineCount);
