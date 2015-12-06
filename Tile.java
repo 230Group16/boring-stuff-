@@ -6,13 +6,13 @@ import java.awt.event.*;
 import java.io.IOException;
 
 /**
-* @file Tile.java
-* @author Nate , Ben ...
-* @date 04 Dec 2015
-* @see Game.java, Board.java, and for related information.
-*
-* Assign tile attributes to the grid from board.
-*/
+ * @file Tile.java
+ * @author Nate , Ben ...
+ * @date 04 Dec 2015
+ * @see Game.java, Board.java, and for related information.
+ *
+ * Assign tile attributes to the grid from board.
+ */
 public class Tile extends JButton {
 	private boolean m_flag;
     private Graphics2D m_graphic;
@@ -21,12 +21,12 @@ public class Tile extends JButton {
     public static final int TILE_SIZE = 20;
     
 	/**
-	* A constructor taking two arguments 
-	* and returning a new instance of Tile.
-    * @param x an integer argument.
-    * @param y an integer argument.
-    * @return new Tile object
-    */
+	 * A constructor taking two arguments 
+	 * and returning a new instance of Tile.
+	 * @param x an integer argument.
+	 * @param y an integer argument.
+	 * @return new Tile object
+	 */
     public Tile(int x, int y) {
         m_flag = false;
         m_graphic = null;
@@ -37,8 +37,8 @@ public class Tile extends JButton {
     }
     
     /**
-    * A method that assigns flag icons to the tiles when clicked.
-    */
+     * A method that assigns flag icons to the tiles when clicked.
+     */
     public void toggleFlag() {
         m_flag = !m_flag;
         if (m_flag) {
@@ -49,10 +49,10 @@ public class Tile extends JButton {
     }
     
     /**
-    * A method  taking an integer argument 
-    * that assigns mine icons to the tiles.
-    * @param mineCount an integer argument.
-    */
+     * A method  taking an integer argument 
+     * that assigns mine icons to the tiles.
+     * @param mineCount an integer argument.
+     */
     public void showGraphic(int mineCount) throws IOException {
             if (mineCount != 0) {
             	setIcon(new ImageIcon(Game.class.getResource("/images/" + mineCount + ".png")));
@@ -62,33 +62,33 @@ public class Tile extends JButton {
     }
     
     /**
-    * An accessor method taking no arguments and 
-    * returning the  
-    * @return m_graphic a Graphics2D argument
-    */
+     * An accessor method taking no arguments and 
+     * returning the  
+     * @return m_graphic a Graphics2D argument
+     */
     public Graphics2D getGraphic() {
         return m_graphic;
     }
     
     /**
-    * An assigning method taking in no argument and returning false.
-    * @return returns false
-    */
+     * An assigning method taking in no argument and returning false.
+     * @return returns false
+     */
     public boolean hasMine() {
         return false;
     }
     
     /**
-    * An assigning method taking in no argument and returning m_flag.
-    * @return returns m_flag a boolean argument
-    */
+     * An assigning method taking in no argument and returning m_flag.
+     * @return returns m_flag a boolean argument
+     */
     public boolean hasFlag() {
         return m_flag;
     }
     
     /**
-    * 
-    */
+     * 
+     */
     public void addHandler() {
         class MouseHandle implements MouseListener {
             public void mousePressed(MouseEvent e){
@@ -122,28 +122,28 @@ public class Tile extends JButton {
     }
     
 	/**
-    * An accessor method taking in no arguments and returning the
-    * instance of a tile we are currently accessing. 
-    * @return the current tile
-    */
+	 * An accessor method taking in no arguments and returning the
+	 * instance of a tile we are currently accessing. 
+	 * @return the current tile
+	 */
     public Tile getThis() {
         return this;
     }
 	
     /**
-    * An accessor method taking in no arguments and returning 
-    * the x-axis value of the current tile.
-    * @return the x-axis value of the tile
-    */
+     * An accessor method taking in no arguments and returning 
+     * the x-axis value of the current tile.
+     * @return the x-axis value of the tile
+     */
     public int getPosX() {
         return m_x;
     }
     
 	/**
-    * An accessor method taking in no arguments and returning 
-	* the y-axis value of the current tile.
-    * @return the y-axis value of the tile
-    */
+	 * An accessor method taking in no arguments and returning 
+	 * the y-axis value of the current tile.
+	 * @return the y-axis value of the tile
+	 */
     public int getPosY() {
         return m_y;
     }
