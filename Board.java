@@ -38,14 +38,20 @@ public class Board extends JPanel {
     }
     
     public int getHeight() {
-    	return m_size * Tile.TILE_SIZE;
+    	int defaultSize = m_size * Tile.TILE_SIZE;
+    	
+    	if (defaultSize < DEFAULT_BOARD_SIZE) {
+    		defaultSize = DEFAULT_BOARD_SIZE;
+    	}
+    	
+    	return defaultSize;
     }
     
     public int getWidth() {
-    	int defaultSize = (m_size) * Tile.TILE_SIZE + 20;
+    	int defaultSize = m_size * Tile.TILE_SIZE;
     	
-    	if (defaultSize < 300) {
-    		defaultSize = 300;
+    	if (defaultSize < DEFAULT_BOARD_SIZE) {
+    		defaultSize = DEFAULT_BOARD_SIZE;
     	}
     	
     	return defaultSize;
@@ -218,17 +224,10 @@ public class Board extends JPanel {
     * @return New board object
     */
     public Board(int sideLength, int numberOfMines) {
-        if (sideLength == -1) {
-        	m_size = DEFAULT_SIZE;
-        } else {
-            m_size = sideLength;
-        }
-        
-        if (numberOfMines == -1) {
-        	m_numberOfMines = m_size;
-        } else {
-        	m_numberOfMines = numberOfMines;
-        }
+
+    	m_size = sideLength;
+       	m_numberOfMines = numberOfMines;
+    
         
         m_tiles = new Tile[m_size][m_size];
 
@@ -277,6 +276,7 @@ public class Board extends JPanel {
 	
 	public final static int SPACING = 3;
 	public final static int DEFAULT_SIZE = 10;
+	public final static int DEFAULT_BOARD_SIZE = 300;
 	public final static int HEIGHT_SPACING = 15;
 	public final static int WIDTH_SPACING = 3;
 	int m_size;
