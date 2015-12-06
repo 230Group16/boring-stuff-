@@ -98,28 +98,38 @@ public class Board extends JPanel {
             		public void actionPerformed( ActionEvent e ){  
             			//If tile has no surrounding mines, reveal all surrounding tiles
             			if (!m_tiles[x][y].hasMine() || checkTile(m_tiles[x][y]) == 0) {
-            				if ((x+1 < m_size) && (y+1 < m_size)) {
+            				
+            				if ((x+1 < m_size) && ( y+1 < m_size)) {
             					if (m_tiles[x+1][y+1].isEnabled()) { reveal(m_tiles[x+1][y+1]); } //Bottom right
-            					if (m_tiles[x+1][y].isEnabled()) { reveal(m_tiles[x+1][y]); } //Right
-            					if (m_tiles[x][y+1].isEnabled()) { reveal(m_tiles[x][y+1]); } //Bottom
             				}
             				
-            				if ((x-1 >= 0) && (y-1 >= 0)) {
-            					if (m_tiles[x-1][y-1].isEnabled()) { reveal(m_tiles[x-1][y-1]); } //Top left
-            					if (m_tiles[x][y-1].isEnabled()) { reveal(m_tiles[x][y-1]); } //Top
-            					if (m_tiles[x-1][y].isEnabled()) { reveal(m_tiles[x-1][y]); } //Left
+            				if (x+1 < m_size) {
+            					if (m_tiles[x+1][y].isEnabled()) { reveal(m_tiles[x+1][y]); } //Right
             				}
             				
             				if ((x+1 < m_size) && (y-1 >= 0)) {
             					if (m_tiles[x+1][y-1].isEnabled()) { reveal(m_tiles[x+1][y-1]); }//Top right
-            					 
             				}
             				
-            				if ((x-1 >= 0) && (y+1 < m_size)) {
+            				if (y-1 >= 0) {
+            					if (m_tiles[x][y-1].isEnabled()) { reveal(m_tiles[x][y-1]); } //Top
+            				}
+            				
+            				if ((x-1 >= 0) && (y-1 >= 0)) {
+            					if (m_tiles[x-1][y-1].isEnabled()) { reveal(m_tiles[x-1][y-1]); } //Top left
+            				}
+            				
+            				if (x-1 >= 0) {
+            					if (m_tiles[x-1][y].isEnabled()) { reveal(m_tiles[x-1][y]); } //Left
+            				}
+            				
+            				if ((x-1>=0 && (y+1<m_size))) {
             					if (m_tiles[x-1][y+1].isEnabled()) { reveal(m_tiles[x-1][y+1]); }//Bottom left
-               				}
+            				}
             				
-            				
+            				if (y+1 < m_size) {
+            					if (m_tiles[x][y+1].isEnabled()) { reveal(m_tiles[x][y+1]); } //Bottom
+            				}
             			}
             		}
             	} );
