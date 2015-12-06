@@ -36,14 +36,22 @@ public class Game extends JPanel {
 	public Scoreboard getScoreboard() {
 		return m_scoreboard;
 	}
+	
+	public Human getPlayer() {
+		return m_player;
+	}
     
     public Game(int size, int mines) {
         makeGame(size, mines);
     }
     
+    public Human newPlayer(String name) {
+    	m_scoreboard.setPlayerName(name);
+    	return new Human(name, this);
+    }
+    
     public void makeGame(int s, int m){
-        m_board = new Board(s, m);
-        
+    	m_board = new Board(s, m);
         m_scoreboard = new Scoreboard();
         
         m_height = m_board.getHeight() + SCOREBOARD_HEIGHT;
@@ -95,4 +103,5 @@ public class Game extends JPanel {
     public static final int SCOREBOARD_HEIGHT = 100; 
     private int m_height;
     private int m_width;
+    private Human m_player;
 }
