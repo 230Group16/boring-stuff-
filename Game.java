@@ -49,8 +49,6 @@ public class Game extends JPanel {
         m_height = m_board.getHeight() + SCOREBOARD_HEIGHT;
         m_width = m_board.getWidth();
         
-        
-        m_scoreboard.setPreferredSize(new Dimension(m_width, SCOREBOARD_HEIGHT));
         m_scoreboard.setBackground(Color.WHITE);
         
         /* add board and scoreboard to frame */
@@ -59,7 +57,7 @@ public class Game extends JPanel {
         
         setLayout(null);
         m_scoreboard.setBounds(0,0, m_width, SCOREBOARD_HEIGHT);
-        m_board.setBounds(0,SCOREBOARD_HEIGHT, m_board.getWidth(), m_board.getHeight());
+        m_board.setBounds(0,SCOREBOARD_HEIGHT, m_width, m_board.getHeight());
         setPreferredSize(new Dimension(m_width, m_height));
         updateUI();
     }
