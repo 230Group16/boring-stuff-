@@ -139,13 +139,16 @@ public class GameContainer extends JFrame {
 	       
 	        /* set container layout to boxlayout */
 	        
+	        
+	        gc.pack();
+	        
+	        gc.setLocationRelativeTo(null);
+	        
 	        /* display frame */
 	        gc.setVisible(true);
 	        
 	        /* set frame resizable to false */
 	        gc.setResizable(false);
-	        
-	        gc.pack();
 	        
 	        while(m_running){
 	        	g.getScoreboard().update();
