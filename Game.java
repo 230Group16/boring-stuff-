@@ -14,16 +14,10 @@ package kablewie;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Timer;
 
 import javax.swing.*;
 
 public class Game extends JPanel {
-    
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	
 	public int getHeight() {
 		return m_height;
@@ -40,11 +34,6 @@ public class Game extends JPanel {
 	public Scoreboard getScoreboard() {
 		return m_scoreboard;
 	}
-    
-    static Timer timer = new Timer();
-    static int seconds = 0;
-    public static boolean running = true;
-    
     
     public Game(int size, int mines) {
         makeGame(size, mines);
@@ -75,6 +64,7 @@ public class Game extends JPanel {
     	switch(gameState){
         case 'w':
             //Win
+        	m_scoreboard.setGameStateMessage("You win!");
             
             break;
         case 'l':
@@ -85,13 +75,14 @@ public class Game extends JPanel {
             //reset
             break;
         }
-        
-    	for (int i=0; i<m_board.getBoardSize(); i++){
-    		for (int j=0; j<m_board.getBoardSize();j++) {
-    			m_board.getTile(j, i).setEnabled(false);
-    			m_board.getTile(j, i).setDisabledIcon(m_board.getTile(j, i).getIcon());
-    		}
-    	}
+    	 
+		for (int i=0; i<m_board.getBoardSize(); i++){
+	    	for (int j=0; j<m_board.getBoardSize();j++) {
+	    		m_board.reveal(m_board.getTile(j, i));
+	    	}
+		}
+    
+    	
         
     }
 
