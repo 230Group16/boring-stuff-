@@ -60,7 +60,7 @@ public class Scoreboard extends JPanel {
         
         
         lblName = new JLabel("Name - " + m_playerName);
-        lblTime = new JLabel("Game time - " + (getGTime()/3600) + ":" + (getGTime()/60) + ":" + (getGTime() % SECS_MINS));
+        lblTime = new JLabel("Game time - " + getTime());
         minesDlbl = new JLabel("Mines diffused - " + getMinesDiffused());
         tilesRlbl = new JLabel("Tiles Revealed - " + getNumberOfRevealed());
         lblGameState = new JLabel(getGameState());
@@ -117,8 +117,8 @@ public class Scoreboard extends JPanel {
         return m_playerName;
     }
     
-    public static int getGTime(){
-        return m_time;
+    public String getTime(){
+    	return m_time /(SECS_MINS * SECS_MINS) + ":" + (m_time/SECS_MINS) + ":" + (m_time % SECS_MINS);
     }
     
 
@@ -134,8 +134,8 @@ public class Scoreboard extends JPanel {
     }
     
     
-    public void setGTime() {
-    	lblTime.setText(("Game time - " + (getGTime()/(SECS_MINS * SECS_MINS)) + ":" + (getGTime()/SECS_MINS) + ":" + (getGTime() % SECS_MINS)));
+    public void setTime() {
+    	lblTime.setText("Game time - " + getTime());
         
     }
     
@@ -154,7 +154,7 @@ public class Scoreboard extends JPanel {
     }
     
     public void update() {
-    	setGTime();
+    	setTime();
     	setTilesRevealed();
     	setMinesDiffused();
     }
