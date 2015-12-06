@@ -273,7 +273,7 @@ public class Board extends JPanel {
 		}
 		
 		for (int mineCount=0; mineCount < m_numberOfMines; mineCount++) {
-			int randNo = randomMines.nextInt(freeLocations.size() -1);
+			int randNo = randomMines.nextInt(freeLocations.size());
 			
 			int[] location = freeLocations.get(randNo);
 			m_tiles[location[0]] [location[1]] = new Mine(location[0], location[1]);
