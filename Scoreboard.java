@@ -5,6 +5,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SpringLayout;
 
@@ -18,8 +19,9 @@ public class Scoreboard extends JPanel {
     static int m_time;
     int m_minesDiffused;
     int m_numberOfTilesRevealed;
-	int LblSpace = 90;
 	private String m_playerName = "";
+	private String gameState = "Good luck!";
+	int LblSpace = 90;
     JLabel lblName;
     JLabel lblTime;
     JLabel minesDlbl;
@@ -28,9 +30,7 @@ public class Scoreboard extends JPanel {
     final static long MS_IN_SECOND = 1000L;
     public final int SECS_MINS = 60;
     
-    public void setPlayerName(String name) {
-        m_playerName = name;
-    }
+
     
     public int getGameTime() {
         return m_time;
@@ -44,16 +44,22 @@ public class Scoreboard extends JPanel {
         return m_numberOfTilesRevealed;
     }
     
+    public String getGameState() {
+        return gameState;
+    }
+    
     public Scoreboard() {
         /*Sets grid layout for scoreboard */
     	SpringLayout layout = new SpringLayout();
         setLayout(layout);
         
+        JOptionPane.showInputDialog("Enter your name:");
+        
         lblName = new JLabel("Name- " + m_playerName);
         lblTime = new JLabel("Game time - " + (getGTime()/3600) + ":" + (getGTime()/60) + ":" + (getGTime() % SECS_MINS));
         minesDlbl = new JLabel("Mines diffused - " + getMinesDiffused());
         tilesRlbl = new JLabel("Tiles Revealed - " + getNumberOfRevealed());
-        lblGameState = new JLabel("Good luck!");
+        lblGameState = new JLabel(getGameState());
         
         addComponent(lblName);
         addComponent(lblTime);
@@ -111,13 +117,42 @@ public class Scoreboard extends JPanel {
         return m_time;
     }
     
-    public void setGameStateMessage(String message) {
-        lblGameState.setText(message);
+
+    public void setGameState(String message) {
+    	gameState = message;
         
     }
     
+
+    public void setGameStateLabel() {
+    	lblGameState.setText(gameState);
+        
+    }
+    
+    
+    public void setGTime() {
+    	lblTime.setText(("Game time - " + (getGTime()/(SECS_MINS * SECS_MINS)) + ":" + (getGTime()/SECS_MINS) + ":" + (getGTime() % SECS_MINS)));
+        
+    }
+    
+    public void setTilesRevealed() {
+    	tilesRlbl.setText("Tiles Revealed - " + getNumberOfRevealed());
+        
+    }
+    
+    public void setMinesDiffused() {
+    	minesDlbl.setText("Mines diffused - " + getMinesDiffused());
+        
+    }
+    
+    public void setPlayerName(String name) {
+        m_playerName = name;
+    }
+    
     public void update() {
-          lblTime.setText(("Game time - " + (getGTime()/(SECS_MINS * SECS_MINS)) + ":" + (getGTime()/SECS_MINS) + ":" + (getGTime() % SECS_MINS)));
+    	setGTime();
+    	setTilesRevealed();
+    	setMinesDiffused();
     }
     
     public static void updatetime(){
