@@ -36,8 +36,12 @@ public class Board extends JPanel {
     	return m_tiles[x][y];
     }
     
-    public int getSideLength() {
-    return (m_size + 3) * Tile.TILE_SIZE;
+    public int getHeight() {
+    	return m_size  * Tile.TILE_SIZE + 15;
+    }
+    
+    public int getWidth() {
+    	return (m_size + 3) * Tile.TILE_SIZE;
     }
     
     /**
@@ -225,7 +229,7 @@ public class Board extends JPanel {
         GridBagConstraints c = new GridBagConstraints();
         
         setLayout(boardLayout);
-        setPreferredSize(new Dimension(getSideLength(), getSideLength()));
+        //setPreferredSize(new Dimension(getSideLength(), getSideLength()));
         
         //Create array of tiles
         for (int y = 0; y < m_size; y++) {
