@@ -7,11 +7,6 @@ import java.awt.event.*;
 import java.io.IOException;
 
 public class Tile extends JButton {
-
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	private boolean m_flag;
     private Graphics2D m_graphic;
     private int m_x;
@@ -24,8 +19,6 @@ public class Tile extends JButton {
         m_x = x;
         m_y = y;
         setPreferredSize(new Dimension(TILE_SIZE, TILE_SIZE));
-        
-        createGraphicsArray();
         addHandler();
     }
     
@@ -39,14 +32,11 @@ public class Tile extends JButton {
     }
     
     public void showGraphic(int mineCount) throws IOException{
-            //setIcon(new ImageIcon(Game.class.getResource("/images/" + mineCount + ".jpg")));
-            
             if (mineCount != 0) {
             	setIcon(new ImageIcon(Game.class.getResource("/images/" + mineCount + ".png")));
             } else {
             	setIcon(new ImageIcon(Game.class.getResource("/images/mine.png")));  
-            }
-           
+            }    
     }
     
     public Graphics2D getGraphic(){
@@ -68,7 +58,6 @@ public class Tile extends JButton {
                 {
                     Board b = (Board) getParent();
                     b.reveal(getThis());
-                    //b.reveal(getThis());
                 }
                 else if((e.getButton() == MouseEvent.BUTTON3) && isEnabled() 
                 		&& ((getIcon() == new JButton().getIcon() || m_flag)))
@@ -96,11 +85,6 @@ public class Tile extends JButton {
     
     public Tile getThis() {
         return this;
-    }
-    
-    public void createGraphicsArray(){
-        //img = new Graphics2D[10];
-        //add images for each Aled
     }
     
     public int getPosX(){
