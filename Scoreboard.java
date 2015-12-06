@@ -53,8 +53,7 @@ public class Scoreboard extends JPanel {
     	SpringLayout layout = new SpringLayout();
         setLayout(layout);
         
-        JOptionPane.showInputDialog("Enter your name:");
-        
+        m_playerName = JOptionPane.showInputDialog("Enter your name: ", "New Challenger");
         lblName = new JLabel("Name- " + m_playerName);
         lblTime = new JLabel("Game time - " + (getGTime()/3600) + ":" + (getGTime()/60) + ":" + (getGTime() % SECS_MINS));
         minesDlbl = new JLabel("Mines diffused - " + getMinesDiffused());
@@ -167,4 +166,10 @@ public class Scoreboard extends JPanel {
              }
         }, MS_IN_SECOND, MS_IN_SECOND);
     }
+    
+    public void setGameStateMessage(String message) {
+		lblGameState.setText(message);
+		
+	}
 }
+ 
