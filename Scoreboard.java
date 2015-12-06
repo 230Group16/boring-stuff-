@@ -53,13 +53,9 @@ public class Scoreboard extends JPanel {
     	SpringLayout layout = new SpringLayout();
         setLayout(layout);
         
-        m_playerName = JOptionPane.showInputDialog("Enter your name: ", "New Challenger");
-        if(m_playerName.length() > 20){
-        	m_playerName = JOptionPane.showInputDialog("Sorry character limit is 20.\n Enter your name: ", "New Challenger");
-        }
         
         
-        lblName = new JLabel("Name - " + m_playerName);
+        lblName = new JLabel();
         lblTime = new JLabel("Game time - " + getTime());
         minesDlbl = new JLabel("Mines diffused - " + getMinesDiffused());
         tilesRlbl = new JLabel("Tiles Revealed - " + getNumberOfRevealed());
@@ -150,7 +146,7 @@ public class Scoreboard extends JPanel {
     }
     
     public void setPlayerName(String name) {
-        m_playerName = name;
+        lblName.setText("Name - " + name);
     }
     
     public void update() {
