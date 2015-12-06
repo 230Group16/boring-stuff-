@@ -3,6 +3,7 @@ package kablewie;
 import java.awt.Component;
 import java.util.Timer;
 import java.util.TimerTask;
+
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -16,19 +17,22 @@ public class Scoreboard extends JPanel {
     private static final long serialVersionUID = 1L;
     /* Initialisation of variables */
     static int m_time;
+    
+    private Game m_game;
     private Board m_board;
     private int m_minesDiffused;
     private static int m_numberOfTilesRevealed;
-    private static int m_numberOfTilesNotRevealed;
 	private String m_playerName = "";
-	private String gameState = "Good luck!";
     private JLabel lblName;
     private JLabel lblTime;
     private JLabel minesDlbl;
     private JLabel tilesRlbl;
     private JLabel lblGameState;
+    private JLabel lblNRlbl;
+    private JLabel tilesNRlbl;
     final static long MS_IN_SECOND = 1000L;
     public final int SECS_MINS = 60;
+    private static int m_numberOfTilesNotRevealed;
     
     public int getMinesDiffused() {
         return m_minesDiffused;
@@ -39,75 +43,73 @@ public class Scoreboard extends JPanel {
     }
     
     public int getNumberOfNotRevealed() {
-        return m_numberOfTilesNotRevealed;
+    	return m_numberOfTilesNotRevealed;
     }
-    
-    public String getGameState() {
-        return gameState;
-    }
-    
+    	
     public Scoreboard(Game g) {
         /*Sets grid layout for scoreboard */
     	SpringLayout layout = new SpringLayout();
         setLayout(layout);
         
+        m_game = g;
         m_board = g.getBoard();
         lblName = new JLabel();
         lblTime = new JLabel("Game time - " + getTime());
         minesDlbl = new JLabel("Mines diffused - " + getMinesDiffused());
         tilesRlbl = new JLabel("Tiles Revealed - " + getNumberOfRevealed());
+        lblGameState = new JLabel("Good luck!");
         tilesNRlbl = new JLabel("Tiles not revealed - " + getNumberOfNotRevealed());
-        lblGameState = new JLabel(getGameState());
-        
+        lblGameState = new JLabel();
+        		
         addComponent(lblName);
         addComponent(lblTime);
-	addComponent(minesDlbl);
+	    addComponent(minesDlbl);
         addComponent(lblGameState);
         addComponent(tilesRlbl);
         addComponent(tilesNRlbl);
         
         /* Layout */
-	   layout.putConstraint(SpringLayout.WEST, lblName,
-	          10,
-	          SpringLayout.WEST, this);
-	   layout.putConstraint(SpringLayout.NORTH, lblName,
-	          0,
-	          SpringLayout.NORTH, this);
-		  
-	   layout.putConstraint(SpringLayout.EAST, lblTime,
-	   	  -10,
-		  SpringLayout.EAST, this);
-	   layout.putConstraint(SpringLayout.NORTH, lblTime,
-		  0,
-		  SpringLayout.NORTH, this);
-		  
-	   layout.putConstraint(SpringLayout.WEST, tilesRlbl,
-		  10,
-		  SpringLayout.WEST, this);
-	   layout.putConstraint(SpringLayout.NORTH, tilesRlbl,
-		  5,
-		  SpringLayout.SOUTH, lblName);
-	      
-	   layout.putConstraint(SpringLayout.EAST, minesDlbl,
-		  -10,
-		  SpringLayout.EAST, this);
-	   layout.putConstraint(SpringLayout.NORTH, minesDlbl,
-	   	  5,
-	   	  SpringLayout.SOUTH, lblTime);
-	
-	   layout.putConstraint(SpringLayout.EAST, tilesNRlbl,
-	    		  -10,
-	    		  SpringLayout.EAST, this);
-	      layout.putConstraint(SpringLayout.NORTH, tilesNRlbl,
-	    		  5,
-	    		  SpringLayout.SOUTH, minesDlbl);
-	      
-	   layout.putConstraint(SpringLayout.WEST, lblGameState,
-		  10,
-		  SpringLayout.WEST, this);
-	   layout.putConstraint(SpringLayout.NORTH, lblGameState,
-		  5,
-		  SpringLayout.SOUTH, tilesRlbl);
+        layout.putConstraint(SpringLayout.WEST, lblName,
+  	          10,
+  	          SpringLayout.WEST, this);
+  	   layout.putConstraint(SpringLayout.NORTH, lblName,
+  	          0,
+  	          SpringLayout.NORTH, this);
+  		  
+  	   layout.putConstraint(SpringLayout.EAST, lblTime,
+  	   	  -10,
+  		  SpringLayout.EAST, this);
+  	   layout.putConstraint(SpringLayout.NORTH, lblTime,
+  		  0,
+  		  SpringLayout.NORTH, this);
+  		  
+  	   layout.putConstraint(SpringLayout.WEST, tilesRlbl,
+  		  10,
+  		  SpringLayout.WEST, this);
+  	   layout.putConstraint(SpringLayout.NORTH, tilesRlbl,
+  		  5,
+  		  SpringLayout.SOUTH, lblName);
+  	      
+  	   layout.putConstraint(SpringLayout.EAST, minesDlbl,
+  		  -10,
+  		  SpringLayout.EAST, this);
+  	   layout.putConstraint(SpringLayout.NORTH, minesDlbl,
+  	   	  5,
+  	   	  SpringLayout.SOUTH, lblTime);
+  	
+  	   layout.putConstraint(SpringLayout.EAST, tilesNRlbl,
+  	    		  -10,
+  	    		  SpringLayout.EAST, this);
+  	      layout.putConstraint(SpringLayout.NORTH, tilesNRlbl,
+  	    		  5,
+  	    		  SpringLayout.SOUTH, minesDlbl);
+  	      
+  	   layout.putConstraint(SpringLayout.WEST, lblGameState,
+  		  10,
+  		  SpringLayout.WEST, this);
+  	   layout.putConstraint(SpringLayout.NORTH, lblGameState,
+  		  5,
+  		  SpringLayout.SOUTH, tilesRlbl);
 	      
     }
     
@@ -125,16 +127,9 @@ public class Scoreboard extends JPanel {
     
 
     public void setGameState(String message) {
-    	gameState = message;
+    	lblGameState.setText(message);
         
-    }
-    
-
-    public void setGameStateLabel() {
-    	lblGameState.setText(gameState);
-        
-    }
-    
+    } 
     
     public void setTime() {
     	lblTime.setText("Game time - " + getTime());
@@ -165,6 +160,13 @@ public class Scoreboard extends JPanel {
     	setTilesRevealed();
     	setMinesDiffused();
     	setTilesNotRevealed();
+    	
+    	int numberOfTiles = m_board.getBoardSize() * m_board.getBoardSize();
+    	
+    	if (m_numberOfTilesRevealed == numberOfTiles - m_board.getNumberOfMines() && GameContainer.isRunning()) {
+    		m_board.setGameOver(true);
+    		m_game.endGame('w');
+    	}
     }
     
     public static void incrementTilesRevealed() {
