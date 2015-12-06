@@ -34,11 +34,9 @@ public class Human{
         m_scoreboard.update();
         
         if(m_board.isGameOver()){
-            if(m_board.isGameOver()){
-            	//m_game.endGame(true);
-            } else {
-            	//m_game.endGame(false);
-            }
+            m_game.endGame('l');
+        } else {
+        	//m_game.endGame(false);
         }
         
     }
