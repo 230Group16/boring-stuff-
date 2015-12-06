@@ -95,10 +95,15 @@ public class Board extends JPanel {
 		int x = tile.getPosX();
     	int y = tile.getPosY();
     	
+    	if (!tile.isRevealed()) {
+    		Scoreboard.incrementTilesRevealed();
+    	}
+    	
     	if (m_tiles[x][y].hasMine()) {
     		if (!m_gameOver) {
     			m_gameOver = true;
            		updateGameState();
+           		
     		}
     		
 			try {
@@ -283,7 +288,6 @@ public class Board extends JPanel {
 	int m_size;
 	int m_numberOfMines;
 	int[][] m_mineLocations;
-	//boolean[][] m_mineLocations;
 	boolean m_gameOver;
 	Tile[][] m_tiles;
 }
