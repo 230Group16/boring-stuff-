@@ -71,14 +71,11 @@ public class Game extends JPanel {
     }
     
     public void endGame(char gameState) {    
-    	GameContainer.stop();
-    	
+
     	switch(gameState){
         case 'w':
             //Win
         	m_scoreboard.setGameState("You win!");
-        	
-            
             break;
         case 'l':
             //Loss and display animation
@@ -94,8 +91,8 @@ public class Game extends JPanel {
 	    		m_board.reveal(m_board.getTile(j, i));
 	    	}
 		}
-    
-    	
+		
+		GameContainer.stop();
         
     }
     private Board m_board;
