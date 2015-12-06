@@ -33,7 +33,17 @@ public class GameContainer extends JFrame {
 
 	        Game g = new Game(10,10);
 	        
-     		
+	        String playerName = JOptionPane.showInputDialog("Enter your name: ", "New Challenger");
+	        
+	        if (playerName != null) {
+	        	if(playerName.length() > 20) {
+	            	playerName = JOptionPane.showInputDialog("Sorry character limit is 20.\n Enter your name: ", "New Challenger");
+	            }
+	        } else {
+	        	playerName = "N/A";
+	        }
+	        
+	        g.newPlayer(playerName);
 	        
 	        JPanel input = new JPanel();
 	        input.setSize(g.getWidth(), INPUT_HEIGHT);
@@ -64,33 +74,32 @@ public class GameContainer extends JFrame {
 	        		int size = 10;
 	        		int mines = -1;
 	        		boolean valid = true;
+	        		boolean defaultValue = false;
 	        		int sizeInput = 10;
 	        		int mineInput = -1;
 	        		
 	        		 if (e.getSource() == btnNewGame) {
-	        			g.endGame('r');
-	 	        		g.removeAll();
-	 	        		
-	 	        		if (tfSize.getText().equals("")) {
+	 	        		if (tfSize.getText().equals("") || !isNumeric(tfSize.getText())) {
 	 	        			size = 10;
+	 	        			defaultValue = true;
 	 	        		} else {
 	 	        			sizeInput = Integer.parseInt(tfSize.getText());
 	 	        		}
 	 	        		
-	 	        		if ((sizeInput <= 30) && (sizeInput > 0) && isNumeric(tfSize.getText())){
+	 	        		if ((sizeInput <= 30) && (sizeInput > 0) && (isNumeric(tfSize.getText()) || defaultValue)){
 	 	        			size = sizeInput;
 	 	        		} else {
 	 	        			valid = false;
 	 	        		}
 	 	        		
-	 	        		if (tfMines.getText().equals("")) {
+	 	        		if (tfMines.getText().equals("") || !isNumeric(tfSize.getText())) {
 	 	        			mines = size;
 	 	        			mineInput = size;
 	 	        		} else {
 	 	        			mineInput = Integer.parseInt(tfMines.getText()); 
 	 	        		}
 	 	        		
-	 	        		if ((mineInput <= 150) && (mineInput < (sizeInput*sizeInput) && isNumeric(tfSize.getText()))){
+	 	        		if ((mineInput <= 150) && (mineInput < (sizeInput*sizeInput)) && (isNumeric(tfSize.getText()) || defaultValue)){
 	 	        			mines = mineInput;
 	 	        		} else {
 	 	        			valid = false;
@@ -98,10 +107,12 @@ public class GameContainer extends JFrame {
 	 	        		
 	 	        		
 	 	        		if (valid) {
+	 	        			g.endGame('r');
+		 	        		g.removeAll();
 	 	        			g.makeGame(size, mines);
 		 	        		gc.pack();
 	 	        		} else {
-	 	        			JOptionPane.showMessageDialog(gc, "The size must be between 1 and 30. \n\n"
+	 	        			JOptionPane.showMessageDialog(gc, "The size must be a number between 1 and 30. \n\n"
 	 	        					+ "The number of mines must be between 0 \n"
 	 	        					+ "and the size squared and must not exceed 150.",
 	 	        					"Incorrect value(s) entered", JOptionPane.WARNING_MESSAGE);
