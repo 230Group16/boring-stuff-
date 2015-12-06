@@ -11,6 +11,8 @@
 
 package kablewie;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -41,19 +43,19 @@ public class Game extends JPanel {
     
     public void makeGame(int s, int m){
         m_board = new Board(s, m);
+        
         m_scoreboard = new Scoreboard();
         
-        m_height = m_board.getSideLength() + SCOREBOARD_HEIGHT;
-        m_width = m_board.getSideLength() - (Board.SPACING * SPACING_MULTIPLIER);
+        m_height = m_board.getHeight() + SCOREBOARD_HEIGHT;
+        m_width = m_board.getWidth() - (Board.SPACING * SPACING_MULTIPLIER);
        
         m_scoreboard.setPreferredSize(new Dimension(m_width, SCOREBOARD_HEIGHT));
+        m_scoreboard.setBackground(Color.WHITE);
         
-        //setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        /* add boardPanel and scoreboardPanel to frame */
-        
+        /* add board and scoreboard to frame */
         add(m_scoreboard);
         add(m_board);
-
+       
         setPreferredSize(new Dimension(m_width, m_height));
         updateUI();
     }
@@ -65,6 +67,7 @@ public class Game extends JPanel {
         case 'w':
             //Win
         	m_scoreboard.setGameStateMessage("You win!");
+        	
             
             break;
         case 'l':
