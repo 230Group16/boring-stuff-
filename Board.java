@@ -3,13 +3,17 @@ package kablewie;
 import javax.swing.*;
 
 import java.util.Random;
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
 import javax.swing.JPanel;
+import javax.swing.border.BevelBorder;
 
 /**
 * @file Board.java
@@ -33,7 +37,7 @@ public class Board extends JPanel {
     }
     
     public int getSideLength() {
-    return m_size * Tile.TILE_SIZE;
+    return (m_size + 3) * Tile.TILE_SIZE;
     }
     
     /**
@@ -207,7 +211,9 @@ public class Board extends JPanel {
         
         m_tiles = new Tile[m_size][m_size];
 
-        GridLayout boardLayout = new GridLayout(m_size,m_size);
+        GridBagLayout boardLayout = new GridBagLayout();
+        GridBagConstraints c = new GridBagConstraints();
+        
         setLayout(boardLayout);
         setPreferredSize(new Dimension(getSideLength(), getSideLength()));
         
@@ -215,12 +221,15 @@ public class Board extends JPanel {
         for (int y = 0; y < m_size; y++) {
         	for (int x = 0; x < m_size; x++) {
         		Tile tile = new Tile(x, y);
-        		add(tile);
+        		c.gridx = x;
+        		c.gridy = y;
+        		add(tile, c);
         		m_tiles[x][y] = tile;
         	}
         }
         
         allocateMines();
+        //setBorder(BorderFactory.createLineBorder(Color.black));
     }
     
 
@@ -246,6 +255,7 @@ public class Board extends JPanel {
 		}
 	}
 	
+	public final static int SPACING = 3;
 	int m_size;
 	int m_numberOfMines;
 	boolean[][] m_mineLocations;
