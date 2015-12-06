@@ -20,13 +20,6 @@ import javax.swing.JPanel;
 * The board that a Kablewie game will be played on.
 */
 public class Board extends JPanel {
-    
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-
-
 	/**
     * An accessor method taking in no arguments and returning the value of m_gameOver
     * @return Value of m_gameOver
@@ -82,10 +75,11 @@ public class Board extends JPanel {
     	int y = tile.getPosY();
     	
     	if (m_tiles[x][y].hasMine()) {
-    		System.out.println("mine");
-    		m_gameOver = true;
-       		updateGameState();
-    		//Mine mine = (Mine) m_tiles[tile.getPosX()][tile.getPosY()];
+    		if (!m_gameOver) {
+    			m_gameOver = true;
+           		updateGameState();
+    		}
+    		
 			try {
 				tile.showGraphic(0);
 			} catch (IOException e) {
@@ -128,15 +122,6 @@ public class Board extends JPanel {
             	
             	timer.setRepeats( false );
             	timer.start();
-        	}
-        	
-        	if (m_tiles[x][y].hasMine()) {
-        		try {
-    				m_tiles[x][y].showGraphic(0);
-    			} catch (IOException e) {
-    				// TODO Auto-generated catch block
-    				e.printStackTrace();
-    			}
         	}
     	}
     	
