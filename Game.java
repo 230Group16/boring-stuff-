@@ -44,8 +44,8 @@ public class Game extends JPanel {
         m_scoreboard = new Scoreboard();
         
         m_height = m_board.getSideLength() + SCOREBOARD_HEIGHT;
-        m_width = m_board.getSideLength();
-        
+        m_width = m_board.getSideLength() - (Board.SPACING * SPACING_MULTIPLIER);
+       
         m_scoreboard.setPreferredSize(new Dimension(m_width, SCOREBOARD_HEIGHT));
         
         //setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -86,7 +86,7 @@ public class Game extends JPanel {
         
     }
 
-    
+    public static final int SPACING_MULTIPLIER = 16;
     private Board m_board;
     private Scoreboard m_scoreboard;
     public static final int SCOREBOARD_HEIGHT = 100; 
