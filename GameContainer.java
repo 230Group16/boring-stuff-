@@ -28,7 +28,7 @@ public class GameContainer extends JFrame {
 	        
 	        /* create frame for Board and Scoreboard */
 	        GameContainer gc = new GameContainer( "Kablewie!");
-	        gc.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
+	        gc.setDefaultCloseOperation( JFrame.DISPOSE_ON_CLOSE );
 			gc.setResizable(false);
 
 	        Game g = new Game(10,10);
@@ -66,8 +66,6 @@ public class GameContainer extends JFrame {
 	        
 	        JButton btnExit = new JButton("Exit");
 	        input.add(btnExit);
-	        
-	        
 	        
 	        class InputHandler implements ActionListener {	
 	        	public void actionPerformed(ActionEvent e) {
@@ -139,16 +137,13 @@ public class GameContainer extends JFrame {
 	       
 	        /* set container layout to boxlayout */
 	        
-	        
-	        gc.pack();
-	        
-	        gc.setLocationRelativeTo(null);
-	        
 	        /* display frame */
 	        gc.setVisible(true);
 	        
 	        /* set frame resizable to false */
 	        gc.setResizable(false);
+	        
+	        gc.pack();
 	        
 	        while(m_running){
 	        	g.getScoreboard().update();
