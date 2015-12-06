@@ -21,6 +21,7 @@ public class GameContainer extends JFrame {
 	public GameContainer(String s) {
 		super(s);
 	}
+	
 	public static void main( String args[] ) {
 	        final int INPUT_HEIGHT = 100;
 	        
@@ -57,34 +58,45 @@ public class GameContainer extends JFrame {
 	        JButton btnExit = new JButton("Exit");
 	        input.add(btnExit);
 	        
-	        class GameListener implements ActionListener {	
+	        
+	        
+	        class InputHandler implements ActionListener {	
 	        	public void actionPerformed(ActionEvent e) {
 	        		int size;
 	        		int mines;
 	        		
-	        		g.endGame('r');
-	        		g.removeAll();
+	        		 if (e.getSource() == btnNewGame) {
+	        			 g.endGame('r');
+	 	        		g.removeAll();
+	 	        		
+	 	        		if (tfSize.getText().equals("")) {
+	 	        			size = -1;
+	 	        		} else {
+	 	        			size = Integer.parseInt(tfSize.getText());
+	 	        		}
+	 	        		
+	 	        		if (tfMines.getText().equals("")) {
+	 	        			mines = -1;
+	 	        		} else {
+	 	        			mines = Integer.parseInt(tfMines.getText());
+	 	        		}
+	 	        		
+	 	        		g.makeGame(size, mines);
+	 	        		gc.getContentPane().setSize(g.getWidth(), g.getHeight() + INPUT_HEIGHT);
+	 	        		gc.pack();
+	                 }  else if (e.getSource() == btnExit) {
+	                     gc.dispose();
+	                 }
 	        		
-	        		if (tfSize.getText().equals("")) {
-	        			size = -1;
-	        		} else {
-	        			size = Integer.parseInt(tfSize.getText());
-	        		}
 	        		
-	        		if (tfMines.getText().equals("")) {
-	        			mines = -1;
-	        		} else {
-	        			mines = Integer.parseInt(tfMines.getText());
-	        		}
 	        		
-	        		g.makeGame(size, mines);
-	        		gc.setSize(g.getWidth(), g.getHeight() + INPUT_HEIGHT);
+	        		
 	        	}
 	        }
 	        
-	        GameListener gl = new GameListener();
-	        btnNewGame.addActionListener(gl);
-	        btnExit.addActionListener(gl);
+	        InputHandler handler = new InputHandler();
+	        btnNewGame.addActionListener(handler);
+	        btnExit.addActionListener(handler);
 	        
 	        gc.getContentPane().add(g, BorderLayout.NORTH);
 	        gc.getContentPane().add(input, BorderLayout.CENTER);
