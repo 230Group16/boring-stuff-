@@ -32,8 +32,7 @@ public class GameContainer extends JFrame {
 			gc.setResizable(false);
 
 	        Game g = new Game(10,10);
-	        gc.getContentPane().setSize(g.getWidth(), g.getHeight() + INPUT_HEIGHT);
-     		gc.pack();
+	        
      		
 	        
 	        JPanel input = new JPanel();
@@ -78,7 +77,7 @@ public class GameContainer extends JFrame {
 	 	        			sizeInput = Integer.parseInt(tfSize.getText());
 	 	        		}
 	 	        		
-	 	        		if ((sizeInput <= 30) && (sizeInput > 0)){
+	 	        		if ((sizeInput <= 30) && (sizeInput > 0) && isNumeric(tfSize.getText())){
 	 	        			size = sizeInput;
 	 	        		} else {
 	 	        			valid = false;
@@ -91,7 +90,7 @@ public class GameContainer extends JFrame {
 	 	        			mineInput = Integer.parseInt(tfMines.getText()); 
 	 	        		}
 	 	        		
-	 	        		if ((mineInput <= 150) && (mineInput < (sizeInput*sizeInput))){
+	 	        		if ((mineInput <= 150) && (mineInput < (sizeInput*sizeInput) && isNumeric(tfSize.getText()))){
 	 	        			mines = mineInput;
 	 	        		} else {
 	 	        			valid = false;
@@ -100,20 +99,23 @@ public class GameContainer extends JFrame {
 	 	        		
 	 	        		if (valid) {
 	 	        			g.makeGame(size, mines);
-		 	        		gc.getContentPane().setSize(g.getWidth(), g.getHeight() + INPUT_HEIGHT);
 		 	        		gc.pack();
 	 	        		} else {
-	 	        			JOptionPane.showMessageDialog(gc, "The size must be between 10 and 30. \n\n"
+	 	        			JOptionPane.showMessageDialog(gc, "The size must be between 1 and 30. \n\n"
 	 	        					+ "The number of mines must be between 0 \n"
 	 	        					+ "and the size squared and must not exceed 150.",
 	 	        					"Incorrect value(s) entered", JOptionPane.WARNING_MESSAGE);
 	 	        		}
 	 	        		
+	 	        		tfSize.setText("");
+	 	        		tfMines.setText("");
 	 	        		
 	                 }  else if (e.getSource() == btnExit) {
 	                     	gc.dispose();
 	                 }
 	        	}
+	        	
+	        	
 	        }
 	        
 	        InputHandler handler = new InputHandler();
@@ -123,20 +125,30 @@ public class GameContainer extends JFrame {
 	        gc.getContentPane().add(g, BorderLayout.NORTH);
 	        gc.getContentPane().add(input, BorderLayout.CENTER);
 	        Scoreboard.updatetime();
-	        
-	        gc.pack();
-	        
+	       
 	        /* set container layout to boxlayout */
 	        
 	        /* display frame */
 	        gc.setVisible(true);
 	        
 	        /* set frame resizable to false */
-	        gc.setResizable(true);
+	        gc.setResizable(false);
+	        
+	        gc.pack();
 	        
 	        while(m_running){
 	        	g.getScoreboard().update();
 	        }
+	}
+	
+	public static boolean isNumeric(String string) {  
+		try {  
+			int testNumber = Integer.parseInt(string);  
+		} catch(NumberFormatException e) {  
+			return false;  
+		}  
+		
+		return true;  
 	}
 	
 	private static boolean m_running = true;
