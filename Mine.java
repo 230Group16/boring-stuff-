@@ -15,11 +15,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 public class Mine extends Tile {
-    
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 
 
 	/**
