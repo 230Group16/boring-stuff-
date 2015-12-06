@@ -17,24 +17,19 @@ public class Scoreboard extends JPanel {
     private static final long serialVersionUID = 1L;
     /* Initialisation of variables */
     static int m_time;
-    int m_minesDiffused;
-    int m_numberOfTilesRevealed;
+    
+    private Board m_board;
+    private int m_minesDiffused;
+    private static int m_numberOfTilesRevealed;
 	private String m_playerName = "";
 	private String gameState = "Good luck!";
-	int LblSpace = 90;
-    JLabel lblName;
-    JLabel lblTime;
-    JLabel minesDlbl;
-    JLabel tilesRlbl;
-    JLabel lblGameState;
+    private JLabel lblName;
+    private JLabel lblTime;
+    private JLabel minesDlbl;
+    private JLabel tilesRlbl;
+    private JLabel lblGameState;
     final static long MS_IN_SECOND = 1000L;
     public final int SECS_MINS = 60;
-    
-
-    
-    public int getGameTime() {
-        return m_time;
-    }
     
     public int getMinesDiffused() {
         return m_minesDiffused;
@@ -48,13 +43,12 @@ public class Scoreboard extends JPanel {
         return gameState;
     }
     
-    public Scoreboard() {
+    public Scoreboard(Game g) {
         /*Sets grid layout for scoreboard */
     	SpringLayout layout = new SpringLayout();
         setLayout(layout);
         
-        
-        
+        m_board = g.getBoard();
         lblName = new JLabel();
         lblTime = new JLabel("Game time - " + getTime());
         minesDlbl = new JLabel("Mines diffused - " + getMinesDiffused());
@@ -153,6 +147,10 @@ public class Scoreboard extends JPanel {
     	setTime();
     	setTilesRevealed();
     	setMinesDiffused();
+    }
+    
+    public static void incrementTilesRevealed() {
+    	m_numberOfTilesRevealed++;
     }
     
     public static void updatetime(){
