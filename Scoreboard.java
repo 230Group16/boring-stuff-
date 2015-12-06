@@ -9,11 +9,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class Scoreboard extends JPanel {
-    
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	static int m_time;
     int m_minesDiffused;
     int m_numberOfTilesRevealed;
