@@ -32,7 +32,7 @@ public class GameContainer extends JFrame {
 	        
 	        Game g = new Game(10,10);
 	        
-	        gc.setSize(g.getWidth(), g.getHeight() + INPUT_HEIGHT);
+	        gc.getContentPane().setSize(g.getWidth(), g.getHeight() + INPUT_HEIGHT);
 	        gc.setResizable(false);
 	        
 	        JPanel input = new JPanel();
@@ -86,9 +86,11 @@ public class GameContainer extends JFrame {
 	        btnNewGame.addActionListener(gl);
 	        btnExit.addActionListener(gl);
 	        
-	        gc.add(g, BorderLayout.NORTH);
-	        gc.add(input, BorderLayout.CENTER);
+	        gc.getContentPane().add(g, BorderLayout.NORTH);
+	        gc.getContentPane().add(input, BorderLayout.CENTER);
 	        Scoreboard.updatetime();
+	        
+	        gc.pack();
 	        
 	        /* set container layout to boxlayout */
 	        
