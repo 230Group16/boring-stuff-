@@ -10,8 +10,6 @@ package kablewie;
 */
 public class Human{
     
-    
-    
 	/**
 	* An accessor method taking in no arguments and returning the value of m_name
 	* @return Value of n_name
