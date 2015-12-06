@@ -40,8 +40,8 @@ public class Board extends JPanel {
     public int getHeight() {
     	int defaultSize = m_size * Tile.TILE_SIZE;
     	
-    	if (defaultSize < DEFAULT_BOARD_SIZE) {
-    		defaultSize = DEFAULT_BOARD_SIZE;
+    	if (defaultSize < DEFAULT_BOARD_HEIGHT) {
+    		defaultSize = DEFAULT_BOARD_HEIGHT;
     	}
     	
     	return defaultSize;
@@ -50,8 +50,8 @@ public class Board extends JPanel {
     public int getWidth() {
     	int defaultSize = m_size * Tile.TILE_SIZE;
     	
-    	if (defaultSize < DEFAULT_BOARD_SIZE) {
-    		defaultSize = DEFAULT_BOARD_SIZE;
+    	if (defaultSize < DEFAULT_BOARD_WIDTH) {
+    		defaultSize = DEFAULT_BOARD_WIDTH;
     	}
     	
     	return defaultSize;
@@ -276,7 +276,8 @@ public class Board extends JPanel {
 	
 	public final static int SPACING = 3;
 	public final static int DEFAULT_SIZE = 10;
-	public final static int DEFAULT_BOARD_SIZE = 300;
+	public final static int DEFAULT_BOARD_HEIGHT = 250;
+	public final static int DEFAULT_BOARD_WIDTH = 300;
 	public final static int HEIGHT_SPACING = 15;
 	public final static int WIDTH_SPACING = 3;
 	int m_size;
