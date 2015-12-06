@@ -68,13 +68,13 @@ public class Game extends JPanel {
     	switch(gameState){
         case 'w':
             //Win
-        	m_scoreboard.setGameStateMessage("You win!");
+        	m_scoreboard.setGameState("You win!");
         	
             
             break;
         case 'l':
             //Loss and display animation
-            m_scoreboard.setGameStateMessage("You lose!");
+            m_scoreboard.setGameState("You lose!");
             break;
         case 'r':
             //reset
