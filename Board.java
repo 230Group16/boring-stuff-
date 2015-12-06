@@ -2,6 +2,7 @@ package kablewie;
 
 import javax.swing.*;
 
+import java.util.ArrayList;
 import java.util.Random;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -37,11 +38,23 @@ public class Board extends JPanel {
     }
     
     public int getHeight() {
-    	return m_size  * Tile.TILE_SIZE + 15;
+    	int defaultSize = m_size * Tile.TILE_SIZE + HEIGHT_SPACING;
+    	
+    	if (defaultSize < 200) {
+    		defaultSize = 200;
+    	}
+    	
+    	return defaultSize;
     }
     
     public int getWidth() {
-    	return (m_size + 3) * Tile.TILE_SIZE;
+    	int defaultSize = (m_size + WIDTH_SPACING) * Tile.TILE_SIZE;
+    	
+    	if (defaultSize < 200) {
+    		defaultSize = 200;
+    	}
+    	
+    	return defaultSize;
     }
     
     /**
@@ -64,9 +77,9 @@ public class Board extends JPanel {
     * An accessor method taking in no arguments and returning the value of m_mineLocations
     * @return Value of m_mineLocations
     */
-    public boolean[][] getMineLocations() {
+    /*public boolean[][] getMineLocations() {
         return m_mineLocations;
-    }
+    }*/
     
     
     /**
@@ -212,7 +225,7 @@ public class Board extends JPanel {
     */
     public Board(int sideLength, int numberOfMines) {
         if (sideLength == -1) {
-        	m_size = 10;
+        	m_size = DEFAULT_SIZE;
         } else {
             m_size = sideLength;
         }
@@ -229,7 +242,6 @@ public class Board extends JPanel {
         GridBagConstraints c = new GridBagConstraints();
         
         setLayout(boardLayout);
-        //setPreferredSize(new Dimension(getSideLength(), getSideLength()));
         
         //Create array of tiles
         for (int y = 0; y < m_size; y++) {
@@ -243,36 +255,40 @@ public class Board extends JPanel {
         }
         
         allocateMines();
-        //setBorder(BorderFactory.createLineBorder(Color.black));
     }
     
 
 	public void allocateMines () {
 		Random randomMines = new Random();
-		m_mineLocations = new boolean[m_size][m_size];
+		m_mineLocations = new int[m_size][m_size];
 		
-		for(int i = 0; i < m_size; i++){
-			for(int j = 0; j < m_size; j++) { m_mineLocations[i][j] = false; }
+		ArrayList<int[]> freeLocations = new ArrayList<int[]>();
+		
+		
+		for (int i=0; i<m_size; i++) {
+			for (int j=0; j<m_size; j++) {
+				int[] location = {j,i};
+				freeLocations.add(location);
+			}
 		}
 		
-		int mineCount = 0;
-		
-		while(mineCount < m_numberOfMines) {
-			int x = randomMines.nextInt(m_size - 1);
-			int y = randomMines.nextInt(m_size - 1);
+		for (int mineCount=0; mineCount < m_numberOfMines; mineCount++) {
+			int randNo = randomMines.nextInt(freeLocations.size() -1);
 			
-			if(!m_mineLocations[x][y]){
-				m_tiles[x][y] = new Mine(x,y);
-				m_mineLocations[x][y] = true;
-				mineCount++;
-			}
+			int[] location = freeLocations.get(randNo);
+			m_tiles[location[0]] [location[1]] = new Mine(location[0], location[1]);
+			freeLocations.remove(randNo);
 		}
 	}
 	
 	public final static int SPACING = 3;
+	public final static int DEFAULT_SIZE = 10;
+	public final static int HEIGHT_SPACING = 15;
+	public final static int WIDTH_SPACING = 3;
 	int m_size;
 	int m_numberOfMines;
-	boolean[][] m_mineLocations;
+	int[][] m_mineLocations;
+	//boolean[][] m_mineLocations;
 	boolean m_gameOver;
 	Tile[][] m_tiles;
 }
