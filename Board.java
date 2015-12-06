@@ -88,14 +88,19 @@ public class Board extends JPanel {
     public void updateGameState() {
         if (m_gameOver) {
         	((Game) getParent()).endGame('l');
+        	
         }
+    }
+    
+    public void setGameOver(boolean tf) {
+    	m_gameOver = tf;
     }
     
 	public void reveal(Tile tile) {
 		int x = tile.getPosX();
     	int y = tile.getPosY();
     	
-    	if (!tile.isRevealed()) {
+    	if (!tile.isRevealed() && !m_gameOver) {
     		Scoreboard.incrementTilesRevealed();
     	}
     	
@@ -261,7 +266,6 @@ public class Board extends JPanel {
 		m_mineLocations = new int[m_size][m_size];
 		
 		ArrayList<int[]> freeLocations = new ArrayList<int[]>();
-		
 		
 		for (int i=0; i<m_size; i++) {
 			for (int j=0; j<m_size; j++) {
