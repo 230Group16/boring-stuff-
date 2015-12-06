@@ -3,7 +3,6 @@ package kablewie;
 import java.awt.Component;
 import java.util.Timer;
 import java.util.TimerTask;
-
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -17,10 +16,10 @@ public class Scoreboard extends JPanel {
     private static final long serialVersionUID = 1L;
     /* Initialisation of variables */
     static int m_time;
-    
     private Board m_board;
     private int m_minesDiffused;
     private static int m_numberOfTilesRevealed;
+    private static int m_numberOfTilesNotRevealed;
 	private String m_playerName = "";
 	private String gameState = "Good luck!";
     private JLabel lblName;
@@ -39,6 +38,10 @@ public class Scoreboard extends JPanel {
         return m_numberOfTilesRevealed;
     }
     
+    public int getNumberOfNotRevealed() {
+        return m_numberOfTilesNotRevealed;
+    }
+    
     public String getGameState() {
         return gameState;
     }
@@ -53,49 +56,58 @@ public class Scoreboard extends JPanel {
         lblTime = new JLabel("Game time - " + getTime());
         minesDlbl = new JLabel("Mines diffused - " + getMinesDiffused());
         tilesRlbl = new JLabel("Tiles Revealed - " + getNumberOfRevealed());
+        tilesNRlbl = new JLabel("Tiles not revealed - " + getNumberOfNotRevealed());
         lblGameState = new JLabel(getGameState());
         
         addComponent(lblName);
         addComponent(lblTime);
-	    addComponent(minesDlbl);
+	addComponent(minesDlbl);
         addComponent(lblGameState);
         addComponent(tilesRlbl);
+        addComponent(tilesNRlbl);
         
         /* Layout */
-	      layout.putConstraint(SpringLayout.WEST, lblName,
-	              10,
-	              SpringLayout.WEST, this);
-		  layout.putConstraint(SpringLayout.NORTH, lblName,
-	              0,
-	              SpringLayout.NORTH, this);
+	   layout.putConstraint(SpringLayout.WEST, lblName,
+	          10,
+	          SpringLayout.WEST, this);
+	   layout.putConstraint(SpringLayout.NORTH, lblName,
+	          0,
+	          SpringLayout.NORTH, this);
 		  
-		  layout.putConstraint(SpringLayout.EAST, lblTime,
+	   layout.putConstraint(SpringLayout.EAST, lblTime,
+	   	  -10,
+		  SpringLayout.EAST, this);
+	   layout.putConstraint(SpringLayout.NORTH, lblTime,
+		  0,
+		  SpringLayout.NORTH, this);
+		  
+	   layout.putConstraint(SpringLayout.WEST, tilesRlbl,
+		  10,
+		  SpringLayout.WEST, this);
+	   layout.putConstraint(SpringLayout.NORTH, tilesRlbl,
+		  5,
+		  SpringLayout.SOUTH, lblName);
+	      
+	   layout.putConstraint(SpringLayout.EAST, minesDlbl,
+		  -10,
+		  SpringLayout.EAST, this);
+	   layout.putConstraint(SpringLayout.NORTH, minesDlbl,
+	   	  5,
+	   	  SpringLayout.SOUTH, lblTime);
+	
+	   layout.putConstraint(SpringLayout.EAST, tilesNRlbl,
 	    		  -10,
 	    		  SpringLayout.EAST, this);
-	      layout.putConstraint(SpringLayout.NORTH, lblTime,
-	    		  0,
-	    		  SpringLayout.NORTH, this);
-		  
-		  layout.putConstraint(SpringLayout.WEST, tilesRlbl,
-	    		  10,
-	    		  SpringLayout.WEST, this);
-	      layout.putConstraint(SpringLayout.NORTH, tilesRlbl,
+	      layout.putConstraint(SpringLayout.NORTH, tilesNRlbl,
 	    		  5,
-	    		  SpringLayout.SOUTH, lblName);
+	    		  SpringLayout.SOUTH, minesDlbl);
 	      
-	      layout.putConstraint(SpringLayout.EAST, minesDlbl,
-	    		  -10,
-	    		  SpringLayout.EAST, this);
-	      layout.putConstraint(SpringLayout.NORTH, minesDlbl,
-	    		  5,
-	    		  SpringLayout.SOUTH, lblTime);
-	      
-	      layout.putConstraint(SpringLayout.WEST, lblGameState,
-	    		  10,
-	    		  SpringLayout.WEST, this);
-	      layout.putConstraint(SpringLayout.NORTH, lblGameState,
-	    		  5,
-	    		  SpringLayout.SOUTH, tilesRlbl);
+	   layout.putConstraint(SpringLayout.WEST, lblGameState,
+		  10,
+		  SpringLayout.WEST, this);
+	   layout.putConstraint(SpringLayout.NORTH, lblGameState,
+		  5,
+		  SpringLayout.SOUTH, tilesRlbl);
 	      
     }
     
@@ -134,6 +146,11 @@ public class Scoreboard extends JPanel {
         
     }
     
+    public void setTilesNotRevealed() {
+    	tilesNRlbl.setText("Tiles not revealed - " + getNumberOfNotRevealed());
+        
+    }
+    
     public void setMinesDiffused() {
     	minesDlbl.setText("Mines diffused - " + getMinesDiffused());
         
@@ -147,6 +164,7 @@ public class Scoreboard extends JPanel {
     	setTime();
     	setTilesRevealed();
     	setMinesDiffused();
+    	setTilesNotRevealed();
     }
     
     public static void incrementTilesRevealed() {
