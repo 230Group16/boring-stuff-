@@ -62,30 +62,55 @@ public class GameContainer extends JFrame {
 	        
 	        class InputHandler implements ActionListener {	
 	        	public void actionPerformed(ActionEvent e) {
-	        		int size;
-	        		int mines;
+	        		int size = -1;
+	        		int mines = -1;
+	        		boolean valid = true;
+	        		int sizeInput = 10;
+	        		int mineInput = 10;
+	        		
 	        		
 	        		 if (e.getSource() == btnNewGame) {
-	        			 g.endGame('r');
+	        			g.endGame('r');
 	 	        		g.removeAll();
 	 	        		
 	 	        		if (tfSize.getText().equals("")) {
 	 	        			size = -1;
 	 	        		} else {
-	 	        			size = Integer.parseInt(tfSize.getText());
+	 	        			sizeInput = Integer.parseInt(tfSize.getText());
+	 	        		}
+	 	        		
+	 	        		if ((sizeInput <= 30) && (sizeInput > 0)){
+	 	        			size = sizeInput;
+	 	        		} else {
+	 	        			valid = false;
 	 	        		}
 	 	        		
 	 	        		if (tfMines.getText().equals("")) {
 	 	        			mines = -1;
 	 	        		} else {
-	 	        			mines = Integer.parseInt(tfMines.getText());
+	 	        			mineInput = Integer.parseInt(tfMines.getText()); 
 	 	        		}
 	 	        		
-	 	        		g.makeGame(size, mines);
-	 	        		gc.getContentPane().setSize(g.getWidth(), g.getHeight() + INPUT_HEIGHT);
-	 	        		gc.pack();
+	 	        		if ((mineInput <= 150) && (mineInput < (sizeInput*sizeInput))){
+	 	        			mines = mineInput;
+	 	        		} else {
+	 	        			valid = false;
+	 	        		}
+	 	        		
+	 	        		if (valid) {
+	 	        			g.makeGame(size, mines);
+		 	        		gc.getContentPane().setSize(g.getWidth(), g.getHeight() + INPUT_HEIGHT);
+		 	        		gc.pack();
+	 	        		} else {
+	 	        			JOptionPane.showMessageDialog(gc, "The size must be between 10 and 30. \n\n"
+	 	        					+ "The number of mines must be between 0 \n"
+	 	        					+ "and the size squared and must not exceed 150.",
+	 	        					"Incorrect value(s) entered", JOptionPane.WARNING_MESSAGE);
+	 	        		}
+	 	        		
+	 	        		
 	                 }  else if (e.getSource() == btnExit) {
-	                     gc.dispose();
+	                     	gc.dispose();
 	                 }
 	        		
 	        		
