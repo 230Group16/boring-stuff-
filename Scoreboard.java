@@ -1,20 +1,35 @@
 package kablewie;
 
 import java.awt.Component;
-import java.awt.GridLayout;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SpringLayout;
 
 public class Scoreboard extends JPanel {
-	static int m_time;
+    
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
+    /* Initialisation of variables */
+    static int m_time;
     int m_minesDiffused;
     int m_numberOfTilesRevealed;
+	int LblSpace = 90;
+	private String m_playerName = "";
+    JLabel lblName;
+    JLabel lblTime;
+    JLabel minesDlbl;
+    JLabel tilesRlbl;
+    JLabel lblGameState;
+    final static long MS_IN_SECOND = 1000L;
+    public final int SECS_MINS = 60;
     
     public void setPlayerName(String name) {
-    	m_playerName = name;
+        m_playerName = name;
     }
     
     public int getGameTime() {
@@ -31,16 +46,57 @@ public class Scoreboard extends JPanel {
     
     public Scoreboard() {
         /*Sets grid layout for scoreboard */
-        setLayout(new GridLayout(3,1));
- 
-        m_playerName = "";
-        lblName = new JLabel("Player's Name: " + m_playerName);
-    	lblTime = new JLabel("Game time: " + getGTime());
-    	lblGameState = new JLabel("Good luck!");
-    	
+    	SpringLayout layout = new SpringLayout();
+        setLayout(layout);
+        
+        lblName = new JLabel("Name- " + m_playerName);
+        lblTime = new JLabel("Game time - " + (getGTime()/3600) + ":" + (getGTime()/60) + ":" + (getGTime() % SECS_MINS));
+        minesDlbl = new JLabel("Mines diffused - " + getMinesDiffused());
+        tilesRlbl = new JLabel("Tiles Revealed - " + getNumberOfRevealed());
+        lblGameState = new JLabel("Good luck!");
+        
         addComponent(lblName);
         addComponent(lblTime);
+	    addComponent(minesDlbl);
         addComponent(lblGameState);
+        addComponent(tilesRlbl);
+        
+        /* Layout */
+	      layout.putConstraint(SpringLayout.WEST, lblName,
+	              10,
+	              SpringLayout.WEST, this);
+		  layout.putConstraint(SpringLayout.NORTH, lblName,
+	              0,
+	              SpringLayout.NORTH, this);
+		  
+		  layout.putConstraint(SpringLayout.EAST, lblTime,
+	    		  -10,
+	    		  SpringLayout.EAST, this);
+	      layout.putConstraint(SpringLayout.NORTH, lblTime,
+	    		  0,
+	    		  SpringLayout.NORTH, this);
+		  
+		  layout.putConstraint(SpringLayout.WEST, tilesRlbl,
+	    		  10,
+	    		  SpringLayout.WEST, this);
+	      layout.putConstraint(SpringLayout.NORTH, tilesRlbl,
+	    		  5,
+	    		  SpringLayout.SOUTH, lblName);
+	      
+	      layout.putConstraint(SpringLayout.EAST, minesDlbl,
+	    		  -10,
+	    		  SpringLayout.EAST, this);
+	      layout.putConstraint(SpringLayout.NORTH, minesDlbl,
+	    		  5,
+	    		  SpringLayout.SOUTH, lblTime);
+	      
+	      layout.putConstraint(SpringLayout.WEST, lblGameState,
+	    		  10,
+	    		  SpringLayout.WEST, this);
+	      layout.putConstraint(SpringLayout.NORTH, lblGameState,
+	    		  5,
+	    		  SpringLayout.SOUTH, tilesRlbl);
+	      
     }
     
     private void addComponent(Component x){
@@ -52,38 +108,28 @@ public class Scoreboard extends JPanel {
     }
     
     public static int getGTime(){
-		return m_time;
-	}
-	
+        return m_time;
+    }
+    
     public void setGameStateMessage(String message) {
-		lblGameState.setText(message);
-		
-	}
+        lblGameState.setText(message);
+        
+    }
     
     public void update() {
-	      lblTime.setText(("Game time - " + (getGTime()/(SECS_MINS * SECS_MINS)) + ":" + (getGTime()/SECS_MINS) + ":" + (getGTime() % SECS_MINS)));
+          lblTime.setText(("Game time - " + (getGTime()/(SECS_MINS * SECS_MINS)) + ":" + (getGTime()/SECS_MINS) + ":" + (getGTime() % SECS_MINS)));
     }
     
     public static void updatetime(){
-    	//Creates a timer and sets a task to iterate m_time at every second
+        //Creates a timer and sets a task to iterate m_time at every second
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask()
         {
              public void run()
              {
-            	 Scoreboard.m_time += 1;
-             	 //System.out.println(Scoreboard.m_time);
+                 Scoreboard.m_time += 1;
+                 //System.out.println(Scoreboard.m_time);
              }
         }, MS_IN_SECOND, MS_IN_SECOND);
-	}
-	
-    /* Initialisation of variables */	
-	private String m_playerName;
-	JLabel lblName;
-	JLabel lblTime;
-	JLabel lblGameState;
-    final static long MS_IN_SECOND = 1000L;
-    public final int SECS_MINS = 60;
-
-	
+    }
 }
