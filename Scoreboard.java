@@ -54,7 +54,12 @@ public class Scoreboard extends JPanel {
         setLayout(layout);
         
         m_playerName = JOptionPane.showInputDialog("Enter your name: ", "New Challenger");
-        lblName = new JLabel("Name- " + m_playerName);
+        if(m_playerName.length() > 20){
+        	m_playerName = JOptionPane.showInputDialog("Sorry character limit is 20.\n Enter your name: ", "New Challenger");
+        }
+        
+        
+        lblName = new JLabel("Name - " + m_playerName);
         lblTime = new JLabel("Game time - " + (getGTime()/3600) + ":" + (getGTime()/60) + ":" + (getGTime() % SECS_MINS));
         minesDlbl = new JLabel("Mines diffused - " + getMinesDiffused());
         tilesRlbl = new JLabel("Tiles Revealed - " + getNumberOfRevealed());
@@ -166,10 +171,4 @@ public class Scoreboard extends JPanel {
              }
         }, MS_IN_SECOND, MS_IN_SECOND);
     }
-    
-    public void setGameStateMessage(String message) {
-		lblGameState.setText(message);
-		
-	}
 }
- 
