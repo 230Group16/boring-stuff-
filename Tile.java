@@ -16,8 +16,7 @@ public class Tile extends JButton {
     private Graphics2D m_graphic;
     private int m_x;
     private int m_y;
-    public static final int TILE_SIZE = 30;
-    //private Graphics2D img[];
+    public static final int TILE_SIZE = 20;
     
     public Tile(int x, int y){
         m_flag = false;
@@ -33,7 +32,7 @@ public class Tile extends JButton {
     public void toggleFlag(){
         m_flag = !m_flag;
         if (m_flag) {
-        	setIcon(new ImageIcon(Game.class.getResource("/images/flag.jpg")));
+        	setIcon(new ImageIcon(Game.class.getResource("/images/flag.png")));
         } else {
         	setIcon(new JButton().getIcon());
         }
@@ -43,9 +42,9 @@ public class Tile extends JButton {
             //setIcon(new ImageIcon(Game.class.getResource("/images/" + mineCount + ".jpg")));
             
             if (mineCount != 0) {
-            	setIcon(new ImageIcon(Game.class.getResource("/images/" + mineCount + ".jpg")));
+            	setIcon(new ImageIcon(Game.class.getResource("/images/" + mineCount + ".png")));
             } else {
-            	setIcon(new ImageIcon(Game.class.getResource("/images/mine.jpg")));  
+            	setIcon(new ImageIcon(Game.class.getResource("/images/mine.png")));  
             }
            
     }
