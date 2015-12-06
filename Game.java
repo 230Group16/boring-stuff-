@@ -40,19 +40,19 @@ public class Game extends JPanel {
 	public Human getPlayer() {
 		return m_player;
 	}
-    
+	
+	public Human newPlayer(String name) {
+    	m_scoreboard.setPlayerName(name);
+    	return new Human(name, this);
+    }
+	
     public Game(int size, int mines) {
         makeGame(size, mines);
     }
     
-    public Human newPlayer(String name) {
-    	m_scoreboard.setPlayerName(name);
-    	return new Human(name, this);
-    }
-    
     public void makeGame(int s, int m){
     	m_board = new Board(s, m);
-        m_scoreboard = new Scoreboard();
+        m_scoreboard = new Scoreboard(this);
         
         m_height = m_board.getHeight() + SCOREBOARD_HEIGHT;
         m_width = m_board.getWidth();
