@@ -29,12 +29,9 @@ public class GameContainer extends JFrame {
 	        /* create frame for Board and Scoreboard */
 	        GameContainer gc = new GameContainer( "Kablewie!");
 	        gc.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
-	        gc.setLayout(new BorderLayout());
-	        
+			gc.setResizable(false);
+			
 	        Game g = new Game(10,10);
-	        
-	        gc.getContentPane().setSize(g.getWidth(), g.getHeight() + INPUT_HEIGHT);
-	        gc.setResizable(false);
 	        
 	        JPanel input = new JPanel();
 	        input.setSize(g.getWidth(), INPUT_HEIGHT);
@@ -66,8 +63,7 @@ public class GameContainer extends JFrame {
 	        		int mines = -1;
 	        		boolean valid = true;
 	        		int sizeInput = 10;
-	        		int mineInput = 10;
-	        		
+	        		int mineInput = -1;
 	        		
 	        		 if (e.getSource() == btnNewGame) {
 	        			g.endGame('r');
@@ -112,10 +108,6 @@ public class GameContainer extends JFrame {
 	                 }  else if (e.getSource() == btnExit) {
 	                     	gc.dispose();
 	                 }
-	        		
-	        		
-	        		
-	        		
 	        	}
 	        }
 	        
