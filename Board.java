@@ -38,20 +38,14 @@ public class Board extends JPanel {
     }
     
     public int getHeight() {
-    	int defaultSize = m_size * Tile.TILE_SIZE + HEIGHT_SPACING;
-    	
-    	if (defaultSize < 200) {
-    		defaultSize = 200;
-    	}
-    	
-    	return defaultSize;
+    	return m_size * Tile.TILE_SIZE;
     }
     
     public int getWidth() {
-    	int defaultSize = (m_size + WIDTH_SPACING) * Tile.TILE_SIZE;
+    	int defaultSize = (m_size) * Tile.TILE_SIZE + 20;
     	
-    	if (defaultSize < 200) {
-    		defaultSize = 200;
+    	if (defaultSize < 300) {
+    		defaultSize = 300;
     	}
     	
     	return defaultSize;
@@ -257,7 +251,7 @@ public class Board extends JPanel {
         allocateMines();
     }
     
-
+    
 	public void allocateMines () {
 		Random randomMines = new Random();
 		m_mineLocations = new int[m_size][m_size];
