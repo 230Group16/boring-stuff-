@@ -30,8 +30,11 @@ public class GameContainer extends JFrame {
 	        GameContainer gc = new GameContainer( "Kablewie!");
 	        gc.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
 			gc.setResizable(false);
-			
+
 	        Game g = new Game(10,10);
+	        gc.getContentPane().setSize(g.getWidth(), g.getHeight() + INPUT_HEIGHT);
+     		gc.pack();
+     		
 	        
 	        JPanel input = new JPanel();
 	        input.setSize(g.getWidth(), INPUT_HEIGHT);
@@ -59,7 +62,7 @@ public class GameContainer extends JFrame {
 	        
 	        class InputHandler implements ActionListener {	
 	        	public void actionPerformed(ActionEvent e) {
-	        		int size = -1;
+	        		int size = 10;
 	        		int mines = -1;
 	        		boolean valid = true;
 	        		int sizeInput = 10;
@@ -70,7 +73,7 @@ public class GameContainer extends JFrame {
 	 	        		g.removeAll();
 	 	        		
 	 	        		if (tfSize.getText().equals("")) {
-	 	        			size = -1;
+	 	        			size = 10;
 	 	        		} else {
 	 	        			sizeInput = Integer.parseInt(tfSize.getText());
 	 	        		}
@@ -82,7 +85,8 @@ public class GameContainer extends JFrame {
 	 	        		}
 	 	        		
 	 	        		if (tfMines.getText().equals("")) {
-	 	        			mines = -1;
+	 	        			mines = size;
+	 	        			mineInput = size;
 	 	        		} else {
 	 	        			mineInput = Integer.parseInt(tfMines.getText()); 
 	 	        		}
@@ -92,6 +96,7 @@ public class GameContainer extends JFrame {
 	 	        		} else {
 	 	        			valid = false;
 	 	        		}
+	 	        		
 	 	        		
 	 	        		if (valid) {
 	 	        			g.makeGame(size, mines);
