@@ -18,7 +18,7 @@ import javax.swing.border.BevelBorder;
 
 /**
 * @file Board.java
-* @author Thomas Fisher ************************** Whoever works on this class add your name here **************************
+* @author Thomas Fisher, Ben Harris, Adina Ardeleanu, Tereza Stoyanova
 * @date 28 Nov 2015
 * @see Game.java, Tile.java, Mine.java and Scoreboard.java for related information.
 *
@@ -33,24 +33,48 @@ public class Board extends JPanel {
         return m_gameOver;
     }
     
+    /**
+     * An incrementor method taking in no arguments and incrementing m_numberDiffused
+     * @see Game.java
+     */
     public void incrementNumberDiffused() {
     	m_numberDiffused++;
     	((Game) getParent()).getScoreboard().setMinesDiffused();
     }
     
+    /**
+     * An decrementor method taking in no arguments and decrementing m_numberDiffused
+     * @see Game.java
+     */
     public void decrementNumberDiffused() {
     	m_numberDiffused--;
     	((Game) getParent()).getScoreboard().setMinesDiffused();
     }
     
-    public int getMinesDiffused() {
+    /**
+     * An accessor method taking in no arguments and returning the number tiles diffused
+     * @return Value of m_gameOver
+     */
+    public int getNumberDiffused() {
     	return m_numberDiffused;
     }
     
+    /**
+     * An accessor method taking in 2 arguments and returning a tile 
+     * @param x the x-coordinate of the tile.
+     * @param y the y-coordinate of the tile.
+     * @see Tile.java
+     * @return The tile at location (x,y).
+     */
     public Tile getTile(int x, int y) {
     	return m_tiles[x][y];
     }
     
+    /**
+     * An accessor method taking in no arguments and returning the height of the board.
+     * @return The height of the board in pixels.
+     * @see Tile.java
+     */
     public int getHeight() {
     	int defaultSize = m_size * Tile.TILE_SIZE;
     	
@@ -61,6 +85,12 @@ public class Board extends JPanel {
     	return defaultSize;
     }
     
+    
+    /**
+     * An accessor method taking in no arguments and returning the width of the board.
+     * @return The width of the board in pixels.
+     * @see Tile.java
+     */
     public int getWidth() {
     	int defaultSize = m_size * Tile.TILE_SIZE;
     	
@@ -73,7 +103,7 @@ public class Board extends JPanel {
     
     /**
     * An accessor method taking in no arguments and returning the value of m_size
-    * @return Value of m_size
+    * @return The size of one side of the board.
     */
     public int getBoardSize() {
         return m_size;
@@ -81,35 +111,34 @@ public class Board extends JPanel {
     
     /**
     * An accessor method taking in no arguments and returning the value of m_numberOfMines
-    * @return Value of m_numberOfMines
+    * @return The number of mines on the board.
     */
     public int getNumberOfMines() {
         return m_numberOfMines;
     }
-    
+  
     /**
-    * An accessor method taking in no arguments and returning the value of m_mineLocations
-    * @return Value of m_mineLocations
-    */
-    /*public boolean[][] getMineLocations() {
-        return m_mineLocations;
-    }*/
-    
-    
-    /**
-    * A method that updates all necessary data when called.
+    * A method that updates the state of the game when called.
+    * @see Game.java
     */
     public void updateGameState() {
         if (m_gameOver) {
         	((Game) getParent()).endGame('l');
-        	
         }
     }
     
+    /**
+     * A mutator method taking in one argument and returning nothing.
+     */
     public void setGameOver(boolean tf) {
     	m_gameOver = tf;
     }
     
+    /**
+     * A method that recursively reveals tiles starting from the tile given as an argument.
+     * @param tile the tile to start recursively revealing from.
+     * @see Tile.java
+     */
 	public void reveal(Tile tile) {
 		int x = tile.getPosX();
     	int y = tile.getPosY();
@@ -183,6 +212,13 @@ public class Board extends JPanel {
     	
     }
     
+	/**
+	 * A method that checks how many surrounding mines a tile given as an argument has and sets its icon accordingly.
+	 * @param tile the tile to check for surrounding mines
+	 * @see Tile.java
+	 * @see Mine.java
+	 * @return
+	 */
     private int checkTile(Tile tile){
     	int x = tile.getPosX();
     	int y = tile.getPosY();
@@ -245,6 +281,7 @@ public class Board extends JPanel {
     * A constructor taking two arguments and returning a new instance of Board.
     * @param sideLength the length of a side of the board.
     * @param numberOfMines an integer representing the number of mines.
+    * @see Tile.java
     * @return New board object
     */
     public Board(int sideLength, int numberOfMines) {
@@ -274,7 +311,11 @@ public class Board extends JPanel {
         allocateMines();
     }
     
-    
+    /**
+     * A method that allocates mines in random locations on the board.
+     * @see Tile.java
+     * @see Mine.java
+     */
 	public void allocateMines () {
 		Random randomMines = new Random();
 		m_mineLocations = new int[m_size][m_size];
