@@ -26,6 +26,53 @@ import javax.swing.border.BevelBorder;
 * The board that a Kablewie game will be played on.
 */
 public class Board extends JPanel {
+	
+	public final static int SPACING = 3;
+	public final static int DEFAULT_SIZE = 10;
+	public final static int DEFAULT_BOARD_HEIGHT = 250;
+	public final static int DEFAULT_BOARD_WIDTH = 300;
+	public final static int HEIGHT_SPACING = 15;
+	public final static int WIDTH_SPACING = 3;
+	private int m_size;
+	private int m_numberOfMines;
+	private boolean m_gameOver;
+	private Tile[][] m_tiles;
+	private int m_numberDiffused;
+	    
+    /**
+    * A constructor taking two arguments and returning a new instance of Board.
+    * @param sideLength the length of a side of the board.
+    * @param numberOfMines an integer representing the number of mines.
+    * @see Tile.java
+    * @return New board object
+    */
+    public Board(int sideLength, int numberOfMines) {
+
+    	m_size = sideLength;
+       	m_numberOfMines = numberOfMines;
+    
+        
+        m_tiles = new Tile[m_size][m_size];
+
+        GridBagLayout boardLayout = new GridBagLayout();
+        GridBagConstraints c = new GridBagConstraints();
+        
+        setLayout(boardLayout);
+        
+        //Create array of tiles
+        for (int y = 0; y < m_size; y++) {
+        	for (int x = 0; x < m_size; x++) {
+        		Tile tile = new Tile(x, y);
+        		c.gridx = x;
+        		c.gridy = y;
+        		add(tile, c);
+        		m_tiles[x][y] = tile;
+        	}
+        }
+        
+        allocateMines();
+    }
+	
 	/**
     * An accessor method taking in no arguments 
     * and returning the value of m_gameOver
@@ -34,27 +81,7 @@ public class Board extends JPanel {
     public boolean isGameOver() {
         return m_gameOver;
     }
-    
-    /**
-     * An incrementor method taking in no arguments 
-     * and incrementing m_numberDiffused
-     * @see Game.java
-     */
-    public void incrementNumberDiffused() {
-    	m_numberDiffused++;
-    	((Game) getParent()).getScoreboard().setMinesDiffused();
-    }
-    
-    /**
-     * An decrementor method taking in no arguments 
-     * and decrementing m_numberDiffused
-     * @see Game.java
-     */
-    public void decrementNumberDiffused() {
-    	m_numberDiffused--;
-    	((Game) getParent()).getScoreboard().setMinesDiffused();
-    }
-    
+        
     /**
      * An accessor method taking in no 
      * arguments and returning the number tiles diffused
@@ -63,7 +90,7 @@ public class Board extends JPanel {
     public int getNumberDiffused() {
     	return m_numberDiffused;
     }
-    
+        
     /**
      * An accessor method taking in 2 arguments and returning a tile 
      * @param x the x-coordinate of the tile.
@@ -73,6 +100,24 @@ public class Board extends JPanel {
      */
     public Tile getTile(int x, int y) {
     	return m_tiles[x][y];
+    }
+        
+    /**
+    * An accessor method taking in no 
+    * arguments and returning the value of m_size
+    * @return The size of one side of the board.
+    */
+    public int getBoardSize() {
+        return m_size;
+    }
+    
+    /**
+    * An accessor method taking in no arguments 
+    * and returning the value of m_numberOfMines
+    * @return The number of mines on the board.
+    */
+    public int getNumberOfMines() {
+        return m_numberOfMines;
     }
     
     /**
@@ -91,7 +136,6 @@ public class Board extends JPanel {
     	return defaultSize;
     }
     
-    
     /**
      * An accessor method taking in no arguments 
      * and returning the width of the board.
@@ -109,21 +153,23 @@ public class Board extends JPanel {
     }
     
     /**
-    * An accessor method taking in no 
-    * arguments and returning the value of m_size
-    * @return The size of one side of the board.
-    */
-    public int getBoardSize() {
-        return m_size;
+     * An incrementor method taking in no arguments 
+     * and incrementing m_numberDiffused
+     * @see Game.java
+     */
+    public void incrementNumberDiffused() {
+    	m_numberDiffused++;
+    	((Game) getParent()).getScoreboard().setMinesDiffused();
     }
     
     /**
-    * An accessor method taking in no arguments 
-    * and returning the value of m_numberOfMines
-    * @return The number of mines on the board.
-    */
-    public int getNumberOfMines() {
-        return m_numberOfMines;
+     * A decrementor method taking in no arguments 
+     * and decrementing m_numberDiffused
+     * @see Game.java
+     */
+    public void decrementNumberDiffused() {
+    	m_numberDiffused--;
+    	((Game) getParent()).getScoreboard().setMinesDiffused();
     }
   
     /**
@@ -292,40 +338,6 @@ public class Board extends JPanel {
     }
     
     /**
-    * A constructor taking two arguments and returning a new instance of Board.
-    * @param sideLength the length of a side of the board.
-    * @param numberOfMines an integer representing the number of mines.
-    * @see Tile.java
-    * @return New board object
-    */
-    public Board(int sideLength, int numberOfMines) {
-
-    	m_size = sideLength;
-       	m_numberOfMines = numberOfMines;
-    
-        
-        m_tiles = new Tile[m_size][m_size];
-
-        GridBagLayout boardLayout = new GridBagLayout();
-        GridBagConstraints c = new GridBagConstraints();
-        
-        setLayout(boardLayout);
-        
-        //Create array of tiles
-        for (int y = 0; y < m_size; y++) {
-        	for (int x = 0; x < m_size; x++) {
-        		Tile tile = new Tile(x, y);
-        		c.gridx = x;
-        		c.gridy = y;
-        		add(tile, c);
-        		m_tiles[x][y] = tile;
-        	}
-        }
-        
-        allocateMines();
-    }
-    
-    /**
      * A method that allocates mines in random locations on the board.
      * @see Tile.java
      * @see Mine.java
@@ -350,17 +362,5 @@ public class Board extends JPanel {
 			freeLocations.remove(randNo);
 		}
 	}
-	
-	public final static int SPACING = 3;
-	public final static int DEFAULT_SIZE = 10;
-	public final static int DEFAULT_BOARD_HEIGHT = 250;
-	public final static int DEFAULT_BOARD_WIDTH = 300;
-	public final static int HEIGHT_SPACING = 15;
-	public final static int WIDTH_SPACING = 3;
-	private int m_size;
-	private int m_numberOfMines;
-	private boolean m_gameOver;
-	private Tile[][] m_tiles;
-	private int m_numberDiffused;
 }
 	
