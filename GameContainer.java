@@ -66,7 +66,7 @@ public class GameContainer extends JFrame {
 		setTitle("Kablewie!");
         Game g = new Game(s,m);
         String playerName = JOptionPane.showInputDialog("Enter your name: ",
-														"New Challenger");
+							"New Challenger");
         if (playerName != null) {
         	if(playerName.length() > NAME_CHAR_LIM) {
             	playerName = JOptionPane.showInputDialog("Sorry character "+
