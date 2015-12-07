@@ -2,7 +2,7 @@ package kablewie;
 
 /**
 * @file Human.java
-* @author Aled...
+* @author Aled
 * @date 04 Dec 2015
 * @see Game.java, Board.java, and Scoreboard.java for related information.
 *
@@ -51,18 +51,8 @@ public class Human{
         m_game = g;
         m_board = g.getBoard();
         m_scoreboard = g.getScoreboard();
-        //m_scoreboard.s(m_name); ???
         
         takeTurn();
-        
-        /*class GameListener implements ActionListener{
-            public void actionPerformed(ActionEvent e){	
-                takeTurn();
-            }
-        }
-        
-        GameListener gl = new GameListener();
-        m_game.addActionListener(gl); */
     }
     
     
