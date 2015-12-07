@@ -1,6 +1,6 @@
 /**
-* @file Tile.java
-* @author Nate , Ben ...
+* @file Mine.java
+* @author Nate, Ben
 * @date 04 Dec 2015
 * @see Tile.java for related information.
 *
@@ -9,14 +9,8 @@
 
 package kablewie;
 
-import java.io.IOException;
-
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-
 public class Mine extends Tile {
-
-
+	
 	/**
 	* An assigning method taking in no argument and returning true.
 	* @return returns true.
@@ -24,7 +18,7 @@ public class Mine extends Tile {
     public boolean hasMine(){
         return true;
     }
-	
+    
     /**
      * A constructor taking two arguments and returning a new instance of Mine.
      * @param x an integer argument.
