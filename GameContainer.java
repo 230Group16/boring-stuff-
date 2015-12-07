@@ -9,7 +9,7 @@ import javax.swing.*;
 /**
  * @file	-GameContainer.java
  * @author	-Tereza Stoyanova, Thomas Fisher, Ben Harris
- * @date    -28/11/2015
+ * @date    	-28/11/2015
  * @see		-Game.java
  *
  * A container class for the game core. Also adds small
@@ -21,14 +21,6 @@ public class GameContainer extends JFrame {
 	public static final int CONTROL_PANEL_X = 2;
 	public static final int CONTROL_PANEL_Y = 3;
 	public static final int TEXT_FIELD_SIZE = 10;
-	
-	/**
-	 * A getter method that returns this instance of GameContainer
-	 * @return this instance of GameContainer
-	 */
-	public GameContainer getGameContainer() {
-		return this;
-	}
 	
 	/**
 	 * Main method for this class. Simply instantiates this class with
@@ -128,6 +120,14 @@ public class GameContainer extends JFrame {
 	}
 	
 	/**
+	 * A getter method that returns this instance of GameContainer
+	 * @return this instance of GameContainer
+	 */
+	public GameContainer getGameContainer() {
+		return this;
+	}
+	
+	/**
 	 * Method to reset the entire game
 	 * @param g Game object to be reapplied
 	 * @see Board.getBoardSize()
@@ -153,6 +153,5 @@ public class GameContainer extends JFrame {
 		
 		return true;  
 	}
-	
 
 }
