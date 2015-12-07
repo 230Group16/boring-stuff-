@@ -15,10 +15,8 @@ import javax.swing.*;
 * @see     -Board.java
 * @see	   -Scoreboard.java
 *
-* A simple panel that can contains the core of the game
-*
+* A simple panel that can contains the core of the game.
 */
-
 public class Game extends JPanel {
 	public static final int SCOREBOARD_HEIGHT = 100; 
 	private Board m_board;
