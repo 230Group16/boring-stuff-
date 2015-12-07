@@ -7,7 +7,7 @@ import java.io.IOException;
 
 /**
  * @file Tile.java
- * @author Adina, Ben, Nate
+ * @author Adina Ardeleanu, Ben Harris, Neycho Neychev
  * @date 04 Dec 2015
  * @see Game.java, Board.java, Mine.java for related information.
  *
