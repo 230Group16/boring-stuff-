@@ -2,7 +2,7 @@ package kablewie;
 
 /**
 * @file Human.java
-* @author Aled
+* @author Aled Jones
 * @date 04 Dec 2015
 * @see Game.java, Board.java, and Scoreboard.java for related information.
 *
