@@ -34,25 +34,17 @@ public class Board extends JPanel {
     }
     
     public void incrementNumberDiffused() {
-    	m_minesDiffused++;
+    	m_numberDiffused++;
     	((Game) getParent()).getScoreboard().setMinesDiffused();
     }
     
-    public void detectFlagToggle(int x, int y) {
-    	if (m_tiles[x][y].hasMine() && m_tiles[x][y].hasFlag()) {
-        	decrementNumberDiffused();
-        } else if (m_tiles[x][y].hasMine() && !m_tiles[x][y].hasFlag()) {
-        	incrementNumberDiffused();
-        }
-    }
-    
     public void decrementNumberDiffused() {
-    	m_minesDiffused--;
+    	m_numberDiffused--;
     	((Game) getParent()).getScoreboard().setMinesDiffused();
     }
     
     public int getMinesDiffused() {
-    	return m_minesDiffused;
+    	return m_numberDiffused;
     }
     
     public Tile getTile(int x, int y) {
@@ -316,6 +308,6 @@ public class Board extends JPanel {
 	private int[][] m_mineLocations;
 	private boolean m_gameOver;
 	private Tile[][] m_tiles;
-	private int m_minesDiffused;
+	private int m_numberDiffused;
 }
 	
