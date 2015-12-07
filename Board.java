@@ -20,13 +20,15 @@ import javax.swing.border.BevelBorder;
 * @file Board.java
 * @author Thomas Fisher, Ben Harris, Adina Ardeleanu, Tereza Stoyanova
 * @date 28 Nov 2015
-* @see Game.java, Tile.java, Mine.java and Scoreboard.java for related information.
+* @see Game.java, Tile.java, Mine.java and 
+* Scoreboard.java for related information.
 *
 * The board that a Kablewie game will be played on.
 */
 public class Board extends JPanel {
 	/**
-    * An accessor method taking in no arguments and returning the value of m_gameOver
+    * An accessor method taking in no arguments 
+    * and returning the value of m_gameOver
     * @return Value of m_gameOver
     */
     public boolean isGameOver() {
@@ -34,7 +36,8 @@ public class Board extends JPanel {
     }
     
     /**
-     * An incrementor method taking in no arguments and incrementing m_numberDiffused
+     * An incrementor method taking in no arguments 
+     * and incrementing m_numberDiffused
      * @see Game.java
      */
     public void incrementNumberDiffused() {
@@ -43,7 +46,8 @@ public class Board extends JPanel {
     }
     
     /**
-     * An decrementor method taking in no arguments and decrementing m_numberDiffused
+     * An decrementor method taking in no arguments 
+     * and decrementing m_numberDiffused
      * @see Game.java
      */
     public void decrementNumberDiffused() {
@@ -52,7 +56,8 @@ public class Board extends JPanel {
     }
     
     /**
-     * An accessor method taking in no arguments and returning the number tiles diffused
+     * An accessor method taking in no 
+     * arguments and returning the number tiles diffused
      * @return Value of m_gameOver
      */
     public int getNumberDiffused() {
@@ -71,7 +76,8 @@ public class Board extends JPanel {
     }
     
     /**
-     * An accessor method taking in no arguments and returning the height of the board.
+     * An accessor method taking in no 
+     * arguments and returning the height of the board.
      * @return The height of the board in pixels.
      * @see Tile.java
      */
@@ -87,7 +93,8 @@ public class Board extends JPanel {
     
     
     /**
-     * An accessor method taking in no arguments and returning the width of the board.
+     * An accessor method taking in no arguments 
+     * and returning the width of the board.
      * @return The width of the board in pixels.
      * @see Tile.java
      */
@@ -102,7 +109,8 @@ public class Board extends JPanel {
     }
     
     /**
-    * An accessor method taking in no arguments and returning the value of m_size
+    * An accessor method taking in no 
+    * arguments and returning the value of m_size
     * @return The size of one side of the board.
     */
     public int getBoardSize() {
@@ -110,7 +118,8 @@ public class Board extends JPanel {
     }
     
     /**
-    * An accessor method taking in no arguments and returning the value of m_numberOfMines
+    * An accessor method taking in no arguments 
+    * and returning the value of m_numberOfMines
     * @return The number of mines on the board.
     */
     public int getNumberOfMines() {
@@ -135,7 +144,8 @@ public class Board extends JPanel {
     }
     
     /**
-     * A method that recursively reveals tiles starting from the tile given as an argument.
+     * A method that recursively reveals tiles 
+     * starting from the tile given as an argument.
      * @param tile the tile to start recursively revealing from.
      * @see Tile.java
      */
@@ -216,8 +226,8 @@ public class Board extends JPanel {
     }
     
 	/**
-	 * A method that checks how many surrounding mines a tile given as
-	 * an argument has and sets its icon accordingly.
+	 * A method that checks how many surrounding mines a tile given 
+	 * as an argument has and sets its icon accordingly.
 	 * @param tile the tile to check for surrounding mines
 	 * @see Tile.java
 	 * @see Mine.java
