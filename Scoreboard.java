@@ -17,7 +17,6 @@ import javax.swing.SpringLayout;
  * A Scoreboard panel that displays many details of the current game
  */
 public class Scoreboard extends JPanel {
-
     /* Initialisation of variables */
     private int m_time;
     private Game m_game;
@@ -36,34 +35,6 @@ public class Scoreboard extends JPanel {
     private static final long MS_IN_SECOND = 1000L;
     public final int SECS_MINS = 60;
     private int m_numberOfTilesNotRevealed;
-    
-    
-    /**
-     * A method that gets the game time in HH:MM:SS format.
-     * @return game time in HH:MM:SS format.
-     */
-    public String getTime(){
-    	return m_time /(SECS_MINS * SECS_MINS) + ":" + 
-    	(m_time/SECS_MINS) + ":" + (m_time % SECS_MINS);
-    }
-    
-    /**
-     * A method that gets the number of tiles that are revealed.
-     * @return number of tiles that are revealed.
-     */
-    public int getNumberOfRevealed() {
-        return m_numberOfTilesRevealed;
-    }
-    
-    /**
-     * A method that gets the number of tiles that are not revealed.
-     * @return number of tiles that are revealed.
-     */
-    public int getNumberOfNotRevealed() {
-    	int boardArea = m_board.getBoardSize() * m_board.getBoardSize();
-    	m_numberOfTilesNotRevealed = boardArea - m_numberOfTilesRevealed;
-    	return m_numberOfTilesNotRevealed;
-    }
     
     /**
      * Constructor for the Scoreboard class.
@@ -148,15 +119,6 @@ public class Scoreboard extends JPanel {
     }
     
     /**
-     * A method that adds the given parameter component
-     * to the panel where the method is called
-     * @param x the component that is added.
-     */
-    private void addComponent(Component x){
-        this.add(x);
-    }
-    
-    /**
      * A method that sets the lblGameState label to
      * the string given in the parameter
      * @param message A string passed through the parameter.
@@ -210,6 +172,42 @@ public class Scoreboard extends JPanel {
      */
     public void setPlayerName(String name) {
         lblName.setText("Name - " + name);
+    }
+    
+    /**
+     * A method that gets the game time in HH:MM:SS format.
+     * @return game time in HH:MM:SS format.
+     */
+    public String getTime(){
+    	return m_time /(SECS_MINS * SECS_MINS) + ":" + 
+    	(m_time/SECS_MINS) + ":" + (m_time % SECS_MINS);
+    }
+    
+    /**
+     * A method that gets the number of tiles that are revealed.
+     * @return number of tiles that are revealed.
+     */
+    public int getNumberOfRevealed() {
+        return m_numberOfTilesRevealed;
+    }
+    
+    /**
+     * A method that gets the number of tiles that are not revealed.
+     * @return number of tiles that are revealed.
+     */
+    public int getNumberOfNotRevealed() {
+    	int boardArea = m_board.getBoardSize() * m_board.getBoardSize();
+    	m_numberOfTilesNotRevealed = boardArea - m_numberOfTilesRevealed;
+    	return m_numberOfTilesNotRevealed;
+    }
+    
+    /**
+     * A method that adds the given parameter component
+     * to the panel where the method is called
+     * @param x the component that is added.
+     */
+    private void addComponent(Component x){
+        this.add(x);
     }
     
     /**
