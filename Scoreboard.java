@@ -9,7 +9,7 @@ import javax.swing.SpringLayout;
 
 /**
  * @file    -Scoreboard.java
- * @author  -Rabidra Thapa
+ * @author  -Rabidra Thapa, Thomas Fisher
  * @date    -07/12/2015
  * @see     -Board.java
  * @see	    -Game.java
@@ -162,7 +162,7 @@ public class Scoreboard extends JPanel {
      */
     public void setMinesDiffused() {
     	m_lblDiffused.setText("Number Diffused - " 
-    						+ m_board.getMinesDiffused());
+    						+ m_board.getNumberDiffused());
     }
     
     /**
