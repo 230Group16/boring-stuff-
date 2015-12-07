@@ -216,7 +216,8 @@ public class Board extends JPanel {
     }
     
 	/**
-	 * A method that checks how many surrounding mines a tile given as an argument has and sets its icon accordingly.
+	 * A method that checks how many surrounding mines a tile given as
+	 * an argument has and sets its icon accordingly.
 	 * @param tile the tile to check for surrounding mines
 	 * @see Tile.java
 	 * @see Mine.java
