@@ -349,7 +349,6 @@ public class Board extends JPanel {
 	public final static int WIDTH_SPACING = 3;
 	private int m_size;
 	private int m_numberOfMines;
-	private int[][] m_mineLocations;
 	private boolean m_gameOver;
 	private Tile[][] m_tiles;
 	private int m_numberDiffused;
