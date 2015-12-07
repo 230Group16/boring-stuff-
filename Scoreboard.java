@@ -22,17 +22,15 @@ public class Scoreboard extends JPanel {
     private int m_time;
     private Game m_game;
     private Board m_board;
-    private int m_minesDiffused;
     private int m_numberOfTilesRevealed;
     private int m_spaceFromBorder = 10;
     private int m_spaceFromLbl = 5;
     private JLabel lblName;
     private JLabel lblTime;
-    private JLabel lblminesD;
-    private JLabel lbltilesR;
+    private JLabel lblDiffused;
+    private JLabel lblRevealed;
     private JLabel lblGameState;
-    private JLabel lblNRlbl;
-    private JLabel lbltilesNR;
+    private JLabel lblHidden;
     private JLabel lblMines;
     private Timer m_timer;
     private static final long MS_IN_SECOND = 1000L;
@@ -80,19 +78,20 @@ public class Scoreboard extends JPanel {
         m_board = g.getBoard();
         lblName = new JLabel();
         lblTime = new JLabel("Time - " + getTime());
-        lblminesD = new JLabel("Mines Diffused - 0");
-        lbltilesR = new JLabel("Tiles Revealed - " + getNumberOfRevealed());
+        lblDiffused = new JLabel("Number Diffused - 0");
+        lblRevealed = new JLabel("Tiles Revealed - " + getNumberOfRevealed());
         lblGameState = new JLabel("Good luck!");
-        lbltilesNR = new JLabel("Hidden Tiles - " + getNumberOfNotRevealed());
+        lblHidden = new JLabel("Hidden Tiles - " + getNumberOfNotRevealed());
         lblGameState = new JLabel();
-        lblMines = new JLabel("Number of Mines - " + m_board.getNumberOfMines());
+        lblMines = new JLabel("Number of Mines - " 
+        						+ m_board.getNumberOfMines());
         
         addComponent(lblName);
         addComponent(lblTime);
-	    addComponent(lblminesD);
+	    addComponent(lblDiffused);
         addComponent(lblGameState);
-        addComponent(lbltilesR);
-        addComponent(lbltilesNR);
+        addComponent(lblRevealed);
+        addComponent(lblHidden);
         addComponent(lblMines);
         
         /* Layout */
@@ -110,30 +109,30 @@ public class Scoreboard extends JPanel {
   			  0,
   			  SpringLayout.NORTH, this);
   		  
-  	   layout.putConstraint(SpringLayout.WEST, lbltilesR,
+  	   layout.putConstraint(SpringLayout.WEST, lblRevealed,
   			  m_spaceFromBorder,
   			  SpringLayout.WEST, this);
-  	   layout.putConstraint(SpringLayout.NORTH, lbltilesR,
+  	   layout.putConstraint(SpringLayout.NORTH, lblRevealed,
   			  m_spaceFromLbl,
   			  SpringLayout.SOUTH, lblName);
   	      
-  	   layout.putConstraint(SpringLayout.EAST, lblminesD,
+  	   layout.putConstraint(SpringLayout.EAST, lblDiffused,
   			  -10,
   			  SpringLayout.EAST, this);
-  	   layout.putConstraint(SpringLayout.NORTH, lblminesD,
+  	   layout.putConstraint(SpringLayout.NORTH, lblDiffused,
   			  m_spaceFromLbl,
   			  SpringLayout.SOUTH, lblTime);
   	
-  	   layout.putConstraint(SpringLayout.EAST, lbltilesNR,
+  	   layout.putConstraint(SpringLayout.EAST, lblHidden,
   			  -10,
   			  SpringLayout.EAST, this);
-  	   layout.putConstraint(SpringLayout.NORTH, lbltilesNR,
+  	   layout.putConstraint(SpringLayout.NORTH, lblHidden,
   			  5,
-  	    	  SpringLayout.SOUTH, lblminesD);
+  	    	  SpringLayout.SOUTH, lblDiffused);
   	   
   	   layout.putConstraint(SpringLayout.NORTH, lblMines,
   			  5,
-  			  SpringLayout.SOUTH, lbltilesR);
+  			  SpringLayout.SOUTH, lblRevealed);
   	   
   	   layout.putConstraint(SpringLayout.WEST, lblMines, 
   			  m_spaceFromBorder, 
@@ -145,7 +144,7 @@ public class Scoreboard extends JPanel {
   	  	   
    	   layout.putConstraint(SpringLayout.NORTH, lblGameState,
   	  		  5,
-  	  		  SpringLayout.SOUTH, lbltilesNR);
+  	  		  SpringLayout.SOUTH, lblHidden);
     }
     
     /**
@@ -181,7 +180,7 @@ public class Scoreboard extends JPanel {
      * @see getNumberOfRevealed()
      */
     public void setTilesRevealed() {
-    	lbltilesR.setText("Tiles Revealed - " + getNumberOfRevealed());
+    	lblRevealed.setText("Tiles Revealed - " + getNumberOfRevealed());
     }
     
     /**
@@ -190,7 +189,7 @@ public class Scoreboard extends JPanel {
      * @see getNumberOfNotRevealed()
      */
     public void setTilesNotRevealed() {
-    	lbltilesNR.setText("Hidden Tiles - " + getNumberOfNotRevealed());
+    	lblHidden.setText("Hidden Tiles - " + getNumberOfNotRevealed());
     }
     
     /**
@@ -200,7 +199,8 @@ public class Scoreboard extends JPanel {
      * @see m_board.getMinesDiffused()
      */
     public void setMinesDiffused() {
-    	lblminesD.setText("Mines Diffused - " + m_board.getMinesDiffused());
+    	lblDiffused.setText("Number Diffused - " 
+    						+ m_board.getNumberDiffused());
     }
     
     /**
@@ -241,8 +241,9 @@ public class Scoreboard extends JPanel {
     	setTilesNotRevealed();
     	
     	int numberOfTiles = m_board.getBoardSize() * m_board.getBoardSize();
+    	int numberOfNonMineTiles = numberOfTiles - m_board.getNumberOfMines();
     	
-    	if (m_numberOfTilesRevealed == numberOfTiles - m_board.getNumberOfMines()) {
+    	if (m_numberOfTilesRevealed == numberOfNonMineTiles) {
     		m_board.setGameOver(true);
     		m_game.endGame('w');
     	}
