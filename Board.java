@@ -26,7 +26,6 @@ import javax.swing.border.BevelBorder;
 * The board that a Kablewie game will be played on.
 */
 public class Board extends JPanel {
-	
 	public final static int SPACING = 3;
 	public final static int DEFAULT_SIZE = 10;
 	public final static int DEFAULT_BOARD_HEIGHT = 250;
