@@ -34,6 +34,33 @@ public class Tile extends JButton {
         addHandler();
     }
     
+	/**
+-	 * An accessor method taking in no arguments and returning the
+-	 * instance of a tile we are currently accessing. 
+-	 * @return the current tile
+-	 */
+    public Tile getThis() {
+        return this;
+    }
+	
+    /**
+-     * An accessor method taking in no arguments and returning 
+-     * the x-axis value of the current tile.
+-     * @return the x-axis value of the tile
+-     */
+    public int getPosX() {
+        return m_x;
+    }
+    
+	/**
+-	 * An accessor method taking in no arguments and returning 
+-	 * the y-axis value of the current tile.
+-	 * @return the y-axis value of the tile
+-	 */
+    public int getPosY() {
+        return m_y;
+    }
+    
     /**
 -     * A method that assigns flag icons to the tiles when clicked.
 -     */
@@ -116,32 +143,5 @@ public class Tile extends JButton {
         
         MouseHandle mh = new MouseHandle();
         this.addMouseListener(mh);
-    }
-    
-	/**
--	 * An accessor method taking in no arguments and returning the
--	 * instance of a tile we are currently accessing. 
--	 * @return the current tile
--	 */
-    public Tile getThis() {
-        return this;
-    }
-	
-    /**
--     * An accessor method taking in no arguments and returning 
--     * the x-axis value of the current tile.
--     * @return the x-axis value of the tile
--     */
-    public int getPosX() {
-        return m_x;
-    }
-    
-	/**
--	 * An accessor method taking in no arguments and returning 
--	 * the y-axis value of the current tile.
--	 * @return the y-axis value of the tile
--	 */
-    public int getPosY() {
-        return m_y;
     }
 }
