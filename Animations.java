@@ -18,10 +18,7 @@ import javax.swing.Timer;
 *
 * Creates the losing animation of Kablewie 
 */
-
-
 public class Animations extends JPanel implements ActionListener {
-	
 	public Game m_game;
 	private BufferedImage m_image;
 	public static final int ANIMATION_START_Y = 150;
@@ -51,7 +48,6 @@ public class Animations extends JPanel implements ActionListener {
 	int y = ANIMATION_START_Y; 
 	double m_velX = 1, m_velY = 1;
 	
-	 
     	/**
 	 * A method that draws the image on the screen.
 	 * @param g Graphics argument
