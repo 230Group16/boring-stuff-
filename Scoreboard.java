@@ -36,7 +36,8 @@ public class Scoreboard extends JPanel {
     }
     
     public int getNumberOfNotRevealed() {
-    	m_numberOfTilesNotRevealed = m_board.getBoardSize() * m_board.getBoardSize() - m_numberOfTilesRevealed;
+    	int boardArea = m_board.getBoardSize() * m_board.getBoardSize();
+    	m_numberOfTilesNotRevealed = boardArea - m_numberOfTilesRevealed;
     	return m_numberOfTilesNotRevealed;
     }
     	
@@ -48,13 +49,13 @@ public class Scoreboard extends JPanel {
         m_game = g;
         m_board = g.getBoard();
         lblName = new JLabel();
-        lblTime = new JLabel("Game time - " + getTime());
-        minesDlbl = new JLabel("Mines diffused - 0");
+        lblTime = new JLabel("Time - " + getTime());
+        minesDlbl = new JLabel("Mines Diffused - 0");
         tilesRlbl = new JLabel("Tiles Revealed - " + getNumberOfRevealed());
         lblGameState = new JLabel("Good luck!");
-        tilesNRlbl = new JLabel("Tiles not revealed - " + getNumberOfNotRevealed());
+        tilesNRlbl = new JLabel("Hidden Tiles - " + getNumberOfNotRevealed());
         lblGameState = new JLabel();
-        lblMines = new JLabel("Number of mines - " + m_board.getNumberOfMines());
+        lblMines = new JLabel("Number of Mines - " + m_board.getNumberOfMines());
         
         addComponent(lblName);
         addComponent(lblTime);
@@ -99,14 +100,6 @@ public class Scoreboard extends JPanel {
   	      layout.putConstraint(SpringLayout.NORTH, tilesNRlbl,
   	    		  5,
   	    		  SpringLayout.SOUTH, minesDlbl);
-  	      
-  	   layout.putConstraint(SpringLayout.WEST, lblGameState,
-  		  10,
-  		  SpringLayout.WEST, this);
-  	   
-  	   layout.putConstraint(SpringLayout.NORTH, lblGameState,
-  		  5,
-  		  SpringLayout.SOUTH, tilesRlbl);
   	   
   	   layout.putConstraint(SpringLayout.NORTH, lblMines,
   			   5,
@@ -115,6 +108,14 @@ public class Scoreboard extends JPanel {
   	   layout.putConstraint(SpringLayout.WEST, lblMines, 
   			   10, 
   			   SpringLayout.WEST, this);
+  	   
+  	 layout.putConstraint(SpringLayout.WEST, lblGameState,
+  	  		  10,
+  	  		  SpringLayout.WEST, this);
+  	  	   
+  	  	   layout.putConstraint(SpringLayout.NORTH, lblGameState,
+  	  		  5,
+  	  		  SpringLayout.SOUTH, tilesNRlbl);
 	      
     }
     
@@ -137,7 +138,7 @@ public class Scoreboard extends JPanel {
     } 
     
     public void setTime() {
-    	lblTime.setText("Game time - " + getTime());
+    	lblTime.setText("Time - " + getTime());
         
     }
     
@@ -147,12 +148,12 @@ public class Scoreboard extends JPanel {
     }
     
     public void setTilesNotRevealed() {
-    	tilesNRlbl.setText("Tiles not revealed - " + getNumberOfNotRevealed());
+    	tilesNRlbl.setText("Hidden Tiles - " + getNumberOfNotRevealed());
         
     }
     
     public void setMinesDiffused() {
-    	minesDlbl.setText("Mines diffused - " + m_board.getMinesDiffused());
+    	minesDlbl.setText("Mines Diffused - " + m_board.getMinesDiffused());
         
     }
     
@@ -195,7 +196,7 @@ public class Scoreboard extends JPanel {
              public void run()
              {
                  m_time += 1;
-                 lblTime.setText("Game time - " + getTime());
+                 lblTime.setText("Time - " + getTime());
              }
         }, MS_IN_SECOND, MS_IN_SECOND);
     }
