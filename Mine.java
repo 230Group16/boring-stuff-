@@ -10,14 +10,6 @@
 package kablewie;
 
 public class Mine extends Tile {
-	
-	/**
-	* An assigning method taking in no argument and returning true.
-	* @return returns true.
-	*/
-    public boolean hasMine(){
-        return true;
-    }
     
     /**
      * A constructor taking two arguments and returning a new instance of Mine.
@@ -27,5 +19,13 @@ public class Mine extends Tile {
      */
     public Mine(int x, int y){
         super(x,y);
+    }
+    
+	/**
+	* An assigning method taking in no argument and returning true.
+	* @return returns true.
+	*/
+    public boolean hasMine(){
+        return true;
     }
 }
