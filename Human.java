@@ -11,7 +11,8 @@ package kablewie;
 public class Human{
     
 	/**
-	* An accessor method taking in no arguments and returning the value of m_name
+	* An accessor method taking in no
+	* arguments and returning the the player's name
 	* @return Value of n_name
 	*/
     public String getName (){
@@ -41,7 +42,7 @@ public class Human{
         
     }
     /**
-     * A constructor taking two arguments and returning a new instance of Human.
+     * A constructor taking two arguments and returning a new instance of Human
      * @param name is the name of the player.
      * @param g an instance of the object Game.class.
      * @return New human(player) object
