@@ -1,48 +1,78 @@
 package kablewie;
-
 import java.awt.Component;
 import java.util.Timer;
 import java.util.TimerTask;
-
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SpringLayout;
 
+/**
+ * @file    -Scoreboard.java
+ * @author  -Rabidra Thapa
+ * @date    -07/12/2015
+ * @see     -Board.java
+ * @see	    -Game.java
+ *
+ * A Scoreboard panel that displays many details of the current game
+ */
 public class Scoreboard extends JPanel {
 
     /* Initialisation of variables */
     private int m_time;
-    
     private Game m_game;
     private Board m_board;
     private int m_minesDiffused;
     private int m_numberOfTilesRevealed;
-	private String m_playerName = "";
+    private int m_spaceFromBorder = 10;
+    private int m_spaceFromLbl = 5;
     private JLabel lblName;
     private JLabel lblTime;
-    private JLabel minesDlbl;
-    private JLabel tilesRlbl;
+    private JLabel lblminesD;
+    private JLabel lbltilesR;
     private JLabel lblGameState;
     private JLabel lblNRlbl;
-    private JLabel tilesNRlbl;
+    private JLabel lbltilesNR;
     private JLabel lblMines;
+    private Timer m_timer;
     private static final long MS_IN_SECOND = 1000L;
     public final int SECS_MINS = 60;
     private int m_numberOfTilesNotRevealed;
     
+    
+    /**
+     * A method that gets the game time in HH:MM:SS format.
+     * @return game time in HH:MM:SS format.
+     */
+    public String getTime(){
+    	return m_time /(SECS_MINS * SECS_MINS) + ":" + 
+    	(m_time/SECS_MINS) + ":" + (m_time % SECS_MINS);
+    }
+    
+    /**
+     * A method that gets the number of tiles that are revealed.
+     * @return number of tiles that are revealed.
+     */
     public int getNumberOfRevealed() {
         return m_numberOfTilesRevealed;
     }
     
+    /**
+     * A method that gets the number of tiles that are not revealed.
+     * @return number of tiles that are revealed.
+     */
     public int getNumberOfNotRevealed() {
     	int boardArea = m_board.getBoardSize() * m_board.getBoardSize();
     	m_numberOfTilesNotRevealed = boardArea - m_numberOfTilesRevealed;
     	return m_numberOfTilesNotRevealed;
     }
-    	
+    
+    /**
+     * Constructor for the Scoreboard class.
+     * @param g The game object that the spring board is in.
+     * @see Game.java
+     */
     public Scoreboard(Game g) {
-        /*Sets grid layout for scoreboard */
     	SpringLayout layout = new SpringLayout();
         setLayout(layout);
         
@@ -50,117 +80,144 @@ public class Scoreboard extends JPanel {
         m_board = g.getBoard();
         lblName = new JLabel();
         lblTime = new JLabel("Time - " + getTime());
-        minesDlbl = new JLabel("Mines Diffused - 0");
-        tilesRlbl = new JLabel("Tiles Revealed - " + getNumberOfRevealed());
+        lblminesD = new JLabel("Mines Diffused - 0");
+        lbltilesR = new JLabel("Tiles Revealed - " + getNumberOfRevealed());
         lblGameState = new JLabel("Good luck!");
-        tilesNRlbl = new JLabel("Hidden Tiles - " + getNumberOfNotRevealed());
+        lbltilesNR = new JLabel("Hidden Tiles - " + getNumberOfNotRevealed());
         lblGameState = new JLabel();
         lblMines = new JLabel("Number of Mines - " + m_board.getNumberOfMines());
         
         addComponent(lblName);
         addComponent(lblTime);
-	    addComponent(minesDlbl);
+	    addComponent(lblminesD);
         addComponent(lblGameState);
-        addComponent(tilesRlbl);
-        addComponent(tilesNRlbl);
+        addComponent(lbltilesR);
+        addComponent(lbltilesNR);
         addComponent(lblMines);
         
         /* Layout */
         layout.putConstraint(SpringLayout.WEST, lblName,
-  	          10,
+        	  m_spaceFromBorder,
   	          SpringLayout.WEST, this);
   	   layout.putConstraint(SpringLayout.NORTH, lblName,
   	          0,
   	          SpringLayout.NORTH, this);
   		  
   	   layout.putConstraint(SpringLayout.EAST, lblTime,
-  	   	  -10,
-  		  SpringLayout.EAST, this);
+  			  -10,
+  			  SpringLayout.EAST, this);
   	   layout.putConstraint(SpringLayout.NORTH, lblTime,
-  		  0,
-  		  SpringLayout.NORTH, this);
+  			  0,
+  			  SpringLayout.NORTH, this);
   		  
-  	   layout.putConstraint(SpringLayout.WEST, tilesRlbl,
-  		  10,
-  		  SpringLayout.WEST, this);
-  	   layout.putConstraint(SpringLayout.NORTH, tilesRlbl,
-  		  5,
-  		  SpringLayout.SOUTH, lblName);
+  	   layout.putConstraint(SpringLayout.WEST, lbltilesR,
+  			  m_spaceFromBorder,
+  			  SpringLayout.WEST, this);
+  	   layout.putConstraint(SpringLayout.NORTH, lbltilesR,
+  			  m_spaceFromLbl,
+  			  SpringLayout.SOUTH, lblName);
   	      
-  	   layout.putConstraint(SpringLayout.EAST, minesDlbl,
-  		  -10,
-  		  SpringLayout.EAST, this);
-  	   layout.putConstraint(SpringLayout.NORTH, minesDlbl,
-  	   	  5,
-  	   	  SpringLayout.SOUTH, lblTime);
+  	   layout.putConstraint(SpringLayout.EAST, lblminesD,
+  			  -10,
+  			  SpringLayout.EAST, this);
+  	   layout.putConstraint(SpringLayout.NORTH, lblminesD,
+  			  m_spaceFromLbl,
+  			  SpringLayout.SOUTH, lblTime);
   	
-  	   layout.putConstraint(SpringLayout.EAST, tilesNRlbl,
-  	    		  -10,
-  	    		  SpringLayout.EAST, this);
-  	      layout.putConstraint(SpringLayout.NORTH, tilesNRlbl,
-  	    		  5,
-  	    		  SpringLayout.SOUTH, minesDlbl);
+  	   layout.putConstraint(SpringLayout.EAST, lbltilesNR,
+  			  -10,
+  			  SpringLayout.EAST, this);
+  	   layout.putConstraint(SpringLayout.NORTH, lbltilesNR,
+  			  5,
+  	    	  SpringLayout.SOUTH, lblminesD);
   	   
   	   layout.putConstraint(SpringLayout.NORTH, lblMines,
-  			   5,
-  			   SpringLayout.SOUTH, tilesRlbl);
+  			  5,
+  			  SpringLayout.SOUTH, lbltilesR);
   	   
   	   layout.putConstraint(SpringLayout.WEST, lblMines, 
-  			   10, 
-  			   SpringLayout.WEST, this);
+  			  m_spaceFromBorder, 
+  			  SpringLayout.WEST, this);
   	   
-  	 layout.putConstraint(SpringLayout.WEST, lblGameState,
-  	  		  10,
+   	   layout.putConstraint(SpringLayout.WEST, lblGameState,
+  		   	  m_spaceFromBorder,
   	  		  SpringLayout.WEST, this);
   	  	   
-  	  	   layout.putConstraint(SpringLayout.NORTH, lblGameState,
+   	   layout.putConstraint(SpringLayout.NORTH, lblGameState,
   	  		  5,
-  	  		  SpringLayout.SOUTH, tilesNRlbl);
-	      
+  	  		  SpringLayout.SOUTH, lbltilesNR);
     }
     
+    /**
+     * A method that adds the given parameter component
+     * to the panel where the method is called
+     * @param x the component that is added.
+     */
     private void addComponent(Component x){
         this.add(x);
     }
     
-    public String getPlayerName(){
-        return m_playerName;
-    }
-    
-    public String getTime(){
-    	return m_time /(SECS_MINS * SECS_MINS) + ":" + (m_time/SECS_MINS) + ":" + (m_time % SECS_MINS);
-    }
-    
-
+    /**
+     * A method that sets the lblGameState label to
+     * the string given in the parameter
+     * @param message A string passed through the parameter.
+     */
     public void setGameState(String message) {
     	lblGameState.setText(message);
-        
     } 
     
+    /**
+     * A method that sets the lblTime label to "Time - " 
+     * concatenated with the value the gameTime() method returns.
+     * @see getTime()
+     */
     public void setTime() {
     	lblTime.setText("Time - " + getTime());
-        
     }
     
+    /**
+     * A method that sets the lbltilesR label to "Tiles Revealed - " 
+     * concatenated with the value the getNumberOfRevealed() method returns.
+     * @see getNumberOfRevealed()
+     */
     public void setTilesRevealed() {
-    	tilesRlbl.setText("Tiles Revealed - " + getNumberOfRevealed());
-        
+    	lbltilesR.setText("Tiles Revealed - " + getNumberOfRevealed());
     }
     
+    /**
+     * A method that sets the lbltilesNR label to "Hidden Tiles - " 
+     * concatenated with the value the getNumberOfNotRevealed() method returns.
+     * @see getNumberOfNotRevealed()
+     */
     public void setTilesNotRevealed() {
-    	tilesNRlbl.setText("Hidden Tiles - " + getNumberOfNotRevealed());
-        
+    	lbltilesNR.setText("Hidden Tiles - " + getNumberOfNotRevealed());
     }
     
+    /**
+     * A method that sets the lblminesD label to "Mines Diffused - "
+     * concatenated with the value the m_board.getMinesDiffused() method
+     * returns.
+     * @see m_board.getMinesDiffused()
+     */
     public void setMinesDiffused() {
-    	minesDlbl.setText("Mines Diffused - " + m_board.getMinesDiffused());
-        
+    	lblminesD.setText("Mines Diffused - " + m_board.getMinesDiffused());
     }
     
+    /**
+     * A method that sets the lblName label to "Name - "
+     * concatenated with the string given in the parameter
+     * @param name A string passed through the parameter.
+     */
     public void setPlayerName(String name) {
         lblName.setText("Name - " + name);
     }
     
+    /**
+     * A method that resets some of the values on the scoreboard
+     * and calls setGameOver() on the board and calls updateTime()
+     * @see setGameOver()
+     * @see updateTime()
+     */
     public void reset() {
     	m_board.setGameOver(false);
     	m_time = 0;
@@ -169,6 +226,14 @@ public class Scoreboard extends JPanel {
     	m_numberOfTilesNotRevealed =0;
     }
     
+    /**
+     * Updates the values that the labels display
+     * and checks if the player has won
+     * @see setTime()
+     * @see setTilesRevealed()
+     * @see setMinesDiffused()
+     * @see setTilesNotRevealed()
+     */
     public void update() {
     	setTime();
     	setTilesRevealed();
@@ -183,11 +248,19 @@ public class Scoreboard extends JPanel {
     	}
     }
     
+    /**
+     * Increments the value that tracks number of revealed
+     * tiles and updates the labels
+     * @see update()
+     */
     public void incrementTilesRevealed() {
     	m_numberOfTilesRevealed++;
     	update();
     }
     
+    /**
+     * Creates a timer and sets a task to execute at a fixed period of time
+     */
     public void updateTime(){
         //Creates a timer and sets a task to iterate m_time at every second
         m_timer = new Timer();
@@ -201,9 +274,11 @@ public class Scoreboard extends JPanel {
         }, MS_IN_SECOND, MS_IN_SECOND);
     }
     
+    /**
+     * Stops timer
+     */
     public void stopTimer() {
     	m_timer.cancel();
     }
     
-    private Timer m_timer;
 }
