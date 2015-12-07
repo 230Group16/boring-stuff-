@@ -21,12 +21,12 @@ public class Tile extends JButton {
     private boolean m_revealed = false;
     
 	/**
--	 * A constructor taking two arguments 
--	 * and returning a new instance of Tile.
--	 * @param x an integer argument.
--	 * @param y an integer argument.
--	 * @return new Tile object
--	 */
+	 * A constructor taking two arguments 
+	 * and returning a new instance of Tile.
+	 * @param x an integer argument.
+	 * @param y an integer argument.
+	 * @return new Tile object
+	 */
     public Tile(int x, int y) {
         m_x = x;
         m_y = y;
@@ -35,35 +35,35 @@ public class Tile extends JButton {
     }
     
 	/**
--	 * An accessor method taking in no arguments and returning the
--	 * instance of a tile we are currently accessing. 
--	 * @return the current tile
--	 */
+	 * An accessor method taking in no arguments and returning the
+	 * instance of a tile we are currently accessing. 
+	 * @return the current tile
+	 */
     public Tile getThis() {
         return this;
     }
 	
     /**
--     * An accessor method taking in no arguments and returning 
--     * the x-axis value of the current tile.
--     * @return the x-axis value of the tile
--     */
+     * An accessor method taking in no arguments and returning 
+     * the x-axis value of the current tile.
+     * @return the x-axis value of the tile
+     */
     public int getPosX() {
         return m_x;
     }
     
 	/**
--	 * An accessor method taking in no arguments and returning 
--	 * the y-axis value of the current tile.
--	 * @return the y-axis value of the tile
--	 */
+	 * An accessor method taking in no arguments and returning 
+	 * the y-axis value of the current tile.
+	 * @return the y-axis value of the tile
+	 */
     public int getPosY() {
         return m_y;
     }
     
     /**
--     * A method that assigns flag icons to the tiles when clicked.
--     */
+     * A method that assigns flag icons to the tiles when clicked.
+     */
     public void toggleFlag() {
         m_flag = !m_flag;
         if (m_flag) {
@@ -101,24 +101,24 @@ public class Tile extends JButton {
     }
     
     /**
--     * An assigning method taking in no argument and returning false.
--     * @return returns false
--     */
+     * An assigning method taking in no argument and returning false.
+     * @return returns false
+     */
     public boolean hasMine() {
         return false;
     }
     
     /**
--     * An assigning method taking in no argument and returning m_flag.
--     * @return returns m_flag a boolean argument
--     */
+     * An assigning method taking in no argument and returning m_flag.
+     * @return returns m_flag a boolean argument
+     */
     public boolean hasFlag() {
         return m_flag;
     }
     
     /**
--     * 
--     */
+     * 
+     */
     public void addHandler() {
         class MouseHandle implements MouseListener {
             public void mousePressed(MouseEvent e){
