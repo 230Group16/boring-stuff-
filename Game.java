@@ -50,6 +50,8 @@ public class Game extends JPanel {
         makeGame(size, mines);
     }
     
+    
+    
     public void makeGame(int s, int m){
     	m_board = new Board(s, m);
         m_scoreboard = new Scoreboard(this);
@@ -86,9 +88,10 @@ public class Game extends JPanel {
             Animations a = new Animations(this); 
             add(a);  
             a.setBounds(0,SCOREBOARD_HEIGHT, m_width, m_board.getHeight());
+            m_scoreboard.stopTimer();
             break;
         case 'r':
-            //reset
+            m_scoreboard.reset();
             break;
         }
     	 
@@ -98,9 +101,10 @@ public class Game extends JPanel {
 	    	}
 		}
 		
-		GameContainer.stop();
         
     }
+    
+	
     private Board m_board;
     private Scoreboard m_scoreboard;
     public static final int SCOREBOARD_HEIGHT = 100; 
