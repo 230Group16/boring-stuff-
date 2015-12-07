@@ -1,3 +1,12 @@
+package kablewie;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.*;
+
 /**
 * @file    -Game.java
 * @author  -Ben Harris, Thomas Fisher, David Jones
@@ -9,15 +18,6 @@
 * A simple panel that can contains the core of the game
 *
 */
-
-package kablewie;
-
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.*;
 
 public class Game extends JPanel {
 	public static final int SCOREBOARD_HEIGHT = 100; 
