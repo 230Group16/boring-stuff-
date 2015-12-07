@@ -45,7 +45,7 @@ import javax.swing.Timer;
 		
 		Timer t = new Timer(5, this);
 		int x = 0;
-		int y = 150; 
+		int y = ANIMATION_START_Y; 
 		double m_velX = 1, m_velY = 1;
 		
 		 
@@ -64,14 +64,18 @@ import javax.swing.Timer;
 		* @param e ActionEvent argument 
 		*/
 		public void actionPerformed(ActionEvent e) {
-			if (x < 0 || x > (m_game.getWidth()-100)) { 
+			if (x < 0 || x > (m_game.getWidth()-BOUNCE_WIDTH)) { 
 				m_velX = -m_velX;
 			}
-			if (y < 0 || y > (m_game.getHeight()-135)) { 
+			if (y < 0 || y > (m_game.getHeight()-BOUNCE_HEIGHT)) { 
 				m_velY = -m_velY;
 			}
 			x += m_velX;
 			y += m_velY; 
 			repaint(); 
 		}
+		
+		public static final int ANIMATION_START_Y = 150;
+		public static final int BOUNCE_WIDTH = 100;
+		public static final int BOUNCE_HEIGHT = 135;
 	}
