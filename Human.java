@@ -9,6 +9,25 @@ package kablewie;
 * Handles player actions.
 */
 public class Human{
+    private String m_name;
+    private Board m_board;
+    private Scoreboard m_scoreboard;
+    private Game m_game;
+    
+    /**
+     * A constructor taking two arguments and returning a new instance of Human
+     * @param name is the name of the player.
+     * @param g an instance of the object Game.class.
+     * @return New human(player) object
+     */
+    public Human (String name, Game g){
+        m_name = name ;
+        m_game = g;
+        m_board = g.getBoard();
+        m_scoreboard = g.getScoreboard();
+        
+        takeTurn();
+    }
     
 	/**
 	* An accessor method taking in no
@@ -36,29 +55,6 @@ public class Human{
         
         if(m_board.isGameOver()){
             m_game.endGame('l');
-        } else {
-        	//m_game.endGame(false);
-        }
-        
+        } 
     }
-    /**
-     * A constructor taking two arguments and returning a new instance of Human
-     * @param name is the name of the player.
-     * @param g an instance of the object Game.class.
-     * @return New human(player) object
-     */
-    public Human (String name, Game g){
-        m_name = name ;
-        m_game = g;
-        m_board = g.getBoard();
-        m_scoreboard = g.getScoreboard();
-        
-        takeTurn();
-    }
-    
-    
-    private String m_name;
-    private Board m_board;
-    private Scoreboard m_scoreboard;
-    private Game m_game;
 }
