@@ -6,13 +6,13 @@ import java.awt.event.*;
 import java.io.IOException;
 
 /**
-- * @file Tile.java
-- * @author Adina Ardeleanu, Ben Harris, Neycho Neychev
-- * @date 04 Dec 2015
-- * @see Game.java, Board.java, Mine.java for related information.
-- *
-- * Assign tile attributes to the grid from board.
-- */
+ * @file Tile.java
+ * @author Adina, Ben, Nate
+ * @date 04 Dec 2015
+ * @see Game.java, Board.java, Mine.java for related information.
+ *
+ * Assign tile attributes to the grid from board.
+ */
 public class Tile extends JButton {
 	private boolean m_flag = false;
     private int m_x;
