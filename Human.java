@@ -30,25 +30,25 @@ public class Human{
     }
     
 	/**
-	* An accessor method taking in no
-	* arguments and returning the the player's name
-	* @return Value of n_name
-	*/
+	 * An accessor method taking in no
+	 * arguments and returning the the player's name
+	 * @return Value of n_name
+	 */
     public String getName (){
         return m_name;
     }
     
-    /**
-	* An assigning method taking in one argument and setting it as m_name.
-	* @param n a string
-	*/
+    	/**
+	 * An assigning method taking in one argument and setting it as m_name.
+	 * @param n a string
+	 */
     public void setName (String n) {
         m_name = n;
     }
     
-    /**
-	* A method that keeps track of the player and his progress
-	*/
+	/**
+	 * A method that keeps track of the player and his progress
+ 	 */
     public void takeTurn() {
         m_scoreboard.update();
         
