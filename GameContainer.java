@@ -27,13 +27,10 @@ public class GameContainer extends JFrame {
 	public GameContainer(int s, int m) {
 		final int INPUT_HEIGHT = 100;
         
-        /* create frame for Board and Scoreboard */
-        
-        
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setResizable(false);
 		setTitle("Kablewie!");
-
+		
         Game g = new Game(s,m);
         
         String playerName = JOptionPane.showInputDialog("Enter your name: ", "New Challenger");
@@ -93,14 +90,13 @@ public class GameContainer extends JFrame {
  	        			valid = false;
  	        		}
  	        		
- 	        		if (tfMines.getText().equals("") || !isNumeric(tfSize.getText())) {
+ 	        		if (tfMines.getText().equals("") || !isNumeric(tfMines.getText())) {
  	        			mines = size;
- 	        			mineInput = size;
  	        		} else {
  	        			mineInput = Integer.parseInt(tfMines.getText()); 
  	        		}
  	        		
- 	        		if ((mineInput <= 150) && (mineInput < (sizeInput*sizeInput)) && (isNumeric(tfSize.getText()) || defaultValue)){
+ 	        		if ((mineInput <= 150) && (mineInput < (sizeInput*sizeInput)) && (isNumeric(tfMines.getText()) || defaultValue)){
  	        			mines = mineInput;
  	        		} else {
  	        			valid = false;
@@ -109,6 +105,7 @@ public class GameContainer extends JFrame {
  	        		
  	        		if (valid) {
  	        			new GameContainer(size, mines);
+ 	        			dispose();
 	 	        		
  	        		} else {
  	        			JOptionPane.showMessageDialog(getGameContainer(), "The size must be a number between 1 and 30. \n\n"
@@ -119,7 +116,7 @@ public class GameContainer extends JFrame {
  	        		
  	        		tfSize.setText("");
  	        		tfMines.setText("");
- 	        		dispose();
+ 	        		
  	        		
                  }  else if (e.getSource() == btnExit) {
                      dispose();
@@ -137,15 +134,12 @@ public class GameContainer extends JFrame {
         getContentPane().add(input, BorderLayout.CENTER);
         g.getScoreboard().updateTime();
        
-        /* set container layout to boxlayout */
-        
-        /* display frame */
-        setVisible(true);
-        
         /* set frame resizable to false */
         setResizable(false);
         
         pack();
+		setLocationRelativeTo(null);
+		setVisible(true);
 	}
 	
 	public GameContainer getGameContainer() {
