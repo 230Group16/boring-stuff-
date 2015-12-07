@@ -1,11 +1,11 @@
 /**
-* @file Mine.java
-* @author Neycho Neychev, Ben Harris
-* @date 04 Dec 2015
-* @see Tile.java for related information.
-*
-* Adding mines to the tile attributes.
-*/
+  * @file Mine.java
+  * @author Nate, Ben
+  * @date 04 Dec 2015
+  * @see Tile.java for related information.
+  *
+  * Adding mines to the tile attributes.
+  */
 
 package kablewie;
 
