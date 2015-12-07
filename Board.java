@@ -321,7 +321,6 @@ public class Board extends JPanel {
      */
 	public void allocateMines () {
 		Random randomMines = new Random();
-		m_mineLocations = new int[m_size][m_size];
 		
 		ArrayList<int[]> freeLocations = new ArrayList<int[]>();
 		
