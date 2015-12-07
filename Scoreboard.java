@@ -10,18 +10,14 @@ import javax.swing.JPanel;
 import javax.swing.SpringLayout;
 
 public class Scoreboard extends JPanel {
-    
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 1L;
+
     /* Initialisation of variables */
-    static int m_time;
+    private int m_time;
     
     private Game m_game;
     private Board m_board;
     private int m_minesDiffused;
-    private static int m_numberOfTilesRevealed;
+    private int m_numberOfTilesRevealed;
 	private String m_playerName = "";
     private JLabel lblName;
     private JLabel lblTime;
@@ -30,19 +26,17 @@ public class Scoreboard extends JPanel {
     private JLabel lblGameState;
     private JLabel lblNRlbl;
     private JLabel tilesNRlbl;
-    final static long MS_IN_SECOND = 1000L;
+    private JLabel lblMines;
+    private static final long MS_IN_SECOND = 1000L;
     public final int SECS_MINS = 60;
-    private static int m_numberOfTilesNotRevealed;
-    
-    public int getMinesDiffused() {
-        return m_minesDiffused;
-    }
+    private int m_numberOfTilesNotRevealed;
     
     public int getNumberOfRevealed() {
         return m_numberOfTilesRevealed;
     }
     
     public int getNumberOfNotRevealed() {
+    	m_numberOfTilesNotRevealed = m_board.getBoardSize() * m_board.getBoardSize() - m_numberOfTilesRevealed;
     	return m_numberOfTilesNotRevealed;
     }
     	
@@ -55,18 +49,20 @@ public class Scoreboard extends JPanel {
         m_board = g.getBoard();
         lblName = new JLabel();
         lblTime = new JLabel("Game time - " + getTime());
-        minesDlbl = new JLabel("Mines diffused - " + getMinesDiffused());
+        minesDlbl = new JLabel("Mines diffused - 0");
         tilesRlbl = new JLabel("Tiles Revealed - " + getNumberOfRevealed());
         lblGameState = new JLabel("Good luck!");
         tilesNRlbl = new JLabel("Tiles not revealed - " + getNumberOfNotRevealed());
         lblGameState = new JLabel();
-        		
+        lblMines = new JLabel("Number of mines - " + m_board.getNumberOfMines());
+        
         addComponent(lblName);
         addComponent(lblTime);
 	    addComponent(minesDlbl);
         addComponent(lblGameState);
         addComponent(tilesRlbl);
         addComponent(tilesNRlbl);
+        addComponent(lblMines);
         
         /* Layout */
         layout.putConstraint(SpringLayout.WEST, lblName,
@@ -107,9 +103,18 @@ public class Scoreboard extends JPanel {
   	   layout.putConstraint(SpringLayout.WEST, lblGameState,
   		  10,
   		  SpringLayout.WEST, this);
+  	   
   	   layout.putConstraint(SpringLayout.NORTH, lblGameState,
   		  5,
   		  SpringLayout.SOUTH, tilesRlbl);
+  	   
+  	   layout.putConstraint(SpringLayout.NORTH, lblMines,
+  			   5,
+  			   SpringLayout.SOUTH, tilesRlbl);
+  	   
+  	   layout.putConstraint(SpringLayout.WEST, lblMines, 
+  			   10, 
+  			   SpringLayout.WEST, this);
 	      
     }
     
@@ -147,12 +152,20 @@ public class Scoreboard extends JPanel {
     }
     
     public void setMinesDiffused() {
-    	minesDlbl.setText("Mines diffused - " + getMinesDiffused());
+    	minesDlbl.setText("Mines diffused - " + m_board.getMinesDiffused());
         
     }
     
     public void setPlayerName(String name) {
         lblName.setText("Name - " + name);
+    }
+    
+    public void reset() {
+    	m_board.setGameOver(false);
+    	m_time = 0;
+    	updateTime();
+    	m_numberOfTilesRevealed = 0;
+    	m_numberOfTilesNotRevealed =0;
     }
     
     public void update() {
@@ -163,26 +176,33 @@ public class Scoreboard extends JPanel {
     	
     	int numberOfTiles = m_board.getBoardSize() * m_board.getBoardSize();
     	
-    	if (m_numberOfTilesRevealed == numberOfTiles - m_board.getNumberOfMines() && GameContainer.isRunning()) {
+    	if (m_numberOfTilesRevealed == numberOfTiles - m_board.getNumberOfMines()) {
     		m_board.setGameOver(true);
     		m_game.endGame('w');
     	}
     }
     
-    public static void incrementTilesRevealed() {
+    public void incrementTilesRevealed() {
     	m_numberOfTilesRevealed++;
+    	update();
     }
     
-    public static void updatetime(){
+    public void updateTime(){
         //Creates a timer and sets a task to iterate m_time at every second
-        Timer timer = new Timer();
-        timer.scheduleAtFixedRate(new TimerTask()
+        m_timer = new Timer();
+        m_timer.scheduleAtFixedRate(new TimerTask()
         {
              public void run()
              {
-                 Scoreboard.m_time += 1;
-                 //System.out.println(Scoreboard.m_time);
+                 m_time += 1;
+                 lblTime.setText("Game time - " + getTime());
              }
         }, MS_IN_SECOND, MS_IN_SECOND);
     }
+    
+    public void stopTimer() {
+    	m_timer.cancel();
+    }
+    
+    private Timer m_timer;
 }
