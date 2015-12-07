@@ -1,19 +1,9 @@
 package kablewie;
 
 import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.Container;
-import java.awt.Dimension;
-import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
-import javax.print.DocFlavor.URL;
 import javax.swing.*;
 
 /**
@@ -26,11 +16,11 @@ import javax.swing.*;
  * control panel at the foot of the container.
  */
 public class GameContainer extends JFrame {
-	public static final DEFAULT_GAME_SIZE = 10;
-	public static final NAME_CHAR_LIM = 20;
-	public static final CONTROL_PANEL_X = 2;
-	public static final CONTROL_PANEL_Y = 3;
-	public static final TEXT_FIELD_SIZE = 10;
+	public static final int DEFAULT_GAME_SIZE = 10;
+	public static final int NAME_CHAR_LIM = 20;
+	public static final int CONTROL_PANEL_X = 2;
+	public static final int CONTROL_PANEL_Y = 3;
+	public static final int TEXT_FIELD_SIZE = 10;
 	
 	/**
 	 * A getter method that returns this instance of GameContainer
