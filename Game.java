@@ -20,7 +20,6 @@ import javax.swing.*;
 */
 
 public class Game extends JPanel {
-	
 	public static final int SCOREBOARD_HEIGHT = 100; 
 	private Board m_board;
 	private Scoreboard m_scoreboard;
