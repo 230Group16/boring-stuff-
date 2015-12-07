@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.io.InputStream;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
@@ -13,7 +14,7 @@ import javax.swing.Timer;
 * @file Animations.java
 * @author David
 * @date 07 Dec 2015
-* @see Game.java, Board.java for related information.
+* @see Game.java for related information.
 *
 * Creates the losing animation of Kablewie 
 */
@@ -33,7 +34,10 @@ import javax.swing.Timer;
 		public Animations(Game g) {
 			m_game = g;
 			try {
-				m_image = ImageIO.read(Game.class.getResourceAsStream("/images/kablewie.png"));
+				InputStream img = Game.class.getResourceAsStream(
+						"/images/kablewie.png");
+				m_image = ImageIO.read(Game.class.getResourceAsStream(
+						"/images/kablewie.png"));
 			} catch  (IOException e) {
 				e.printStackTrace();
 			}
