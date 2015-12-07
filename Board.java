@@ -33,6 +33,28 @@ public class Board extends JPanel {
         return m_gameOver;
     }
     
+    public void incrementNumberDiffused() {
+    	m_minesDiffused++;
+    	((Game) getParent()).getScoreboard().setMinesDiffused();
+    }
+    
+    public void detectFlagToggle(int x, int y) {
+    	if (m_tiles[x][y].hasMine() && m_tiles[x][y].hasFlag()) {
+        	decrementNumberDiffused();
+        } else if (m_tiles[x][y].hasMine() && !m_tiles[x][y].hasFlag()) {
+        	incrementNumberDiffused();
+        }
+    }
+    
+    public void decrementNumberDiffused() {
+    	m_minesDiffused--;
+    	((Game) getParent()).getScoreboard().setMinesDiffused();
+    }
+    
+    public int getMinesDiffused() {
+    	return m_minesDiffused;
+    }
+    
     public Tile getTile(int x, int y) {
     	return m_tiles[x][y];
     }
@@ -101,7 +123,7 @@ public class Board extends JPanel {
     	int y = tile.getPosY();
     	
     	if (!tile.isRevealed() && !m_gameOver) {
-    		Scoreboard.incrementTilesRevealed();
+    		((Game) getParent()).getScoreboard().incrementTilesRevealed();
     	}
     	
     	if (m_tiles[x][y].hasMine()) {
@@ -289,10 +311,11 @@ public class Board extends JPanel {
 	public final static int DEFAULT_BOARD_WIDTH = 300;
 	public final static int HEIGHT_SPACING = 15;
 	public final static int WIDTH_SPACING = 3;
-	int m_size;
-	int m_numberOfMines;
-	int[][] m_mineLocations;
-	boolean m_gameOver;
-	Tile[][] m_tiles;
+	private int m_size;
+	private int m_numberOfMines;
+	private int[][] m_mineLocations;
+	private boolean m_gameOver;
+	private Tile[][] m_tiles;
+	private int m_minesDiffused;
 }
 	
