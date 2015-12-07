@@ -65,9 +65,6 @@ public class Game extends JPanel {
         add(m_scoreboard);
         add(m_board);
         
-          
-       
-        
         setLayout(null);
         m_scoreboard.setBounds(0,0, m_width, SCOREBOARD_HEIGHT);
         m_board.setBounds(0,SCOREBOARD_HEIGHT, m_width, m_board.getHeight());
@@ -86,7 +83,8 @@ public class Game extends JPanel {
             //Loss and display animation
             m_scoreboard.setGameState("You lose!");
             Animations a = new Animations(this); 
-            add(a);  
+            add(a);
+            remove(m_board);
             a.setBounds(0,SCOREBOARD_HEIGHT, m_width, m_board.getHeight());
             m_scoreboard.stopTimer();
             break;
