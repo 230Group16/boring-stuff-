@@ -14,7 +14,7 @@ import java.io.IOException;
 - * Assign tile attributes to the grid from board.
 - */
 public class Tile extends JButton {
-	private boolean m_flag;
+	private boolean m_flag = false;
     private int m_x;
     private int m_y;
     public static final int TILE_SIZE = 20;
@@ -28,7 +28,6 @@ public class Tile extends JButton {
 -	 * @return new Tile object
 -	 */
     public Tile(int x, int y) {
-        m_flag = false;
         m_x = x;
         m_y = y;
         setPreferredSize(new Dimension(TILE_SIZE, TILE_SIZE));
@@ -96,7 +95,8 @@ public class Tile extends JButton {
                 else if((e.getButton() == MouseEvent.BUTTON3) && isEnabled() 
                 		&& ((getIcon() == new JButton().getIcon() || m_flag)))
                 {
-                    toggleFlag();
+                	toggleFlag();
+                    ((Board) getParent()).detectFlagToggle(m_x, m_y);
                 }
             }
             public void mouseReleased(MouseEvent e) {
