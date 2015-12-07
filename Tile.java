@@ -41,8 +41,10 @@ public class Tile extends JButton {
         m_flag = !m_flag;
         if (m_flag) {
         	setIcon(new ImageIcon(Game.class.getResource("/images/flag.png")));
+        	((Board) getParent()).incrementNumberDiffused();
         } else {
         	setIcon(new JButton().getIcon());
+        	((Board) getParent()).decrementNumberDiffused();
         }
     }
     
@@ -96,21 +98,13 @@ public class Tile extends JButton {
                 		&& ((getIcon() == new JButton().getIcon() || m_flag)))
                 {
                 	toggleFlag();
-                    ((Board) getParent()).detectFlagToggle(m_x, m_y);
+                	
                 }
             }
-            public void mouseReleased(MouseEvent e) {
-                
-            }
-            public void mouseEntered(MouseEvent e) {
-                
-            }
-            public void mouseExited(MouseEvent e) {
-                
-            }
-            public void mouseClicked(MouseEvent e) {
-                
-            }
+            public void mouseReleased(MouseEvent e) {}
+            public void mouseEntered(MouseEvent e) {}
+            public void mouseExited(MouseEvent e) {}
+            public void mouseClicked(MouseEvent e) {}
         }
         
         MouseHandle mh = new MouseHandle();
