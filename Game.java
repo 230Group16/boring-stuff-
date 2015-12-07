@@ -20,13 +20,23 @@ import javax.swing.*;
 */
 
 public class Game extends JPanel {
-	public static final int SCOREBOARD_HEIGHT = 100; 
 	
+	public static final int SCOREBOARD_HEIGHT = 100; 
 	private Board m_board;
 	private Scoreboard m_scoreboard;
 	private Human m_player;
 	private int m_height;
 	private int m_width;
+   
+	/**
+	 * Constructor for this class. Takes in two args for use in makeGame()
+	 * @param size The width and height of the board (measured in tiles)
+	 * @param mines The amount of mines to be added to the board
+	 * @see makeGame(int, int)
+	 */
+	public Game(int size, int mines) {
+        makeGame(size, mines);
+	}
    
     	/**
 	 * Getter method returning the height of the game panel
@@ -66,16 +76,6 @@ public class Game extends JPanel {
 	 */
 	public Human getPlayer() {
 		return m_player;
-	}
-	
-	/**
-	 * Constructor for this class. Takes in two args for use in makeGame()
-	 * @param size The width and height of the board (measured in tiles)
-	 * @param mines The amount of mines to be added to the board
-	 * @see makeGame(int, int)
-	 */
-	public Game(int size, int mines) {
-        makeGame(size, mines);
 	}
 	
 	/**
