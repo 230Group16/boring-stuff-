@@ -76,7 +76,7 @@ public class GameContainer extends JFrame {
         		int sizeInput = 10;
         		int mineInput = -1;
         		
-        		 if (e.getSource() == btnNewGame) {
+        		if (e.getSource() == btnNewGame) {
  	        		if (tfSize.getText().equals("") || !isNumeric(tfSize.getText())) {
  	        			size = 10;
  	        			defaultValue = true;
@@ -90,30 +90,28 @@ public class GameContainer extends JFrame {
  	        			valid = false;
  	        		}
  	        		
- 	        		if (tfMines.getText().equals("") || !isNumeric(tfMines.getText())) {
+ 	        		if (tfMines.getText().equals("") || !isNumeric(tfSize.getText())) {
  	        			mines = size;
+ 	        			mineInput = size;
  	        		} else {
  	        			mineInput = Integer.parseInt(tfMines.getText()); 
  	        		}
  	        		
- 	        		if ((mineInput <= 150) && (mineInput < (sizeInput*sizeInput)) && (isNumeric(tfMines.getText()) || defaultValue)){
+ 	        		if ((mineInput <= 150) && (mineInput < (sizeInput*sizeInput)) && (isNumeric(tfSize.getText()) || defaultValue)){
  	        			mines = mineInput;
  	        		} else {
  	        			valid = false;
  	        		}
  	        		
- 	        		
  	        		if (valid) {
  	        			new GameContainer(size, mines);
  	        			dispose();
-	 	        		
  	        		} else {
  	        			JOptionPane.showMessageDialog(getGameContainer(), "The size must be a number between 1 and 30. \n\n"
  	        					+ "The number of mines must be between 0 \n"
  	        					+ "and the size squared and must not exceed 150.",
  	        					"Incorrect value(s) entered", JOptionPane.WARNING_MESSAGE);
  	        		}
- 	        		
  	        		tfSize.setText("");
  	        		tfMines.setText("");
  	        		
