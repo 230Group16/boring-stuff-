@@ -12,7 +12,7 @@ import javax.swing.Timer;
 
 /**
 * @file Animations.java
-* @author David
+* @author David Jones
 * @date 07 Dec 2015
 * @see Game.java for related information.
 *
