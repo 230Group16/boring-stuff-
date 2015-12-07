@@ -1,6 +1,6 @@
 /**
 * @file Mine.java
-* @author Nate, Ben
+* @author Neycho Neychev, Ben Harris
 * @date 04 Dec 2015
 * @see Tile.java for related information.
 *
