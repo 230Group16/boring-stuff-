@@ -7,9 +7,9 @@ import java.io.IOException;
 
 /**
 - * @file Tile.java
-- * @author Nate , Ben ...
+- * @author Adina, Ben, Nate, Thomas
 - * @date 04 Dec 2015
-- * @see Game.java, Board.java, and for related information.
+- * @see Game.java, Board.java, Mine.java for related information.
 - *
 - * Assign tile attributes to the grid from board.
 - */
@@ -48,6 +48,10 @@ public class Tile extends JButton {
         }
     }
     
+    /**
+     * A method that checks if a tile is revealed yet
+     * @return The boolean value of whether the tile has been revealed
+     */
     public boolean isRevealed() {
     	return m_revealed;
     }
@@ -59,9 +63,11 @@ public class Tile extends JButton {
     */
     public void showGraphic(int mineCount) throws IOException {
             if (mineCount != 0) {
-            	setIcon(new ImageIcon(Game.class.getResource("/images/" + mineCount + ".png")));
+            	setIcon(new ImageIcon(
+            		Game.class.getResource("/images/" + mineCount + ".png")));
             } else {
-            	setIcon(new ImageIcon(Game.class.getResource("/images/mine.png")));  
+            	setIcon(new ImageIcon(
+            		Game.class.getResource("/images/mine.png")));  
             }
             
             m_revealed = true;
@@ -89,7 +95,8 @@ public class Tile extends JButton {
     public void addHandler() {
         class MouseHandle implements MouseListener {
             public void mousePressed(MouseEvent e){
-                if((e.getButton() == MouseEvent.BUTTON1) && isEnabled() && (getIcon() == new JButton().getIcon()))
+                if((e.getButton() == MouseEvent.BUTTON1) && isEnabled()
+                		&& (getIcon() == new JButton().getIcon()))
                 {
                     Board b = (Board) getParent();
                     b.reveal(getThis());
