@@ -24,13 +24,13 @@ public class Scoreboard extends JPanel {
     private int m_numberOfTilesRevealed;
     private int m_spaceFromBorder = 10;
     private int m_spaceFromLbl = 5;
-    private JLabel lblName;
-    private JLabel lblTime;
-    private JLabel lblDiffused;
-    private JLabel lblRevealed;
-    private JLabel lblGameState;
-    private JLabel lblHidden;
-    private JLabel lblMines;
+    private JLabel m_lblName;
+    private JLabel m_lblTime;
+    private JLabel m_lblDiffused;
+    private JLabel m_lblRevealed;
+    private JLabel m_lblGameState;
+    private JLabel m_lblHidden;
+    private JLabel m_lblMines;
     private Timer m_timer;
     private static final long MS_IN_SECOND = 1000L;
     public final int SECS_MINS = 60;
@@ -47,131 +47,131 @@ public class Scoreboard extends JPanel {
         
         m_game = g;
         m_board = g.getBoard();
-        lblName = new JLabel();
-        lblTime = new JLabel("Time - " + getTime());
-        lblDiffused = new JLabel("Number Diffused - 0");
-        lblRevealed = new JLabel("Tiles Revealed - " + getNumberOfRevealed());
-        lblGameState = new JLabel("Good luck!");
-        lblHidden = new JLabel("Hidden Tiles - " + getNumberOfNotRevealed());
-        lblGameState = new JLabel();
-        lblMines = new JLabel("Number of Mines - " 
+        m_lblName = new JLabel();
+        m_lblTime = new JLabel("Time - " + getTime());
+        m_lblDiffused = new JLabel("Number Diffused - 0");
+        m_lblRevealed = new JLabel("Tiles Revealed - " + getNumberOfRevealed());
+        m_lblGameState = new JLabel("Good luck!");
+        m_lblHidden = new JLabel("Hidden Tiles - " + getNumberOfNotRevealed());
+        m_lblGameState = new JLabel();
+        m_lblMines = new JLabel("Number of Mines - " 
         						+ m_board.getNumberOfMines());
         
-        addComponent(lblName);
-        addComponent(lblTime);
-	    addComponent(lblDiffused);
-        addComponent(lblGameState);
-        addComponent(lblRevealed);
-        addComponent(lblHidden);
-        addComponent(lblMines);
+        addComponent(m_lblName);
+        addComponent(m_lblTime);
+	    addComponent(m_lblDiffused);
+        addComponent(m_lblGameState);
+        addComponent(m_lblRevealed);
+        addComponent(m_lblHidden);
+        addComponent(m_lblMines);
         
         /* Layout */
-        layout.putConstraint(SpringLayout.WEST, lblName,
+        layout.putConstraint(SpringLayout.WEST, m_lblName,
         	  m_spaceFromBorder,
   	          SpringLayout.WEST, this);
-  	   layout.putConstraint(SpringLayout.NORTH, lblName,
+  	   layout.putConstraint(SpringLayout.NORTH, m_lblName,
   	          0,
   	          SpringLayout.NORTH, this);
   		  
-  	   layout.putConstraint(SpringLayout.EAST, lblTime,
+  	   layout.putConstraint(SpringLayout.EAST, m_lblTime,
   			  -10,
   			  SpringLayout.EAST, this);
-  	   layout.putConstraint(SpringLayout.NORTH, lblTime,
+  	   layout.putConstraint(SpringLayout.NORTH, m_lblTime,
   			  0,
   			  SpringLayout.NORTH, this);
   		  
-  	   layout.putConstraint(SpringLayout.WEST, lblRevealed,
+  	   layout.putConstraint(SpringLayout.WEST, m_lblRevealed,
   			  m_spaceFromBorder,
   			  SpringLayout.WEST, this);
-  	   layout.putConstraint(SpringLayout.NORTH, lblRevealed,
+  	   layout.putConstraint(SpringLayout.NORTH, m_lblRevealed,
   			  m_spaceFromLbl,
-  			  SpringLayout.SOUTH, lblName);
+  			  SpringLayout.SOUTH, m_lblName);
   	      
-  	   layout.putConstraint(SpringLayout.EAST, lblDiffused,
+  	   layout.putConstraint(SpringLayout.EAST, m_lblDiffused,
   			  -10,
   			  SpringLayout.EAST, this);
-  	   layout.putConstraint(SpringLayout.NORTH, lblDiffused,
+  	   layout.putConstraint(SpringLayout.NORTH, m_lblDiffused,
   			  m_spaceFromLbl,
-  			  SpringLayout.SOUTH, lblTime);
+  			  SpringLayout.SOUTH, m_lblTime);
   	
-  	   layout.putConstraint(SpringLayout.EAST, lblHidden,
+  	   layout.putConstraint(SpringLayout.EAST, m_lblHidden,
   			  -10,
   			  SpringLayout.EAST, this);
-  	   layout.putConstraint(SpringLayout.NORTH, lblHidden,
+  	   layout.putConstraint(SpringLayout.NORTH, m_lblHidden,
   			  5,
-  	    	  SpringLayout.SOUTH, lblDiffused);
+  	    	  SpringLayout.SOUTH, m_lblDiffused);
   	   
-  	   layout.putConstraint(SpringLayout.NORTH, lblMines,
+  	   layout.putConstraint(SpringLayout.NORTH, m_lblMines,
   			  5,
-  			  SpringLayout.SOUTH, lblRevealed);
+  			  SpringLayout.SOUTH, m_lblRevealed);
   	   
-  	   layout.putConstraint(SpringLayout.WEST, lblMines, 
+  	   layout.putConstraint(SpringLayout.WEST, m_lblMines, 
   			  m_spaceFromBorder, 
   			  SpringLayout.WEST, this);
   	   
-   	   layout.putConstraint(SpringLayout.WEST, lblGameState,
+   	   layout.putConstraint(SpringLayout.WEST, m_lblGameState,
   		   	  m_spaceFromBorder,
   	  		  SpringLayout.WEST, this);
   	  	   
-   	   layout.putConstraint(SpringLayout.NORTH, lblGameState,
+   	   layout.putConstraint(SpringLayout.NORTH, m_lblGameState,
   	  		  5,
-  	  		  SpringLayout.SOUTH, lblHidden);
+  	  		  SpringLayout.SOUTH, m_lblHidden);
     }
     
     /**
-     * A method that sets the lblGameState label to
+     * A method that sets the m_lblGameState label to
      * the string given in the parameter
      * @param message A string passed through the parameter.
      */
     public void setGameState(String message) {
-    	lblGameState.setText(message);
+    	m_lblGameState.setText(message);
     } 
     
     /**
-     * A method that sets the lblTime label to "Time - " 
+     * A method that sets the m_lblTime label to "Time - " 
      * concatenated with the value the gameTime() method returns.
      * @see getTime()
      */
     public void setTime() {
-    	lblTime.setText("Time - " + getTime());
+    	m_lblTime.setText("Time - " + getTime());
     }
     
     /**
-     * A method that sets the lbltilesR label to "Tiles Revealed - " 
+     * A method that sets the m_lblRevealed label to "Tiles Revealed - " 
      * concatenated with the value the getNumberOfRevealed() method returns.
      * @see getNumberOfRevealed()
      */
     public void setTilesRevealed() {
-    	lblRevealed.setText("Tiles Revealed - " + getNumberOfRevealed());
+    	m_lblRevealed.setText("Tiles Revealed - " + getNumberOfRevealed());
     }
     
     /**
-     * A method that sets the lbltilesNR label to "Hidden Tiles - " 
+     * A method that sets the m_lblHidden label to "Hidden Tiles - " 
      * concatenated with the value the getNumberOfNotRevealed() method returns.
      * @see getNumberOfNotRevealed()
      */
     public void setTilesNotRevealed() {
-    	lblHidden.setText("Hidden Tiles - " + getNumberOfNotRevealed());
+    	m_lblHidden.setText("Hidden Tiles - " + getNumberOfNotRevealed());
     }
     
     /**
-     * A method that sets the lblminesD label to "Mines Diffused - "
+     * A method that sets the m_lblDiffused label to "Number Diffused - "
      * concatenated with the value the m_board.getMinesDiffused() method
      * returns.
      * @see m_board.getMinesDiffused()
      */
     public void setMinesDiffused() {
-    	lblDiffused.setText("Number Diffused - " 
-    						+ m_board.getNumberDiffused());
+    	m_lblDiffused.setText("Number Diffused - " 
+    						+ m_board.getMinesDiffused());
     }
     
     /**
-     * A method that sets the lblName label to "Name - "
+     * A method that sets the m_lblName label to "Name - "
      * concatenated with the string given in the parameter
      * @param name A string passed through the parameter.
      */
     public void setPlayerName(String name) {
-        lblName.setText("Name - " + name);
+        m_lblName.setText("Name - " + name);
     }
     
     /**
@@ -268,7 +268,7 @@ public class Scoreboard extends JPanel {
              public void run()
              {
                  m_time += 1;
-                 lblTime.setText("Time - " + getTime());
+                 m_lblTime.setText("Time - " + getTime());
              }
         }, MS_IN_SECOND, MS_IN_SECOND);
     }
