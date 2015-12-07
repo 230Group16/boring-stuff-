@@ -24,6 +24,9 @@ public class Animations extends JPanel implements ActionListener {
 	
 	public Game m_game;
 	private BufferedImage m_image;
+	public static final int ANIMATION_START_Y = 150;
+	public static final int BOUNCE_WIDTH = 100;
+	public static final int BOUNCE_HEIGHT = 135;
 	
 	/**
 	 * A constructor taking one argument 
@@ -59,10 +62,10 @@ public class Animations extends JPanel implements ActionListener {
 		t.start();
 	}
 	
-	 /**
-	* A method that moves the image accross the screen.
-	* @param e ActionEvent argument 
-	*/
+	/**
+	 * A method that moves the image accross the screen.
+	 * @param e ActionEvent argument 
+	 */
 	public void actionPerformed(ActionEvent e) {
 		if (x < 0 || x > (m_game.getWidth()-BOUNCE_WIDTH)) { 
 			m_velX = -m_velX;
@@ -74,8 +77,4 @@ public class Animations extends JPanel implements ActionListener {
 		y += m_velY; 
 		repaint(); 
 	}
-	
-	public static final int ANIMATION_START_Y = 150;
-	public static final int BOUNCE_WIDTH = 100;
-	public static final int BOUNCE_HEIGHT = 135;
 }
