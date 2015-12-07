@@ -38,7 +38,6 @@ public class Human{
         return m_name;
     }
     
-    
     /**
 	* An assigning method taking in one argument and setting it as m_name.
 	* @param n a string
